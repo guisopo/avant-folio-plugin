@@ -53,9 +53,13 @@ function avant_folio_register_settings() {
 }
 
 function avant_folio_sanitize_options( $input ) {
+  $input['option_name'] = sanitize_text_field( $input['option_name'] );
+  $input['option_last_name'] = sanitize_text_field( $input['option_last_name'] );
   $input['option_twitter'] = sanitize_text_field( $input['option_twitter'] );
   $input['option_facebook'] = sanitize_text_field( $input['option_facebook'] );
   $input['option_instagram'] = sanitize_text_field( $input['option_instagram'] );
+  
+  return $input;
 }
 
 function avant_folio_profile_page() {

@@ -1,8 +1,9 @@
 <div>
-  <h2>User Profile</h2>
   <form method="post" action="options.php">
     <?php settings_fields( 'avant-folio-settings-group' ); ?>
     <?php $avant_folio_options = get_option( 'avant_folio_options' ); ?>
+    <?php var_dump($avant_folio_options) ?>
+    <h2>User Profile</h2>
     <!-- Name -->
     <p>
       <label class="post-attributes-label" for="avant_folio_options[option_name]">Name:</label>
@@ -23,14 +24,11 @@
         name="avant_folio_options[option_last_name]" 
         placeholder="Last name"
         size="20"
-        value="<?php echo esc_attr( $avant_folio_options['option_family_name']); ?>"
+        value="<?php echo esc_attr( $avant_folio_options['option_last_name']); ?>"
       >
     </p>
-  </form>
-  <h2>Social Profiles</h2>
-  <form method="post" action="options.php">
-    <?php settings_fields( 'avant-folio-settings-group' ); ?>
-    <?php $avant_folio_options = get_option( 'avant_folio_options' ); ?>
+  
+    <h2>Social Profiles</h2>
     <!-- Twitter -->
     <p>
       <label class="post-attributes-label" for="avant_folio_options[option_twitter]">Twitter:</label>
