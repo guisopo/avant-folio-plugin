@@ -59,6 +59,5 @@ function avant_folio_sanitize_options( $input ) {
 }
 
 function avant_folio_profile_page() {
-  var_dump(get_template_directory() . '/includes/templates/avant-folio-admin.php');
-  require_once( get_template_directory() . '/includes/templates/avant-folio-admin.php' );
+  require_once( plugin_dir_path( __FILE__ )  . '/includes/templates/avant-folio-admin.php' );
 }
