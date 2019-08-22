@@ -55,13 +55,19 @@ function avant_folio_register_settings() {
 function avant_folio_sanitize_options( $input ) {
   $input['option_name'] = sanitize_text_field( $input['option_name'] );
   $input['option_last_name'] = sanitize_text_field( $input['option_last_name'] );
-  $input['option_twitter'] = sanitize_text_field( $input['option_twitter'] );
+  $input['option_twitter'] = avant_folio_sanitize_at_symbol( $input['option_twitter'] );
+  $input['option_instagram'] = avant_folio_sanitize_at_symbol( $input['option_instagram'] );
   $input['option_facebook'] = sanitize_text_field( $input['option_facebook'] );
-  $input['option_instagram'] = sanitize_text_field( $input['option_instagram'] );
   
   return $input;
 }
 
 function avant_folio_profile_page() {
   require_once( plugin_dir_path( __FILE__ )  . '/includes/templates/avant-folio-admin.php' );
+}
+
+function avant_folio_sanitize_at_symbol( $input ){
+	$output = sanitize_text_field( $input );
+	$output = str_replace('@', '', $output);
+	return $output;
 }
