@@ -22,7 +22,7 @@ function avant_folio_create_menu() {
     'Portfolio', 
     'manage_options', 
     'avant_folio', 
-    'avant_folio_plugin_page', 
+    'avant_folio_profile_page', 
     'dashicons-admin-customizer',
     '2'
   );
@@ -30,16 +30,16 @@ function avant_folio_create_menu() {
   add_submenu_page(
     'avant_folio',
     'User Profile Page',
-    'Profile',
+    'User Profile',
     'manage_options',
-    'avant_folio_profile',
+    'avant_folio',
     'avant_folio_profile_page'
   );
 
   add_submenu_page(
     'avant_folio',
     'Portfolio Settings Page',
-    'Settings',
+    'Portfolio Settings',
     'manage_options',
     'avant_folio_settings', 
     'avant_folio_settings_page'
