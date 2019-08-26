@@ -12,7 +12,7 @@ class Avant_Folio {
   }
 
   public function run() {
-    // add_action( 'admin_init', array( $this, 'register_settings' ) );
+    add_action( 'admin_init', array( $this, 'register_settings' ) );
     add_action( 'admin_menu', array( $this, 'addMenuPage' ) );
   }
 
@@ -70,7 +70,7 @@ class Avant_Folio {
     register_setting( 
       'avant-folio-settings-group', 
       'avant_folio_options', 
-      $this-> array($this, 'sanitize_settings')
+      array($this, 'sanitize_settings')
     );
   }
 
@@ -85,9 +85,9 @@ class Avant_Folio {
   public function sanitize_settings( $input ) {
     $input['option_name'] = sanitize_text_field( $input['option_name'] );
     $input['option_last_name'] = sanitize_text_field( $input['option_last_name'] );
-    $input['option_twitter'] = $this-> array($this, 'sanitize_at_symbol' );
-    $input['option_instagram'] = $this-> array($this, 'sanitize_at_symbol' );
     $input['option_facebook'] = sanitize_text_field( $input['option_facebook'] );
+    $input['option_twitter'] = $this->sanitize_at_symbol($input['option_twitter']);
+    $input['option_instagram'] = $this->sanitize_at_symbol($input['option_instagram']);
     
     return $input;
   }

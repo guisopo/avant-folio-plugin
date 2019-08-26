@@ -31,10 +31,12 @@ function run_avant_folio() {
 }
 run_avant_folio();
 
+/**
+ * Call function when plugin is activated
+ */
 function avant_folio_activation() {
-  // flush rewrite rules: tells WP something is happenning in the DB and needs to refresh in order to read the new information
+  // Refresh DB in order to read the new information
   flush_rewrite_rules();
 }
 
-// Call function when plugin is activated
 register_activation_hook( __FILE__, 'run_avant_folio' );
