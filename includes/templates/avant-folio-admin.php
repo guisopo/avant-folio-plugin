@@ -1,8 +1,9 @@
 <div>
   <form method="post" action="options.php">
+  
     <?php settings_fields( 'avant-folio-settings-group' ); ?>
     <?php $avant_folio_options = get_option( 'avant_folio_options' ); ?>
-    <?php var_dump($avant_folio_options) ?>
+
     <h2>User Profile</h2>
     <!-- Name -->
     <p>

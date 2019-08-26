@@ -65,6 +65,14 @@ class Avant_Folio {
     }
   }
 
+  public function profile_page() {
+    require_once( plugin_dir_path( __FILE__ )  . '../templates/avant-folio-admin.php' );
+  }
+  
+  public function settings_page() {
+    require_once( plugin_dir_path( __FILE__ )  . '../templates/avant-folio-settings.php' );
+  }
+  
   public function register_settings() {
 
     register_setting( 
@@ -72,14 +80,6 @@ class Avant_Folio {
       'avant_folio_options', 
       array($this, 'sanitize_settings')
     );
-  }
-
-  public function profile_page() {
-    require_once( plugin_dir_path( __FILE__ )  . '../templates/avant-folio-admin.php' );
-  }
-
-  public function settings_page() {
-    require_once( plugin_dir_path( __FILE__ )  . '../templates/avant-folio-settings.php' );
   }
 
   public function sanitize_settings( $input ) {
