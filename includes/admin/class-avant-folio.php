@@ -83,10 +83,10 @@ class Avant_Folio {
   }
 
   public function sanitize_settings( $input ) {
-    $input['option_name'] = sanitize_text_field( $input['option_name'] );
+    $input['option_name']      = sanitize_text_field( $input['option_name'] );
     $input['option_last_name'] = sanitize_text_field( $input['option_last_name'] );
-    $input['option_facebook'] = sanitize_text_field( $input['option_facebook'] );
-    $input['option_twitter'] = $this->sanitize_at_symbol($input['option_twitter']);
+    $input['option_facebook']  = sanitize_text_field( $input['option_facebook'] );
+    $input['option_twitter']   = $this->sanitize_at_symbol($input['option_twitter']);
     $input['option_instagram'] = $this->sanitize_at_symbol($input['option_instagram']);
     
     return $input;
