@@ -1,11 +1,13 @@
 <?php
 
 class Avant_Folio {
+  
   protected $loader;
   protected $plugin_slug;
   protected $version;
 
   public function __construct() {
+
     $this->plugin_slug = 'avant_folio';
     $this->version = '0.1.0';
 
@@ -14,6 +16,7 @@ class Avant_Folio {
   }
 
   private function load_dependencies() {
+
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-admin.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-settings.php';
 
@@ -22,6 +25,7 @@ class Avant_Folio {
   }
 
   private function define_admin_hooks() {
+
     $admin = new Avant_Folio_Admin($this->version);
     $this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_styles' );
     $this->loader->add_action( 'admin_menu', $admin, 'add_menu_pages' );
@@ -31,10 +35,12 @@ class Avant_Folio {
   }
 
   public function run() {
+
     $this->loader->run();
   }
 
   public function get_version() {
+
     return $this->version;
   }
 }
