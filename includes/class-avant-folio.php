@@ -15,6 +15,7 @@ class Avant_Folio {
 
   private function load_dependencies() {
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-admin.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-settings.php';
 
     require_once plugin_dir_path( __FILE__ ) . 'class-avant-folio-loader.php';
     $this->loader = new Avant_Folio_Loader();
@@ -24,7 +25,9 @@ class Avant_Folio {
     $admin = new Avant_Folio_Admin($this->version);
     $this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_styles' );
     $this->loader->add_action( 'admin_menu', $admin, 'add_menu_pages' );
-    // $this->loader->add_action( 'admin_init', $admin, 'register_settings' );
+
+    $settings = new Avant_Folio_Settings();
+    $this->loader->add_action( 'admin_init', $settings, 'register_settings' );
   }
 
   public function run() {

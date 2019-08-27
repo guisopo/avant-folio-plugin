@@ -6,7 +6,7 @@ class Avant_Folio_Loader {
 
   public function __construct() {
     $this->actions = $actions;
-    // $this->filters = $filters;
+    $this->filters = $filters;
   }
 
   public function add_action( $hook, $component, $callback) {
@@ -14,7 +14,7 @@ class Avant_Folio_Loader {
   }
 
   public function add_filter( $filter, $component, $callback ) {
-    // $this->filters = $this->add( $this->filters, $filter, $component, $callback);
+    $this->filters = $this->add( $this->filters, $filter, $component, $callback);
   }
   
   private function add( $hooks, $hook, $component, $callback) {
@@ -28,9 +28,9 @@ class Avant_Folio_Loader {
   }
 
   public function run() {
-    // foreach ( $this->filters as $hook ) {
-    //   add_filter( $hook['hook'], array( $hook['component'], $hook['callback'] ) );
-    // }
+    foreach ( $this->filters as $hook ) {
+      add_filter( $hook['hook'], array( $hook['component'], $hook['callback'] ) );
+    }
 
     foreach ( $this->actions as $hook ) {
       add_action( $hook['hook'], array( $hook['component'], $hook['callback'] ) );
