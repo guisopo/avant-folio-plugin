@@ -18,13 +18,13 @@ class Avant_Folio {
 
   public function addMenuPage() {
     add_menu_page(
-      $this->name,
-      'Portfolio',
-      'manage_options',
-      $this->name,
-      array( $this, 'profile_page' ),
-      'dashicons-admin-customizer',
-      '2'
+      $this->name,                    // $page_title
+      'Portfolio',                    // $menu_title
+      'manage_options',               // $capability
+      $this->name,                    // $menu_slug
+      array( $this, 'profile_page' ), // $callback
+      'dashicons-admin-customizer',   // $icon_url
+      '2'                             // $position
     );
 
     $this->addSubMenuPages();
@@ -37,7 +37,7 @@ class Avant_Folio {
       array(
         'parent_slug' => $this->name,
         'page_title'  => 'User Profile Page',
-        'menu_title'  => 'User Pofile',
+        'menu_title'  => 'User Profile',
         'capability'  => 'manage_options',
         'menu_slug'   => $this->name,
         'callback'    => array( $this, 'profile_page' ) 
@@ -74,7 +74,6 @@ class Avant_Folio {
   }
   
   public function register_settings() {
-
     register_setting( 
       'avant-folio-settings-group', 
       'avant_folio_options', 
@@ -86,15 +85,15 @@ class Avant_Folio {
     $input['option_name']      = sanitize_text_field( $input['option_name'] );
     $input['option_last_name'] = sanitize_text_field( $input['option_last_name'] );
     $input['option_facebook']  = sanitize_text_field( $input['option_facebook'] );
-    $input['option_twitter']   = $this->sanitize_at_symbol($input['option_twitter']);
-    $input['option_instagram'] = $this->sanitize_at_symbol($input['option_instagram']);
+    $input['option_twitter']   = $this->sanitize_at_symbol( $input['option_twitter'] );
+    $input['option_instagram'] = $this->sanitize_at_symbol( $input['option_instagram'] );
     
     return $input;
   }
 
   public function sanitize_at_symbol( $input ){
     $output = sanitize_text_field( $input );
-    $output = str_replace('@', '', $output);
+    $output = str_replace( '@', '', $output );
     return $output;
   }
 }
