@@ -20,7 +20,7 @@ if ( ! defined( 'WPINC' ) ){
  * Include core class for executing the plugin
  */
 
-require_once( plugin_dir_path(__FILE__) . 'includes/admin/class-avant-folio.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/class-avant-folio.php' );
 
 /**
  * Begin excution of plugin
