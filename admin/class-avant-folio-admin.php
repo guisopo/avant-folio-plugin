@@ -1,10 +1,41 @@
 <?php
-
 class Avant_Folio_Admin {
   protected $version;
 
   public function __construct($version) {
+
     $this->version = $version;
+
+    $this->adminPage = array(
+      'page_title' => 'Avant Folio Page',
+      'menu_title' => 'Portfolio',
+      'capability' => 'manage_options',
+      'menu_slug' => 'avant-folio-user-profile',
+      'callback' => array( $this, 'render_user_profile_page' ),
+      'icon_url' => 'dashicons-admin-customizer',
+      'position' => '2'
+    );
+
+    $this->subMenuPages = array(
+      // User Profile
+      array(
+        'parent_slug' => 'avant-folio-user-profile',
+        'page_title'  => 'User Profile Page',
+        'menu_title'  => 'User Profile',
+        'capability'  => 'manage_options',
+        'menu_slug'   => 'avant-folio-user-profile',
+        'callback'    => array( $this, 'render_user_profile_page' ) 
+      ),
+      // Portfolio CV
+      array(
+        'parent_slug' => 'avant-folio-user-profile',
+        'page_title'  => 'Curriculum Vitae',
+        'menu_title'  => 'CV',
+        'capability'  => 'manage_options',
+        'menu_slug'   => 'avant_folio_cv',
+        'callback'    => array( $this, 'render_cv_page' )
+      )
+    );
   }
 
   public function enqueue_styles() {
@@ -18,13 +49,13 @@ class Avant_Folio_Admin {
 
   public function add_menu_pages() {
     add_menu_page(
-      'Avant Folio Page',                    // $page_title
-      'Portfolio',                           // $menu_title
-      'manage_options',                      // $capability
-      'avant-folio-admin',                   // $menu_slug
-      array( $this, 'render_profile_page' ), // $callback
-      'dashicons-admin-customizer',          // $icon_url
-      '2'                                    // $position
+      $this->adminPage['page_title'],
+      $this->adminPage['menu_title'],
+      $this->adminPage['capability'],
+      $this->adminPage['menu_slug'],
+      $this->adminPage['callback'],
+      $this->adminPage['icon_url'],
+      $this->adminPage['position']
     );
 
     $this->addSubMenuPages();
@@ -32,28 +63,7 @@ class Avant_Folio_Admin {
 
   public function addSubMenuPages() {
 
-    $subMenuPages = array(
-      // User Profiles
-      array(
-        'parent_slug' => 'avant-folio-admin',
-        'page_title'  => 'User Profile Page',
-        'menu_title'  => 'User Profile',
-        'capability'  => 'manage_options',
-        'menu_slug'   => 'avant-folio-admin',
-        'callback'    => array( $this, 'render_profile_page' ) 
-      ),
-      // Portfolio Settings
-      array(
-        'parent_slug' => 'avant-folio-admin',
-        'page_title'  => 'Portfolio Settings Page',
-        'menu_title'  => 'Portfolio Settings',
-        'capability'  => 'manage_options',
-        'menu_slug'   => 'avant_folio_settings',
-        'callback'    => array( $this, 'render_settings_page' )
-      )
-    );
-
-    foreach ( $subMenuPages as $subpage) {
+    foreach ( $this->subMenuPages as $subpage) {
       add_submenu_page(
         $subpage['parent_slug'],
         $subpage['page_title'],
@@ -65,11 +75,11 @@ class Avant_Folio_Admin {
     }
   }
 
-  public function render_profile_page() {
-    require_once plugin_dir_path( dirname( __FILE__ ) )  . 'partials/avant-folio-admin.php';
+  public function render_user_profile_page() {
+    require_once plugin_dir_path( dirname( __FILE__ ) )  . 'partials/avant-folio-user-profile.php';
   }
 
-  public function render_settings_page() {
-    require_once plugin_dir_path( dirname( __FILE__ ) )  . 'partials/avant-folio-settings.php';
+  public function render_cv_page() {
+    require_once plugin_dir_path( dirname( __FILE__ ) )  . 'partials/avant-folio-cv.php';
   }
 }
