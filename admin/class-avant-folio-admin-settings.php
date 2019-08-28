@@ -1,5 +1,5 @@
 <?php
-class Avant_Folio_Settings {
+class Avant_Folio_Admin_Settings {
 
   public function __construct() {
   }
