@@ -32,7 +32,9 @@
     <h2>Social Profiles</h2>
     <!-- Twitter -->
     <p>
-      <label class="post-attributes-label" for="avant_folio_options[option_twitter]">Twitter:</label>
+      <label class="post-attributes-label" for="avant_folio_options[option_twitter]">
+      <span class="dashicons dashicons-twitter"></span>
+      </label>
       <input
         type="text" 
         id="avant_folio_options[option_twitter]"
@@ -44,7 +46,9 @@
     </p>
     <!-- Instagram -->
     <p>
-      <label class="post-attributes-label" for="avant_folio_options[option_instagram]">Instagram:</label>
+      <label class="post-attributes-label" for="avant_folio_options[option_instagram]">
+        <span class="dashicons dashicons-instagram"></span>
+      </label>
       <input
         type="text" 
         id="avant_folio_options[option_instagram]"
@@ -56,7 +60,9 @@
     </p>
     <!-- Facebook -->
     <p>
-      <label class="post-attributes-label" for="avant_folio_options[option_facebook]">Facebook:</label>
+      <label class="post-attributes-label" for="avant_folio_options[option_facebook]">
+      <span class="dashicons dashicons-facebook"></span>
+      </label>
       <input
         type="text" 
         id="avant_folio_options[option_facebook]"
