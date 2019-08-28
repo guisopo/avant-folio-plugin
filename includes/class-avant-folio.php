@@ -20,6 +20,7 @@ class Avant_Folio {
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-admin.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-admin-settings.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-cpt.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-taxonomies.php';
 
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'theme/class-avant-folio-theme.php';
 
@@ -43,6 +44,10 @@ class Avant_Folio {
     $cpt = new Avant_Folio_CPT();
     $this->loader->add_action( 'init', $cpt, 'register_cpt' );
     $this->loader->add_filter( 'enter_title_here', $cpt, 'set_custom_enter_title' );
+    
+    $taxonomies = new Avant_Folio_Taxonomies();
+    $this->loader->add_action( 'init', $taxonomies, 'register_taxonomies' );
+    $this->loader->add_action( 'init', $taxonomies, 'populate_taxonomies' );
   }
 
   public function run() {

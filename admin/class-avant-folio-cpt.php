@@ -63,6 +63,7 @@ class Avant_Folio_CPT {
       
       $this->set_labels();
       $this->set_cpt_arguments();
+      
       register_post_type( $key, $this->args);
     }
   }
