@@ -21,6 +21,7 @@ class Avant_Folio {
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-admin-settings.php';
 
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'theme/class-avant-folio-theme.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-cpt.php';
 
     require_once plugin_dir_path( __FILE__ ) . 'class-avant-folio-loader.php';
     $this->loader = new Avant_Folio_Loader();
@@ -38,6 +39,9 @@ class Avant_Folio {
     $theme = new Avant_Folio_Theme();
     $this->loader->add_action( 'after_setup_theme', $theme, 'set_theme_support');
     $this->loader->add_action( 'after_setup_theme', $theme, 'set_image_sizes');
+
+    $theme = new Avant_Folio_CPT();
+    $this->loader->add_action( 'init', $theme, 'register_cpt' );
   }
 
   public function run() {
