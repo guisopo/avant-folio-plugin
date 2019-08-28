@@ -21,6 +21,7 @@ class Avant_Folio {
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-admin-settings.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-cpt.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-taxonomies.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-custom-fields.php';
 
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'theme/class-avant-folio-theme.php';
 
@@ -48,6 +49,10 @@ class Avant_Folio {
     $taxonomies = new Avant_Folio_Taxonomies();
     $this->loader->add_action( 'init', $taxonomies, 'register_taxonomies' );
     $this->loader->add_action( 'init', $taxonomies, 'populate_taxonomies' );
+
+    $customFields = new Avant_Folio_Custom_Fields();
+    $this->loader->add_action( 'add_meta_boxes', $customFields, 'create_meta_boxes' );
+    // $this->loader->add_action( 'save_post', $customFields, 'save_post_work_meta', 10, 2 );
   }
 
   public function run() {

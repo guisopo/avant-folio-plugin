@@ -81,7 +81,6 @@ class Avant_Folio_Taxonomies {
   public function populate_taxonomies() {
 
     foreach ($this->taxonomy_terms as $taxonomy => $terms) {
-
       foreach ($terms as $term) {
 
         wp_insert_term(
@@ -90,9 +89,10 @@ class Avant_Folio_Taxonomies {
           array(
             'slug' => $term,
           )
-          
+
         );
       }
     }
   }
+
 }
