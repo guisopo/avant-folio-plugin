@@ -6,7 +6,7 @@ class Avant_Folio_CPT {
   protected $args;
 
   public function __construct() {
-    $this->cpts = 'exhibitions';
+    $this->cpts = 'works';
     $this->supports = array(
       'title',
       'thumbnail',
@@ -16,22 +16,22 @@ class Avant_Folio_CPT {
   }
 
   public function set_labels() {
-
-    $singular = rtrim($this->cpts,'s');
+    $cpt_name = ucfirst($this->cpts);
+    $cpt_singular = rtrim($cpt_name,'s');
 
     $this->labels = array(
-      'name'               => $this->cpts,
+      'name'               => $cpt_name,
       'singular_name'      => 'Work',
-      'add_new'            => 'Add New ' . $singular . '',
-      'add_new_item'       => 'Add New ' . $singular . '',
-      'edit_item'          => 'Edit ' . $singular . '',
-      'new_item'           => 'New ' . $singular . '',
-      'view_item'          => 'View ' . $singular . '',
-      'all_item'           => 'All ' . $this->cpts . '',
-      'search_items'       => 'Search ' . $this->cpts . '',
-      'not_found'          => 'No ' . $this->cpts . ' found',
-      'not_found_in_trash' => 'No ' . $this->cpts . ' found in trash',
-      'archives'           => '' . $this->cpts . ' Archives'
+      'add_new'            => 'Add New ' . $cpt_singular . '',
+      'add_new_item'       => 'Add New ' . $cpt_singular . '',
+      'edit_item'          => 'Edit ' . $cpt_singular . '',
+      'new_item'           => 'New ' . $cpt_singular . '',
+      'view_item'          => 'View ' . $cpt_singular . '',
+      'all_item'           => 'All ' . $cpt_name . '',
+      'search_items'       => 'Search ' . $cpt_name . '',
+      'not_found'          => 'No ' . $cpt_name . ' found',
+      'not_found_in_trash' => 'No ' . $cpt_name . ' found in trash',
+      'archives'           => '' . $cpt_name . ' Archives'
     );
   }
 
@@ -43,15 +43,22 @@ class Avant_Folio_CPT {
       'labels'        => $this->labels,
       'hierarchical'  => true,
       'has_archive'   => true,
-      'menu_position' => 6,
+      'menu_position' => 5,
       'show_in_rest'  => true,
-      'menu_icon'     => 'dashicons-admin-customizer'
+      'menu_icon'     => 'dashicons-visibility'
     );
   }
-
+  
   public function register_cpt() {
     $this->set_labels();
     $this->set_cpt_arguments(); 
     register_post_type( $this->cpts, $this->args);
+  }
+
+  public function set_custom_enter_title( $input ) {
+    if ( 'works' === get_post_type() ) {
+        return 'Add title of the new work';
+    }
+    return $input;
   }
 }
