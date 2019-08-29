@@ -40,13 +40,13 @@ class Avant_Folio_Custom_Fields {
     }
   }
 
-  public function render_work_info_cf() {
+  public function render_work_info_cf($post) {
     wp_nonce_field( basename( __FILE__ ), 'folio_work_info_nonce' );
 
     require_once plugin_dir_path( dirname( __FILE__ ) )  . 'partials/avant-folio-cf-work-details.php';
   }
 
-  public function render_work_gallery_cf() {
+  public function render_work_gallery_cf($post) {
     wp_nonce_field( basename( __FILE__ ), 'folio_work_info_nonce' );
     
     require_once plugin_dir_path( dirname( __FILE__ ) )  . 'partials/avant-folio-cf-work-gallery.php';
@@ -62,11 +62,12 @@ class Avant_Folio_Custom_Fields {
   
     // Exits script depending on save status
     if ( $is_autosave || $is_revision || !$is_valid_nonce || !$user_can_edit ) {
-        return;
+      return;
     }
   
     /* Get the posted data and sanitize it for use as an HTML class. */
     $new_meta_value = isset( $_POST['folio_work'] ) ? array_map( 'work_fields_sanitize', $_POST['folio_work'] ) : '';
+    $new_meta_value = isset( $_POST['folio_work'] ) ?  $_POST['folio_work'] : '';
     $cat = $new_meta_value['category'];
     $new_meta_value['title'] = sanitize_text_field($_POST['post_title']);
     $new_meta_value = array_filter($new_meta_value);
@@ -76,7 +77,7 @@ class Avant_Folio_Custom_Fields {
   
     /* Get the meta value of the custom field key. */
     $meta_value = get_post_meta( $post_id, $meta_key, true );
-  
+
     /* If the new meta value does not match the old value, update it. */
     if ( $new_meta_value && $new_meta_value != $meta_value ) {
       wp_set_post_terms( $post_id, $cat, 'work_type' );
@@ -88,7 +89,7 @@ class Avant_Folio_Custom_Fields {
       delete_post_meta( $post_id, $meta_key, $meta_value );
   }
   
-  function work_fields_sanitize( $input ) {
+  public function work_fields_sanitize( $input ) {
     
     if ( $input === $_POST['folio_work']['description'] || $input === $_POST['folio_work']['credits'] ) {
       return sanitize_textarea_field( $input );
