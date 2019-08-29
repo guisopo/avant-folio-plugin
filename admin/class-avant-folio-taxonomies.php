@@ -12,13 +12,14 @@ class Avant_Folio_Taxonomies {
 
   public function __construct() {
     
+    // $taxonomy => [$CPT, $tax_plural_name, $tax_singular_name]
     $this->taxonomies = array(
-      // $CPT => [$taxonomy, $tax_plural_name, $tax_singular_name]
-      'works' => ['work_type', 'Types of Work', 'Type of Work']
+      'work_type' => array( 'works', 'Types of Work', 'Type of Work' ),
+      'year' => array( 'works', 'Years Completed', 'Year Completed' )
     );
 
+    // $taxonomy => array($terms)
     $this->taxonomy_terms = array(
-      // $taxonomy => array($terms)
       'work_type' => array(
         'painting', 
         'sculpture', 
@@ -63,18 +64,19 @@ class Avant_Folio_Taxonomies {
       'show_admin_column' => true
     );
   }
-
   public function register_taxonomies() {
     
-    foreach ($this->taxonomies as $CPT => $value) {
-      $this->taxonomy = $value[0];
+    foreach ($this->taxonomies as $taxonomy => $value) {
+      $this->taxonomy = $taxonomy;
+
+      $this->CPT = $value[0];
       $this->tax_plural_name = $value[1];
       $this->tax_singular_name = $value[2];
       
       $this->set_labels();
       $this->set_arguments();
 
-      register_taxonomy( $this->taxonomy, $CPT, $this->arguments);
+      register_taxonomy( $this->taxonomy, $this->CPT, $this->arguments);
     }
   }
 
