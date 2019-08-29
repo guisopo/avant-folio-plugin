@@ -52,7 +52,7 @@ class Avant_Folio {
 
     $customFields = new Avant_Folio_Custom_Fields();
     $this->loader->add_action( 'add_meta_boxes', $customFields, 'create_meta_boxes' );
-    // $this->loader->add_action( 'save_post', $customFields, 'save_post_work_meta', 10, 2 );
+    $this->loader->add_action( 'save_post', $customFields, 'save_post_work_meta', 10, 2 );
   }
 
   public function run() {
