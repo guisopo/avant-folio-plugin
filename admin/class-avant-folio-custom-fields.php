@@ -28,6 +28,7 @@ class Avant_Folio_Custom_Fields {
   }
 
   public function create_meta_boxes() {
+
     foreach ($this->metaboxes as $metabox) {
       add_meta_box(
         $metabox['id'],
@@ -66,9 +67,10 @@ class Avant_Folio_Custom_Fields {
     }
   
     /* Get the posted data and sanitize it for use as an HTML class. */
-    $new_meta_value = isset( $_POST['folio_work'] ) ? array_map( 'work_fields_sanitize', $_POST['folio_work'] ) : '';
+    $new_meta_value = isset( $_POST['folio_work'] ) ? array_map( 'sanitize_fields', $_POST['folio_work'] ) : '';
     $new_meta_value = isset( $_POST['folio_work'] ) ?  $_POST['folio_work'] : '';
     $cat = $new_meta_value['category'];
+    $year = $new_meta_value['year'];
     $new_meta_value['title'] = sanitize_text_field($_POST['post_title']);
     $new_meta_value = array_filter($new_meta_value);
   
@@ -81,6 +83,7 @@ class Avant_Folio_Custom_Fields {
     /* If the new meta value does not match the old value, update it. */
     if ( $new_meta_value && $new_meta_value != $meta_value ) {
       wp_set_post_terms( $post_id, $cat, 'work_type' );
+      wp_set_post_terms( $post_id, $year, 'year' );
       update_post_meta( $post_id, $meta_key, $new_meta_value );
     }
   
@@ -89,7 +92,7 @@ class Avant_Folio_Custom_Fields {
       delete_post_meta( $post_id, $meta_key, $meta_value );
   }
   
-  public function work_fields_sanitize( $input ) {
+  public function sanitize_fields( $input ) {
     
     if ( $input === $_POST['folio_work']['description'] || $input === $_POST['folio_work']['credits'] ) {
       return sanitize_textarea_field( $input );
@@ -97,5 +100,4 @@ class Avant_Folio_Custom_Fields {
       return sanitize_text_field( $input );
     }
   }
-  
 }
