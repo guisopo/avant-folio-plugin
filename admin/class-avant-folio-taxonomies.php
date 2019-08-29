@@ -15,7 +15,7 @@ class Avant_Folio_Taxonomies {
     // $taxonomy => [$CPT, $tax_plural_name, $tax_singular_name]
     $this->taxonomies = array(
       'work_type' => array( 'works', 'Types of Work', 'Type of Work' ),
-      'year' => array( 'works', 'Years Completed', 'Year Completed' )
+      'completed' => array( 'works', 'Years', 'Year' )
     );
 
     // $taxonomy => array($terms)
@@ -60,7 +60,7 @@ class Avant_Folio_Taxonomies {
       'query_var'         => true,
       'rewrite'           => true,
       'slug'              => $this->taxonomy,
-      'show_ui'           => false,
+      'show_ui'           => true,
       'show_admin_column' => true
     );
   }
