@@ -58,6 +58,8 @@ class Avant_Folio {
     $customColumns = new Avant_Folio_Custom_Columns();
     $this->loader->add_filter( 'manage_works_posts_columns', $customColumns, 'add_custom_columns' );
     $this->loader->add_action( 'manage_works_posts_custom_column', $customColumns, 'manage_custom_columns', 10, 2 );
+    $this->loader->add_filter( 'manage_edit-works_sortable_columns', $customColumns, 'set_sortable_columns');
+    $this->loader->add_action( 'pre_get_posts', $customColumns, 'set_posts_orderby' );
   }
 
   public function run() {

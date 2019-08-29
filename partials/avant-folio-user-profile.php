@@ -33,7 +33,7 @@
     <!-- Twitter -->
     <p>
       <label class="post-attributes-label" for="avant_folio_options[option_twitter]">
-      <span class="dashicons dashicons-twitter"></span>
+        <span class="dashicons dashicons-twitter"></span>
       </label>
       <input
         type="text" 
@@ -61,7 +61,7 @@
     <!-- Facebook -->
     <p>
       <label class="post-attributes-label" for="avant_folio_options[option_facebook]">
-      <span class="dashicons dashicons-facebook"></span>
+        <span class="dashicons dashicons-facebook"></span>
       </label>
       <input
         type="text" 

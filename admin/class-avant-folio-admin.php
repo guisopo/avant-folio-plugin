@@ -1,5 +1,6 @@
 <?php
 class Avant_Folio_Admin {
+  
   protected $version;
 
   public function __construct($version) {
@@ -10,10 +11,10 @@ class Avant_Folio_Admin {
       'page_title' => 'Avant Folio Page',
       'menu_title' => 'Portfolio',
       'capability' => 'manage_options',
-      'menu_slug' => 'avant-folio-user-profile',
-      'callback' => array( $this, 'render_user_profile_page' ),
-      'icon_url' => 'dashicons-admin-customizer',
-      'position' => '2'
+      'menu_slug'  => 'avant-folio-user-profile',
+      'callback'   => array( $this, 'render_user_profile_page' ),
+      'icon_url'   => 'dashicons-admin-customizer',
+      'position'   => '2'
     );
 
     $this->subMenuPages = array(
@@ -39,6 +40,7 @@ class Avant_Folio_Admin {
   }
 
   public function enqueue_styles() {
+
     wp_enqueue_style(
       'avant-folio-admin', 
       plugin_dir_url(__FILE__) . 'css/avant-folio-admin.css', 
@@ -48,6 +50,7 @@ class Avant_Folio_Admin {
   }
 
   public function add_menu_pages() {
+
     add_menu_page(
       $this->adminPage['page_title'],
       $this->adminPage['menu_title'],
