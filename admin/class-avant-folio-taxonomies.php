@@ -60,8 +60,8 @@ class Avant_Folio_Taxonomies {
       'query_var'         => true,
       'rewrite'           => true,
       'slug'              => $this->taxonomy,
-      'show_ui'           => true,
-      'show_admin_column' => true
+      'show_ui'           => false,
+      'show_admin_column' => false
     );
   }
   public function register_taxonomies() {
