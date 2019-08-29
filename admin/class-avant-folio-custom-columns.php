@@ -2,11 +2,8 @@
 
 class Avant_Folio_Custom_Columns {
 
-  public function __construct() {
-
-  }
-
   public function add_custom_columns($columns) {
+
     $columns = array(
       'cb'              =>  $columns['cb'],
       'image'           =>  __('Image'),
@@ -74,17 +71,18 @@ class Avant_Folio_Custom_Columns {
   }
 
   public function set_posts_orderby( $query ) {
+
     if( ! is_admin() || ! $query->is_main_query() ) {
       return;
     }
 
-    if ( 'date' === $query->get( 'orderby') ) {
+    if ( 'date' === $query->get( 'orderby' ) ) {
       $query->set( 'orderby', 'meta_value' );
       $query->set( 'meta_key', '_avant_folio_date_meta_key' );
       $query->set( 'meta_type', 'numeric' );
     }
 
-    if ( 'type' === $query->get( 'orderby') ) {
+    if ( 'type' === $query->get( 'orderby' ) ) {
       $query->set( 'orderby', 'meta_value' );
       $query->set( 'meta_key', '_avant_folio_type_meta_key' );
     }
