@@ -83,7 +83,7 @@ class Avant_Folio_Custom_Fields {
     /* If the new meta value does not match the old value, update it. */
     if ( $new_meta_value && $new_meta_value != $meta_value ) {
       wp_set_post_terms( $post_id, $cat, 'work_type' );
-      wp_set_post_terms( $post_id, $year, 'completed' );
+      wp_set_post_terms( $post_id, $year, 'date_completed' );
       update_post_meta( $post_id, $meta_key, $new_meta_value );
     }
   

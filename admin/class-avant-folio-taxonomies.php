@@ -15,7 +15,7 @@ class Avant_Folio_Taxonomies {
     // $taxonomy => [$CPT, $tax_plural_name, $tax_singular_name]
     $this->taxonomies = array(
       'work_type' => array( 'works', 'Types of Work', 'Type of Work' ),
-      'completed' => array( 'works', 'Years', 'Year' )
+      'date_completed' => array( 'works', 'Dates', 'Date' )
     );
 
     // $taxonomy => array($terms)
