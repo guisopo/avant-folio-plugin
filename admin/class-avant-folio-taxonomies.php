@@ -65,18 +65,15 @@ class Avant_Folio_Taxonomies {
   }
 
   public function populate_taxonomies() {
-    if ( !post_type_exists( $this->cpt_name ) ) {
 
-      foreach ($this->taxonomy_terms as $term) {
-        wp_insert_term(
-          ucfirst($term),
-          $this->taxonomy['id'],
-          array(
-            'slug' => $term,
-          )
-  
-        );
-      }
+    foreach ($this->taxonomy_terms as $term) {
+      wp_insert_term(
+        ucfirst($term),
+        $this->taxonomy['id'],
+        array(
+          'slug' => $term,
+        )
+      );
     }
   }
 
