@@ -60,12 +60,11 @@ class Avant_Folio {
     $works_cpt_args = array(
       'cpt_name' => 'works',
       'cpt_supports' => array( 'title', 'thumbnail', 'revisions', 'post-formats' ),
-      'cpt_icon' => 'dashicons-visibility'
+      'cpt_icon' => 'dashicons-visibility',
+      'cpt_taxonomies' => array()
     );
 
-    $work_taxonomies = array();
-
-    $work_taxonomies[] = array(
+    $works_cpt_args['cpt_taxonomies'][] = array(
       'cpt' => $works_cpt_args['cpt_name'],
       'id' => 'work_type',
       'plural_name' => 'Types of Work',
@@ -73,14 +72,14 @@ class Avant_Folio {
       'terms' => [ 'painting', 'drawing', 'sculpture', 'photography', 'video', 'performance', 'installation']
     );
 
-    $work_taxonomies[] = array(
+    $works_cpt_args['cpt_taxonomies'][] = array(
       'cpt' => $works_cpt_args['cpt_name'],
       'id' => 'date_completed',
       'plural_name' => 'Dates',
       'singular_name' => 'Date'
     );
 
-    $works_cpt = new Avant_Folio_CPT( $works_cpt_args, $work_taxonomies );
+    $works_cpt = new Avant_Folio_CPT( $works_cpt_args );
     $this->loader->add_action( 'init', $works_cpt, 'register_cpt' );
     $this->loader->add_filter( 'enter_title_here', $works_cpt, 'set_custom_enter_title' );
 

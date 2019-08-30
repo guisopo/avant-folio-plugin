@@ -6,14 +6,16 @@ class Avant_Folio_CPT {
   protected $cpt_labels;
   protected $cpt_args;
   protected $cpt_icon;
+  protected $cpt_tax_args;
 
-  public function __construct( $cpt_args, $taxonomies_args ) {
+  public function __construct( $cpt_args ) {
     
     $this->cpt_name     = $cpt_args['cpt_name'];
     $this->cpt_supports = $cpt_args['cpt_supports'];
     $this->cpt_icon     = $cpt_args['cpt_icon'];
+    $this->cpt_tax_args = $cpt_args['cpt_taxonomies'];
 
-    $this->set_taxonomies( $taxonomies_args );
+    $this->set_taxonomies( $this->cpt_tax_args );
   }
 
   public function set_taxonomies( $taxonomies_args ) {
