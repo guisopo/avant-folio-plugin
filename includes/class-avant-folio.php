@@ -13,7 +13,8 @@ class Avant_Folio {
 
     $this->load_dependencies();
     $this->define_admin_hooks();
-    $this->define_custom_post();
+    $this->define_works_cpt();
+    $this->define_exhibitions_cpt();
   }
 
   private function load_dependencies() {
@@ -47,21 +48,24 @@ class Avant_Folio {
     $customFields = new Avant_Folio_Custom_Fields();
     $this->loader->add_action( 'add_meta_boxes', $customFields, 'create_meta_boxes' );
     $this->loader->add_action( 'save_post', $customFields, 'save_post_work_meta', 10, 2 );
-
-    
   }
 
-  private function define_custom_post() {
+  private function define_works_cpt() {
 
     // Works CPT
     $works_cpt_args = array(
       'cpt_name' => 'works',
       'cpt_supports' => array( 'title', 'thumbnail', 'revisions', 'post-formats' ),
-      'cpt_icon' => 'dashicons-visibility',
-      'cpt_taxonomies' => array()
+      'cpt_icon' => 'dashicons-visibility'
     );
 
-    $works_cpt_args['cpt_taxonomies'][] = array(
+    $works_cpt = new Avant_Folio_CPT( $works_cpt_args, $works_cpt_columns, $works_cpt_custom_columnst );
+    $this->loader->add_action( 'init', $works_cpt, 'register_cpt' );
+    $this->loader->add_filter( 'enter_title_here', $works_cpt, 'set_custom_enter_title' );
+
+    // Works CPT Custom Taxonomies
+    // Work Type Taxonomy
+    $work_type_tax_args = array(
       'cpt' => $works_cpt_args['cpt_name'],
       'id' => 'work_type',
       'plural_name' => 'Types of Work',
@@ -69,13 +73,21 @@ class Avant_Folio {
       'terms' => [ 'painting', 'drawing', 'sculpture', 'photography', 'video', 'performance', 'installation']
     );
 
-    $works_cpt_args['cpt_taxonomies'][] = array(
+    $work_type_taxonomy = new Avant_Folio_Taxonomies( $work_type_tax_args );
+    $this->loader->add_action( 'init', $work_type_taxonomy, 'register_taxonomy' );
+
+    // Date Completed Taxonomy
+    $date_completed_tax_args = array(
       'cpt' => $works_cpt_args['cpt_name'],
       'id' => 'date_completed',
       'plural_name' => 'Dates',
       'singular_name' => 'Date'
     );
 
+    $date_completed_taxonomy = new Avant_Folio_Taxonomies( $date_completed_tax_args );
+    $this->loader->add_action( 'init', $date_completed_taxonomy, 'register_taxonomy' );
+    
+    // Works CPT Custom Columns
     $works_cpt_columns = array(
       'cb'              =>  $columns['cb'],
       'image'           =>  __('Image'),
@@ -94,10 +106,14 @@ class Avant_Folio {
       )
     );
 
-    $works_cpt = new Avant_Folio_CPT( $works_cpt_args, $works_cpt_columns, $works_cpt_custom_columnst );
-    $this->loader->add_action( 'init', $works_cpt, 'register_cpt' );
-    $this->loader->add_filter( 'enter_title_here', $works_cpt, 'set_custom_enter_title' );
+    $class_cpt_custom_columns = new Avant_Folio_Custom_Columns( 'works', $works_cpt_columns, $works_cpt_custom_columnst );
+    $this->loader->add_filter( 'manage_works_posts_columns', $class_cpt_custom_columns, 'add_custom_columns' );
+    $this->loader->add_action( 'manage_works_posts_custom_column', $class_cpt_custom_columns, 'manage_custom_columns', 10, 2 );
+    $this->loader->add_filter( 'manage_edit-works_sortable_columns', $class_cpt_custom_columns, 'set_sortable_columns');
+    $this->loader->add_action( 'pre_get_posts', $class_cpt_custom_columns, 'set_posts_orderby' );
+  }
 
+  public function define_exhibitions_cpt() {
     // Exhibition CPT
     $exhibitions_cpt_args = array(
       'cpt_name' => 'exhibitions',
@@ -105,7 +121,6 @@ class Avant_Folio {
       'cpt_icon' => 'dashicons-awards',
       'cpt_taxonomies' => array()
     );
-
     $exhibitions_cpt = new Avant_Folio_CPT( $exhibitions_cpt_args );
     $this->loader->add_action( 'init', $exhibitions_cpt, 'register_cpt' );
     $this->loader->add_filter( 'enter_title_here', $exhibitions_cpt, 'set_custom_enter_title' );

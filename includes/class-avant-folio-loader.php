@@ -38,10 +38,11 @@ class Avant_Folio_Loader {
     }
 
     foreach ( $this->actions as $hook ) {
-      !$hook['priority'] ?
-        add_action( $hook['hook'], array( $hook['component'], $hook['callback'] ) )
-      :
+      if ( !$hook['priority'] ) {
+        add_action( $hook['hook'], array( $hook['component'], $hook['callback'] ) );
+      } else {
         add_action( $hook['hook'], array( $hook['component'], $hook['callback'] ), $hook['priority'], $hook['arguments'] );
+      }
     }
   }
 }

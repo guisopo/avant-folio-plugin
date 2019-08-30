@@ -12,7 +12,7 @@ class Avant_Folio_Custom_Columns {
   }
 
   public function add_custom_columns($columns) {
-
+    
     $columns = $this->cpt_columns;
 
     return $columns;

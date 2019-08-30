@@ -2,15 +2,16 @@
 
 class Avant_Folio_Taxonomies {
 
-  protected $cpt_name;
   protected $taxonomy;
   protected $labels;
   protected $arguments;
 
-  public function __construct( $cpt_name, $taxonomy ) {
+  public function __construct( $taxonomy ) {
 
-    $this->cpt_name = $cpt_name;
     $this->taxonomy = $taxonomy;
+
+    $this->set_labels();
+    $this->set_arguments();
   }
 
   public function set_labels() {
@@ -50,10 +51,7 @@ class Avant_Folio_Taxonomies {
   }
 
   public function register_taxonomy() {
-    $this->set_labels();
-    $this->set_arguments();
-    
-    register_taxonomy( $this->taxonomy['id'], $this->cpt_name, $this->arguments);
+    register_taxonomy( $this->taxonomy['id'], $this->taxonomy['cpt'], $this->arguments);
     
     if ( !$this->taxonomy['terms'] ) {
 
