@@ -1,32 +1,41 @@
 <?php
 class Avant_Folio_CPT {
-  protected $cpts;
-  protected $cpt;
-  protected $supports;
-  protected $labels;
-  protected $args;
-  protected $icons;
-  protected $icon;
+  protected $loader;
+  protected $cpt_name;
+  protected $cpt_supports;
+  protected $cpt_labels;
+  protected $cpt_args;
+  protected $cpt_icon;
 
-  public function __construct() {
-    $this->cpts = array(
-      'works' => array( 'title', 'thumbnail', 'revisions', 'post-formats' ),
-      'exhibitions' => array( 'title', 'thumbnail', 'revisions', 'post-formats' )
-    );
-    $this->icons = array(
-      'works' => 'dashicons-visibility',
-      'exhibitions' => 'dashicons-awards'
-    );
+  public function __construct( $cpt_name, $cpt_supports ) {
+    
+    $this->cpt_name = $cpt_name;
+    $this->cpt_supports = $cpt_supports;
+    $this->cpt_icon = $cpt_icon;
+
+    $this->load_dependencies();
+    $this->define_admin_hooks();
+  }
+
+  private function load_dependencies() {
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-taxonomies.php';
+    $this->loader = new Avant_Folio_Loader();
+  }
+
+  private function define_admin_hooks() {
+    $taxonomies = new Avant_Folio_Taxonomies();
+    $this->loader->add_action( 'init', $taxonomies, 'register_taxonomies' );
+    $this->loader->add_action( 'init', $taxonomies, 'populate_taxonomies' );
   }
 
   public function set_labels() {
 
-    $cpt_name = ucfirst($this->cpt);
+    $cpt_name = ucfirst($this->cpt_name);
     $cpt_singular = rtrim($cpt_name,'s');
 
-    $this->labels = array(
+    $this->cpt_labels = array(
       'name'               => $cpt_name,
-      'singular_name'      => 'Work',
+      'singular_name'      => $cpt_singular,
       'add_new'            => 'Add New ' . $cpt_singular . '',
       'add_new_item'       => 'Add New ' . $cpt_singular . '',
       'edit_item'          => 'Edit ' . $cpt_singular . '',
@@ -42,30 +51,24 @@ class Avant_Folio_CPT {
 
   public function set_cpt_arguments() {
     
-    $this->args = array(
+    $this->cpt_arguments = array(
       'public'        => true,
-      'supports'      => $this->supports,
-      'labels'        => $this->labels,
+      'supports'      => $this->cpt_supports,
+      'labels'        => $this->cpt_labels,
       'hierarchical'  => true,
       'has_archive'   => true,
       'menu_position' => 5,
       'show_in_rest'  => true,
-      'menu_icon'     => $this->icon
+      'menu_icon'     => $this->cpt_icon
     );
   }
   
   public function register_cpt() {
-
-    foreach ($this->cpts as $key => $value) {
-      $this->cpt = $key;
-      $this->supports = $value;
-      $this->icon = $this->icons[$key];
-      
-      $this->set_labels();
-      $this->set_cpt_arguments();
-      
-      register_post_type( $key, $this->args);
-    }
+    
+    $this->set_labels();
+    $this->set_cpt_arguments();
+    
+    register_post_type( $this->cpt_name, $this->cpt_arguments);
   }
 
   public function set_custom_enter_title($input) {

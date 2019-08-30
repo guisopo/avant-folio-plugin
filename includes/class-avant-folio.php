@@ -43,13 +43,9 @@ class Avant_Folio {
     $this->loader->add_action( 'after_setup_theme', $theme, 'set_theme_support');
     $this->loader->add_action( 'after_setup_theme', $theme, 'set_image_sizes');
 
-    $cpt = new Avant_Folio_CPT();
+    $cpt = new Avant_Folio_CPT('works', array( 'title', 'thumbnail', 'revisions', 'post-formats' ), 'dashicons-visibility');
     $this->loader->add_action( 'init', $cpt, 'register_cpt' );
     $this->loader->add_filter( 'enter_title_here', $cpt, 'set_custom_enter_title' );
-    
-    $taxonomies = new Avant_Folio_Taxonomies();
-    $this->loader->add_action( 'init', $taxonomies, 'register_taxonomies' );
-    $this->loader->add_action( 'init', $taxonomies, 'populate_taxonomies' );
 
     $customFields = new Avant_Folio_Custom_Fields();
     $this->loader->add_action( 'add_meta_boxes', $customFields, 'create_meta_boxes' );
