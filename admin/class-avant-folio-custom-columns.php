@@ -42,7 +42,7 @@ class Avant_Folio_Custom_Columns {
           _e( 'n/a' );  
         } else {
           echo (
-            '<a href="'. get_site_url() .'/wp-admin/edit.php?post_type=' . $this->cpt_name . 's&' . $key . '='. $meta_value .'">' 
+            '<a href="'. get_site_url() .'/wp-admin/edit.php?post_type=' . $this->cpt_name . '&' . $key . '='. $meta_value .'">' 
               . $meta_value . 
             '</a>'
           );
