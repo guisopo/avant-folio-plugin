@@ -48,15 +48,11 @@ class Avant_Folio {
     $this->loader->add_action( 'add_meta_boxes', $customFields, 'create_meta_boxes' );
     $this->loader->add_action( 'save_post', $customFields, 'save_post_work_meta', 10, 2 );
 
-    $customColumns = new Avant_Folio_Custom_Columns();
-    $this->loader->add_filter( 'manage_works_posts_columns', $customColumns, 'add_custom_columns' );
-    $this->loader->add_action( 'manage_works_posts_custom_column', $customColumns, 'manage_custom_columns', 10, 2 );
-    $this->loader->add_filter( 'manage_edit-works_sortable_columns', $customColumns, 'set_sortable_columns');
-    $this->loader->add_action( 'pre_get_posts', $customColumns, 'set_posts_orderby' );
+    
   }
 
   private function define_custom_post() {
-    
+
     // Works CPT
     $works_cpt_args = array(
       'cpt_name' => 'works',
@@ -80,7 +76,25 @@ class Avant_Folio {
       'singular_name' => 'Date'
     );
 
-    $works_cpt = new Avant_Folio_CPT( $works_cpt_args );
+    $works_cpt_columns = array(
+      'cb'              =>  $columns['cb'],
+      'image'           =>  __('Image'),
+      'title'           =>  __('Title'),
+      'work_type'       =>  __('Work Type'),
+      'date_completed'  =>  __('Date Completed'),
+      'date'            =>  __('Date Published'),
+    );
+
+    $works_cpt_custom_columnst = array(
+      'work_type' => array(
+        'sort_id'   => 'type'
+      ),
+      'date_completed' => array(
+        'sort_id'   => 'date'
+      )
+    );
+
+    $works_cpt = new Avant_Folio_CPT( $works_cpt_args, $works_cpt_columns, $works_cpt_custom_columnst );
     $this->loader->add_action( 'init', $works_cpt, 'register_cpt' );
     $this->loader->add_filter( 'enter_title_here', $works_cpt, 'set_custom_enter_title' );
 

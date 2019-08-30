@@ -78,8 +78,8 @@ class Avant_Folio_Custom_Fields {
   
     /* Get the meta key. */
     $meta_key      = '_folio_work_meta_key';
-    $date_meta_key = '_avant_folio_date_meta_key';
-    $cat_meta_key = '_avant_folio_type_meta_key';
+    $date_meta_key = '_avant_folio_date_completed_key';
+    $cat_meta_key = '_avant_folio_work_type_key';
   
     /* Get the meta value of the custom field key. */
     $meta_value = get_post_meta( $post_id, $meta_key, true );

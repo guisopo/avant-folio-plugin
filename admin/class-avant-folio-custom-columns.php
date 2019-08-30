@@ -2,16 +2,18 @@
 
 class Avant_Folio_Custom_Columns {
 
+  public function __construct( $cpt_name, $cpt_columns, $cpt_custom_columnst ) {
+
+    $this->cpt_name = $cpt_name;
+
+    $this->cpt_columns = $cpt_columns;
+
+    $this->cpt_custom_columnst = $cpt_custom_columnst;
+  }
+
   public function add_custom_columns($columns) {
 
-    $columns = array(
-      'cb'              =>  $columns['cb'],
-      'image'           =>  __('Image'),
-      'title'           =>  __('Title'),
-      'work_type'       =>  __('Work Type'),
-      'date_completed'  =>  __('Date Completed'),
-      'date'            =>  __('Date Published'),
-    );
+    $columns = $this->cpt_columns;
 
     return $columns;
   }
@@ -22,6 +24,7 @@ class Avant_Folio_Custom_Columns {
     if ( 'image' === $column ) {
 
       $thumbnail = get_the_post_thumbnail( $post_id, array(80, 80) );
+
       echo (
         '<a href="'. get_site_url() .'/wp-admin/post.php?post='. $post_id .'&action=edit">' 
           . $thumbnail . 
@@ -29,43 +32,30 @@ class Avant_Folio_Custom_Columns {
       );
     }
 
-    // Date Column
-    if ( 'date_completed' === $column ) {
+    foreach ($this->cpt_custom_columnst as $key => $value) {
 
-      $date = get_post_meta( $post_id, '_avant_folio_date_meta_key', true );
+      if ( $key === $column ) {
 
-      if ( !$date ) {
-        _e( 'n/a' );  
-      } else {
-        echo (
-          '<a href="'. get_site_url() .'/wp-admin/edit.php?post_type=works&date_completed='. $date .'">' 
-            . $date . 
-          '</a>'
-        );
-      }
-    }
+        $meta_value = get_post_meta( $post_id, '_avant_folio_'. $key .'_key', true );
 
-    // Work Type Column
-    if ( 'work_type' === $column ) {
-
-      $work_type = get_post_meta( $post_id, '_avant_folio_type_meta_key', true );
-
-      if ( !$work_type ) {
-        _e( 'n/a' );  
-      } else {
-        echo (
-          '<a href="'. get_site_url() .'/wp-admin/edit.php?post_type=works&work_type=' . $work_type . '">' 
-            . $work_type . 
-          '</a>'
-        );
+        if ( !$meta_value ) {
+          _e( 'n/a' );  
+        } else {
+          echo (
+            '<a href="'. get_site_url() .'/wp-admin/edit.php?post_type=' . $this->cpt_name . 's&' . $key . '='. $meta_value .'">' 
+              . $meta_value . 
+            '</a>'
+          );
+        }
       }
     }
   }
 
   public function set_sortable_columns( $columns ) {
 
-    $columns['date_completed'] = 'date';
-    $columns['work_type'] = 'type';
+    foreach ($this->cpt_custom_columnst as $key => $value) {
+      $columns[$key] = $value['sort_id'];
+    };
 
     return $columns;
   }
@@ -76,15 +66,12 @@ class Avant_Folio_Custom_Columns {
       return;
     }
 
-    if ( 'date' === $query->get( 'orderby' ) ) {
-      $query->set( 'orderby', 'meta_value' );
-      $query->set( 'meta_key', '_avant_folio_date_meta_key' );
-      $query->set( 'meta_type', 'numeric' );
-    }
+    foreach ( $this->cpt_custom_columnst as $key => $value ) {
 
-    if ( 'type' === $query->get( 'orderby' ) ) {
-      $query->set( 'orderby', 'meta_value' );
-      $query->set( 'meta_key', '_avant_folio_type_meta_key' );
+      if ( $value['sort_id'] === $query->get( 'orderby' ) ) {
+        $query->set( 'orderby', 'meta_value' );
+        $query->set( 'meta_key', '_avant_folio_' . $key . '_key' );
+      }
     }
   }
 }
