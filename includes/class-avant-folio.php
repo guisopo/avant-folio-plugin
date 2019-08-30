@@ -56,6 +56,7 @@ class Avant_Folio {
   }
 
   private function define_custom_post() {
+    
     // Works CPT
     $works_cpt_args = array(
       'cpt_name' => 'works',
@@ -84,10 +85,16 @@ class Avant_Folio {
     $this->loader->add_filter( 'enter_title_here', $works_cpt, 'set_custom_enter_title' );
 
     // Exhibition CPT
-    // $exhibition_cpt = new Avant_Folio_CPT('exhibition', array( 'title', 'thumbnail', 'revisions', 'post-formats' ), 'dashicons-awards');
-    // $this->loader->add_action( 'init', $exhibition_cpt, 'register_cpt' );
-    // $this->loader->add_filter( 'enter_title_here', $exhibition_cpt, 'set_custom_enter_title' );
+    $exhibitions_cpt_args = array(
+      'cpt_name' => 'exhibitions',
+      'cpt_supports' => array( 'title', 'thumbnail', 'revisions', 'post-formats' ),
+      'cpt_icon' => 'dashicons-awards',
+      'cpt_taxonomies' => array()
+    );
 
+    $exhibitions_cpt = new Avant_Folio_CPT( $exhibitions_cpt_args );
+    $this->loader->add_action( 'init', $exhibitions_cpt, 'register_cpt' );
+    $this->loader->add_filter( 'enter_title_here', $exhibitions_cpt, 'set_custom_enter_title' );
   }
 
   public function run() {
