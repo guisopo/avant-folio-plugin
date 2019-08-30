@@ -13,6 +13,7 @@ class Avant_Folio {
 
     $this->load_dependencies();
     $this->define_admin_hooks();
+    $this->define_custom_post();
   }
 
   private function load_dependencies() {
@@ -43,16 +44,6 @@ class Avant_Folio {
     $this->loader->add_action( 'after_setup_theme', $theme, 'set_theme_support');
     $this->loader->add_action( 'after_setup_theme', $theme, 'set_image_sizes');
 
-    $cpt = new Avant_Folio_CPT('works', array( 'title', 'thumbnail', 'revisions', 'post-formats' ), 'dashicons-visibility');
-    $this->loader->add_action( 'init', $cpt, 'register_cpt' );
-    $this->loader->add_filter( 'enter_title_here', $cpt, 'set_custom_enter_title' );
-
-    $work_type_taxonomy = new Avant_Folio_Taxonomies( 'works', [ 'id' => 'work_type', 'plural_name' => 'Types of Work', 'singular_name' => 'Type of Work'], [ 'painting', 'sculpture', 'drawing', 'performance', 'photography', 'video', 'installation' ] );
-    $this->loader->add_action( 'init', $work_type_taxonomy, 'register_taxonomies' );
-    
-    $work_date_taxonomy =  new Avant_Folio_Taxonomies( 'works', [ 'id' => 'date_completed', 'plural_name' => 'Dates', 'singular_name' => 'Date'] );
-    $this->loader->add_action( 'init', $work_date_taxonomy, 'register_taxonomies' );
-
     $customFields = new Avant_Folio_Custom_Fields();
     $this->loader->add_action( 'add_meta_boxes', $customFields, 'create_meta_boxes' );
     $this->loader->add_action( 'save_post', $customFields, 'save_post_work_meta', 10, 2 );
@@ -62,6 +53,42 @@ class Avant_Folio {
     $this->loader->add_action( 'manage_works_posts_custom_column', $customColumns, 'manage_custom_columns', 10, 2 );
     $this->loader->add_filter( 'manage_edit-works_sortable_columns', $customColumns, 'set_sortable_columns');
     $this->loader->add_action( 'pre_get_posts', $customColumns, 'set_posts_orderby' );
+  }
+
+  private function define_custom_post() {
+    // Works CPT
+    $works_cpt_args = array(
+      'cpt_name' => 'works',
+      'cpt_supports' => array( 'title', 'thumbnail', 'revisions', 'post-formats' ),
+      'cpt_icon' => 'dashicons-visibility'
+    );
+
+    $work_taxonomies = array();
+
+    $work_taxonomies[] = array(
+      'cpt' => $works_cpt_args['cpt_name'],
+      'id' => 'work_type',
+      'plural_name' => 'Types of Work',
+      'singular_name' => 'Type of Work',
+      'terms' => [ 'painting', 'drawing', 'sculpture', 'photography', 'video', 'performance', 'installation']
+    );
+
+    $work_taxonomies[] = array(
+      'cpt' => $works_cpt_args['cpt_name'],
+      'id' => 'date_completed',
+      'plural_name' => 'Dates',
+      'singular_name' => 'Date'
+    );
+
+    $works_cpt = new Avant_Folio_CPT( $works_cpt_args, $work_taxonomies );
+    $this->loader->add_action( 'init', $works_cpt, 'register_cpt' );
+    $this->loader->add_filter( 'enter_title_here', $works_cpt, 'set_custom_enter_title' );
+
+    // Exhibition CPT
+    // $exhibition_cpt = new Avant_Folio_CPT('exhibition', array( 'title', 'thumbnail', 'revisions', 'post-formats' ), 'dashicons-awards');
+    // $this->loader->add_action( 'init', $exhibition_cpt, 'register_cpt' );
+    // $this->loader->add_filter( 'enter_title_here', $exhibition_cpt, 'set_custom_enter_title' );
+
   }
 
   public function run() {

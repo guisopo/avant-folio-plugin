@@ -4,20 +4,18 @@ class Avant_Folio_Taxonomies {
 
   protected $cpt_name;
   protected $taxonomy;
-  protected $taxonomy_terms;
   protected $labels;
   protected $arguments;
 
-  public function __construct( $cpt_name, $taxonomy, $taxonomy_terms = NULL) {
-    
+  public function __construct( $cpt_name, $taxonomy ) {
+
     $this->cpt_name = $cpt_name;
     $this->taxonomy = $taxonomy;
-    $this->taxonomy_terms = $taxonomy_terms;
   }
 
   public function set_labels() {
     
-    $plural_name = $this->taxonomy['plural_name'];
+    $plural_name   = $this->taxonomy['plural_name'];
     $singular_name = $this->taxonomy['singular_name'];
 
     $this->labels = array(
@@ -51,13 +49,14 @@ class Avant_Folio_Taxonomies {
     );
   }
 
-  public function register_taxonomies() {
+  public function register_taxonomy() {
     $this->set_labels();
     $this->set_arguments();
-
+    
     register_taxonomy( $this->taxonomy['id'], $this->cpt_name, $this->arguments);
     
-    if ( $this->taxonomy_terms === NULL ) {
+    if ( !$this->taxonomy['terms'] ) {
+
       return;
     }
 
@@ -66,7 +65,7 @@ class Avant_Folio_Taxonomies {
 
   public function populate_taxonomies() {
 
-    foreach ($this->taxonomy_terms as $term) {
+    foreach ($this->taxonomy['terms'] as $term) {
       wp_insert_term(
         ucfirst($term),
         $this->taxonomy['id'],

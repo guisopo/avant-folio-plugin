@@ -7,16 +7,37 @@ class Avant_Folio_CPT {
   protected $cpt_args;
   protected $cpt_icon;
 
-  public function __construct( $cpt_name, $cpt_supports, $cpt_icon ) {
+  public function __construct( $cpt_args, $taxonomies_args ) {
     
-    $this->cpt_name = $cpt_name;
-    $this->cpt_supports = $cpt_supports;
-    $this->cpt_icon = $cpt_icon;
+    $this->cpt_name     = $cpt_args['cpt_name'];
+    $this->cpt_supports = $cpt_args['cpt_supports'];
+    $this->cpt_icon     = $cpt_args['cpt_icon'];
+
+    $this->set_taxonomies( $taxonomies_args );
+  }
+
+  public function set_taxonomies( $taxonomies_args ) {
+    
+    $this->cpt_taxonomies = array();
+
+    foreach ( $taxonomies_args as $taxonomy_arg ) {
+
+      $taxonomy = array(
+        'id'            => $taxonomy_arg['id'],
+        'plural_name'   => $taxonomy_arg['plural_name'], 
+        'singular_name' => $taxonomy_arg['singular_name'],
+        'terms'         => $taxonomy_arg['terms']
+      );
+
+      $cpt_taxonomy = new Avant_Folio_Taxonomies( $this->cpt_name, $taxonomy );
+      
+      $this->cpt_taxonomies[] = $cpt_taxonomy;
+    }
   }
 
   public function set_labels() {
 
-    $cpt_name = ucfirst($this->cpt_name);
+    $cpt_name     = ucfirst($this->cpt_name);
     $cpt_singular = rtrim($cpt_name,'s');
 
     $this->cpt_labels = array(
@@ -54,10 +75,21 @@ class Avant_Folio_CPT {
     $this->set_labels();
     $this->set_cpt_arguments();
     
-    register_post_type( $this->cpt_name, $this->cpt_arguments);
+    register_post_type( $this->cpt_name, $this->cpt_arguments );
+    
+    $this->register_cpt_taxonomies();
   }
 
-  public function set_custom_enter_title($input) {
+  public function register_cpt_taxonomies() {
+
+    foreach ( $this->cpt_taxonomies as $cpt_taxonomy ) {
+
+      $cpt_taxonomy->register_taxonomy();
+    }
+  }
+
+  public function set_custom_enter_title( $input ) {
+
     $cpt_singular = rtrim($this->cpt,'s');
     return 'Add title of the new ' . $cpt_singular . '';
   }
