@@ -1,31 +1,17 @@
 <?php
 class Avant_Folio_CPT {
-  protected $loader;
+
   protected $cpt_name;
   protected $cpt_supports;
   protected $cpt_labels;
   protected $cpt_args;
   protected $cpt_icon;
 
-  public function __construct( $cpt_name, $cpt_supports ) {
+  public function __construct( $cpt_name, $cpt_supports, $cpt_icon ) {
     
     $this->cpt_name = $cpt_name;
     $this->cpt_supports = $cpt_supports;
     $this->cpt_icon = $cpt_icon;
-
-    $this->load_dependencies();
-    $this->define_admin_hooks();
-  }
-
-  private function load_dependencies() {
-    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-taxonomies.php';
-    $this->loader = new Avant_Folio_Loader();
-  }
-
-  private function define_admin_hooks() {
-    $taxonomies = new Avant_Folio_Taxonomies();
-    $this->loader->add_action( 'init', $taxonomies, 'register_taxonomies' );
-    $this->loader->add_action( 'init', $taxonomies, 'populate_taxonomies' );
   }
 
   public function set_labels() {

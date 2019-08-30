@@ -47,6 +47,12 @@ class Avant_Folio {
     $this->loader->add_action( 'init', $cpt, 'register_cpt' );
     $this->loader->add_filter( 'enter_title_here', $cpt, 'set_custom_enter_title' );
 
+    $work_type_taxonomy = new Avant_Folio_Taxonomies( 'works', [ 'id' => 'work_type', 'plural_name' => 'Types of Work', 'singular_name' => 'Type of Work'], [ 'painting', 'sculpture', 'drawing', 'performance', 'photography', 'video', 'installation' ] );
+    $this->loader->add_action( 'init', $work_type_taxonomy, 'register_taxonomies' );
+    
+    $work_date_taxonomy =  new Avant_Folio_Taxonomies( 'works', [ 'id' => 'date_completed', 'plural_name' => 'Dates', 'singular_name' => 'Date'] );
+    $this->loader->add_action( 'init', $work_date_taxonomy, 'register_taxonomies' );
+
     $customFields = new Avant_Folio_Custom_Fields();
     $this->loader->add_action( 'add_meta_boxes', $customFields, 'create_meta_boxes' );
     $this->loader->add_action( 'save_post', $customFields, 'save_post_work_meta', 10, 2 );
