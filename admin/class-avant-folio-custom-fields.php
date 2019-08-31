@@ -8,7 +8,7 @@ class Avant_Folio_Custom_Fields {
 
   public function __construct( $metabox ) {
 
-    $this->metabox = $metabox;
+    $this->metabox       = $metabox;
     $this->metabox_nonce = $this->metabox['meta-key'] . '_nonce';
   }
 
@@ -44,17 +44,17 @@ class Avant_Folio_Custom_Fields {
       return;
     }
   
-    /* Get the posted data and sanitize it for use as an HTML class. */
+    /* Get the posted data and sanitize it */
     // $new_meta_value = isset( $_POST[ $this->metabox['meta-key'] ] ) ? array_map( 'sanitize_fields', $_POST[ $this->metabox['meta-key'] ] ) : '';
     $new_meta_value = isset( $_POST[ $this->metabox['meta-key'] ] ) ?  $_POST[ $this->metabox['meta-key'] ] : '';
-    $work_type = $new_meta_value['work_type'];
-    $date_completed = $new_meta_value['year'];
+    
     $new_meta_value['title'] = sanitize_text_field( $_POST[ 'post_title' ] );
     $new_meta_value = array_filter($new_meta_value);
   
     /* Get the meta key. */
-    $meta_key      =  '_' . $this->metabox['meta-key'] . '_key';
-    $work_type_meta_key  = '_avant_folio_work_type_key';
+    $meta_key =  '_' . $this->metabox['meta-key'] . '_key';
+
+    $work_type_meta_key      = '_avant_folio_work_type_key';
     $date_completed_meta_key = '_avant_folio_date_completed_key';
   
     /* Get the meta value of the custom field key. */
@@ -62,12 +62,15 @@ class Avant_Folio_Custom_Fields {
 
     /* If the new meta value does not match the old value, update it. */
     if ( $new_meta_value && $new_meta_value != $meta_value ) {
+      
+      $work_type      = $new_meta_value['work_type'];
+      $date_completed = $new_meta_value['date_completed'];
       wp_set_post_terms( $post_id, $work_type, 'work_type' );
       wp_set_post_terms( $post_id, $date_completed, 'date_completed' );
-
-      update_post_meta( $post_id, $meta_key, $new_meta_value );
       update_post_meta( $post_id, $work_type_meta_key, $work_type );
       update_post_meta( $post_id, $date_completed_meta_key, $date_completed );
+
+      update_post_meta( $post_id, $meta_key, $new_meta_value );
     }
   
     /* If there is no new meta value but an old value exists, delete it. */

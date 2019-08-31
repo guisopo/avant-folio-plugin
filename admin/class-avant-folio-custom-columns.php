@@ -2,13 +2,11 @@
 
 class Avant_Folio_Custom_Columns {
 
-  public function __construct( $cpt_name, $cpt_columns, $cpt_custom_columnst ) {
+  public function __construct( $cpt_name, $cpt_columns, $cpt_custom_columns ) {
 
-    $this->cpt_name = $cpt_name;
-
-    $this->cpt_columns = $cpt_columns;
-
-    $this->cpt_custom_columnst = $cpt_custom_columnst;
+    $this->cpt_name            = $cpt_name;
+    $this->cpt_columns         = $cpt_columns;
+    $this->cpt_custom_columns = $cpt_custom_columns;
   }
 
   public function add_custom_columns($columns) {
@@ -19,7 +17,9 @@ class Avant_Folio_Custom_Columns {
   }
 
   public function manage_custom_columns( $column, $post_id ) {
-    
+
+    $meta_value = get_post_meta( $post_id, '_avant_folio_work_info_key', true );
+
     // Image Column
     if ( 'image' === $column ) {
 
@@ -32,18 +32,18 @@ class Avant_Folio_Custom_Columns {
       );
     }
 
-    foreach ($this->cpt_custom_columnst as $key => $value) {
-
+    foreach ($this->cpt_custom_columns as $key => $value) {
       if ( $key === $column ) {
 
-        $meta_value = get_post_meta( $post_id, '_avant_folio_'. $key .'_key', true );
-
         if ( !$meta_value ) {
+
           _e( 'n/a' );  
+
         } else {
+          
           echo (
-            '<a href="'. get_site_url() .'/wp-admin/edit.php?post_type=' . $this->cpt_name . '&' . $key . '='. $meta_value .'">' 
-              . $meta_value . 
+            '<a href="'. get_site_url() .'/wp-admin/edit.php?post_type=' . $this->cpt_name . '&' . $key . '='. $meta_value[$key] .'">' 
+              . $meta_value[$key] . 
             '</a>'
           );
         }
@@ -53,7 +53,7 @@ class Avant_Folio_Custom_Columns {
 
   public function set_sortable_columns( $columns ) {
 
-    foreach ($this->cpt_custom_columnst as $key => $value) {
+    foreach ($this->cpt_custom_columns as $key => $value) {
       $columns[$key] = $value['sort_id'];
     };
 
@@ -66,7 +66,7 @@ class Avant_Folio_Custom_Columns {
       return;
     }
 
-    foreach ( $this->cpt_custom_columnst as $key => $value ) {
+    foreach ( $this->cpt_custom_columns as $key => $value ) {
 
       if ( $value['sort_id'] === $query->get( 'orderby' ) ) {
         $query->set( 'orderby', 'meta_value' );

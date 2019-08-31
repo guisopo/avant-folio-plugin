@@ -5,7 +5,7 @@
     ${'work_'.$key} = ( ! empty ( $value ) ) ? $value : '';
   }
 
-  $taxterms = get_terms( 'work_type', array( 'get' => 'all' ) );
+  $work_types_taxonomies = get_terms( 'work_type', array( 'get' => 'all' ) );
 ?>
   <p>Here you can fill the details of this work. Remember to click the <b>Publish</b> button on the right to save the data.</p>
   <!-- Work Type -->
@@ -13,7 +13,7 @@
     <label class="post-attributes-label" for="avant_folio_work_info_work_type">Category:</label>
     <select id="work_type" name="avant_folio_work_info[work_type]">
       <?php 
-        foreach( $taxterms as $term ){
+        foreach( $work_types_taxonomies as $term ){
           $selected = selected( $work_work_type, $term->name );
           echo '<option value="'. $term->name .'" '. $selected .'>'. $term->name .'</option>';
         }
@@ -22,15 +22,15 @@
   </p>
   <!-- Work Year -->
   <p>
-    <label class="post-attributes-label" for="avant_folio_work_info_year">Year:</label>
+    <label class="post-attributes-label" for="avant_folio_work_info_date_completed">Year:</label>
     <input
       type="text"
-      name="avant_folio_work_info[year]"
+      name="avant_folio_work_info[date_completed]"
       placeholder="<?php echo date('Y') ?>"
       maxlength="4"
       pattern="[0-9]{4,4}"
       size="4"
-      value="<?php echo esc_attr( $work_year ); ?>"
+      value="<?php echo esc_attr( $work_date_completed ); ?>"
     >
   </p>
   <!-- Work Material -->
