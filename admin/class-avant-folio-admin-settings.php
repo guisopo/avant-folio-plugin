@@ -13,9 +13,10 @@ class Avant_Folio_Admin_Settings {
   }
 
   public function sanitize_settings( $input ) {
+
     $input['option_name']      = sanitize_text_field( $input['option_name'] );
     $input['option_last_name'] = sanitize_text_field( $input['option_last_name'] );
-    $input['option_facebook']  = sanitize_text_field( $input['option_facebook'] );
+    $input['option_facebook']  = $this->sanitize_at_symbol( $input['option_facebook'] );
     $input['option_twitter']   = $this->sanitize_at_symbol( $input['option_twitter'] );
     $input['option_instagram'] = $this->sanitize_at_symbol( $input['option_instagram'] );
     
@@ -24,7 +25,7 @@ class Avant_Folio_Admin_Settings {
 
   public function sanitize_at_symbol( $input ){
     $output = sanitize_text_field( $input );
-    $output = str_replace( '@', '', $output );
+    $output = trim($output, '@');
     return $output;
   }
 }
