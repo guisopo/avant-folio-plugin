@@ -51,6 +51,7 @@ class Avant_Folio_Taxonomies {
   }
 
   public function register_taxonomy() {
+    
     register_taxonomy( $this->taxonomy['id'], $this->taxonomy['cpt'], $this->arguments);
     
     if ( !$this->taxonomy['terms'] ) {

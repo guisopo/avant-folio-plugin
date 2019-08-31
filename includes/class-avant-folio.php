@@ -44,10 +44,6 @@ class Avant_Folio {
     $theme = new Avant_Folio_Theme();
     $this->loader->add_action( 'after_setup_theme', $theme, 'set_theme_support');
     $this->loader->add_action( 'after_setup_theme', $theme, 'set_image_sizes');
-
-    $customFields = new Avant_Folio_Custom_Fields();
-    $this->loader->add_action( 'add_meta_boxes', $customFields, 'create_meta_boxes' );
-    $this->loader->add_action( 'save_post', $customFields, 'save_post_work_meta', 10, 2 );
   }
 
   private function define_works_cpt() {
@@ -59,14 +55,20 @@ class Avant_Folio {
       'cpt_icon' => 'dashicons-visibility'
     );
 
-    $works_cpt = new Avant_Folio_CPT( $works_cpt_args, $works_cpt_columns, $works_cpt_custom_columnst );
+    $works_cpt = new Avant_Folio_CPT( $works_cpt_args );
     $this->loader->add_action( 'init', $works_cpt, 'register_cpt' );
     $this->loader->add_filter( 'enter_title_here', $works_cpt, 'set_custom_enter_title' );
 
-    // Works CPT Custom Taxonomies
+    $this->define_works_cpt_taxonomies($works_cpt_args['cpt_name']);
+    $this->define_works_cpt_columns($works_cpt_args['cpt_name']);
+    $this->define_works_cpt_metaboxes($works_cpt_args['cpt_name']);
+  }
+
+  public function define_works_cpt_taxonomies($cpt_name) {
+
     // Work Type Taxonomy
     $work_type_tax_args = array(
-      'cpt' => $works_cpt_args['cpt_name'],
+      'cpt' => $cpt_name,
       'id' => 'work_type',
       'plural_name' => 'Types of Work',
       'singular_name' => 'Type of Work',
@@ -78,7 +80,7 @@ class Avant_Folio {
 
     // Date Completed Taxonomy
     $date_completed_tax_args = array(
-      'cpt' => $works_cpt_args['cpt_name'],
+      'cpt' => $cpt_name,
       'id' => 'date_completed',
       'plural_name' => 'Dates',
       'singular_name' => 'Date'
@@ -86,8 +88,10 @@ class Avant_Folio {
 
     $date_completed_taxonomy = new Avant_Folio_Taxonomies( $date_completed_tax_args );
     $this->loader->add_action( 'init', $date_completed_taxonomy, 'register_taxonomy' );
-    
-    // Works CPT Custom Columns
+  }
+
+  public function define_works_cpt_columns($cpt_name) {
+
     $works_cpt_columns = array(
       'cb'              =>  $columns['cb'],
       'image'           =>  __('Image'),
@@ -106,11 +110,28 @@ class Avant_Folio {
       )
     );
 
-    $class_cpt_custom_columns = new Avant_Folio_Custom_Columns( 'works', $works_cpt_columns, $works_cpt_custom_columnst );
-    $this->loader->add_filter( 'manage_works_posts_columns', $class_cpt_custom_columns, 'add_custom_columns' );
-    $this->loader->add_action( 'manage_works_posts_custom_column', $class_cpt_custom_columns, 'manage_custom_columns', 10, 2 );
-    $this->loader->add_filter( 'manage_edit-works_sortable_columns', $class_cpt_custom_columns, 'set_sortable_columns');
+    $class_cpt_custom_columns = new Avant_Folio_Custom_Columns( $cpt_name, $works_cpt_columns, $works_cpt_custom_columnst );
+    $this->loader->add_filter( 'manage_' . $cpt_name . '_posts_columns', $class_cpt_custom_columns, 'add_custom_columns' );
+    $this->loader->add_action( 'manage_' . $cpt_name . '_posts_custom_column', $class_cpt_custom_columns, 'manage_custom_columns', 10, 2 );
+    $this->loader->add_filter( 'manage_edit-' . $cpt_name . '_sortable_columns', $class_cpt_custom_columns, 'set_sortable_columns');
     $this->loader->add_action( 'pre_get_posts', $class_cpt_custom_columns, 'set_posts_orderby' );
+  }
+
+  public function define_works_cpt_metaboxes( $cpt_name ) {
+
+    $work_info_metabox = array(
+      'id'       => 'work-information',
+      'title'    => esc_html__( 'Work Details', 'string' ),
+      'callback' => 'render_cf',
+      'screen'   => $cpt_name,
+      'context'  => 'normal',
+      'priority' => 'core',
+      'meta-key'    => 'avant_folio_work_info',
+    );
+
+    $customFields = new Avant_Folio_Custom_Fields( $work_info_metabox );
+    $this->loader->add_action( 'add_meta_boxes', $customFields, 'create_meta_boxes' );
+    $this->loader->add_action( 'save_post', $customFields, 'save_post_work_meta', 10, 2 );
   }
 
   public function define_exhibitions_cpt() {
@@ -121,6 +142,7 @@ class Avant_Folio {
       'cpt_icon' => 'dashicons-awards',
       'cpt_taxonomies' => array()
     );
+
     $exhibitions_cpt = new Avant_Folio_CPT( $exhibitions_cpt_args );
     $this->loader->add_action( 'init', $exhibitions_cpt, 'register_cpt' );
     $this->loader->add_filter( 'enter_title_here', $exhibitions_cpt, 'set_custom_enter_title' );
