@@ -124,8 +124,6 @@ class Avant_Folio {
       'title'    => esc_html__( 'Work Details', 'string' ),
       'callback' => 'render_cf',
       'screen'   => $cpt_name,
-      'context'  => 'normal',
-      'priority' => 'core',
       'meta-key'    => 'avant_folio_work_info',
     );
 

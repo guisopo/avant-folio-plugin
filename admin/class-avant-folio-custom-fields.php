@@ -19,8 +19,8 @@ class Avant_Folio_Custom_Fields {
       $this->metabox['title'],
       array( $this, $this->metabox['callback'] ),
       $this->metabox['screen'],  
-      $this->metabox['context'], 
-      $this->metabox['priority']   
+      $this->metabox['context'] ?: 'normal', 
+      $this->metabox['priority'] ?: 'core'   
     );
   }
 
