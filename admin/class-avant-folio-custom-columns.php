@@ -6,7 +6,7 @@ class Avant_Folio_Custom_Columns {
 
     $this->cpt_name            = $cpt_name;
     $this->cpt_columns         = $cpt_columns;
-    $this->cpt_custom_columns = $cpt_custom_columns;
+    $this->cpt_custom_columns  = $cpt_custom_columns;
   }
 
   public function add_custom_columns($columns) {
