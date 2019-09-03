@@ -3,14 +3,14 @@
   height: auto;
 }
 
-.avant_folio_gallery li.attachment {
+.avant_folio_gallery_list li.attachment {
 	width:  141px;
 	height: 141px;
 }
 .avant_folio_gallery {
 	display: block;
 }
-.avant_folio_gallery:after {
+.avant_folio_gallery_list:after {
 	display: table;
 	content: '';
 	clear: both;
