@@ -6,13 +6,21 @@ class mediaUploader   {
 
     this.addImagesButton = document.getElementById('avant_folio_gallery_add_images');
     this.galleryList = document.getElementById('avant_folio_gallery_list');
+    this.galleryHiddenInput;
 
     this.imagesListItems= '';
     this.selectedImages = [];
-    this.galleryHiddenInput;
 
     console.log('Constructed');
     this.init();
+  }
+
+  init() {
+    console.log('Init');
+
+    this.bindAll();
+    this.addEvents();
+    this.createInput();
   }
 
   bindAll() {
@@ -20,6 +28,34 @@ class mediaUploader   {
       .forEach( fn => this[fn] = this[fn].bind(this));
 
     console.log('Bind All');
+  }
+
+  addEvents() {
+    this.addImagesButton.addEventListener('click', this.renderMediaUploader);
+    
+    console.log('Add events');
+  }
+
+
+  setInputValue() {
+    let inputValue = [];
+    this.selectedImages.forEach(image => inputValue.push(image.id));
+
+    this.galleryHiddenInput.setAttribute('value', inputValue);
+
+    console.log(`Set Input Value: ${this.galleryHiddenInput.value || null}`);
+  }
+
+  createInput() {
+    this.galleryHiddenInput = document.createElement('input');
+
+    this.galleryHiddenInput.setAttribute('type', 'hidden');
+    this.galleryHiddenInput.setAttribute('id', 'avant_folio_work_gallery');
+    this.galleryHiddenInput.setAttribute('name', 'avant_folio_work_info[gallery]');
+
+    this.galleryList.appendChild(this.galleryHiddenInput);
+
+    console.log('Hidden Meta Box Created');
   }
 
   renderMediaUploader(e) {
@@ -90,29 +126,7 @@ class mediaUploader   {
   }
 
   renderImages() {
-    this.galleryList.sortable();
     this.galleryList.innerHTML = this.imagesListItems;
-  }
-
-  createInput() {
-    this.galleryHiddenInput = document.createElement('input');
-
-    this.galleryHiddenInput.setAttribute('type', 'hidden');
-    this.galleryHiddenInput.setAttribute('id', 'avant_folio_work_gallery');
-    this.galleryHiddenInput.setAttribute('name', 'avant_folio_work_info[gallery]');
-
-    this.galleryList.appendChild(this.galleryHiddenInput);
-
-    console.log('Hidden Meta Box Created');
-  }
-
-  setInputValue() {
-    let inputValue = [];
-    this.selectedImages.forEach(image => inputValue.push(image.id));
-
-    this.galleryHiddenInput.setAttribute('value', inputValue);
-
-    console.log(`Set Input Value: ${this.galleryHiddenInput.value || null}`);
   }
 
   removeImage(e) {
@@ -124,20 +138,6 @@ class mediaUploader   {
     console.log(`Click:  %cImage removed ${e.target.dataset.id}`, 'color: red');
 
     this.setInputValue();
-  }
-
-  addEvents() {
-    this.addImagesButton.addEventListener('click', this.renderMediaUploader);
-    
-    console.log('Add events');
-  }
-
-  init() {
-    console.log('Init');
-
-    this.bindAll();
-    this.addEvents();
-    this.createInput();
   }
 }
 
