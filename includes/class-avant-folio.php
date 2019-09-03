@@ -151,8 +151,9 @@ class Avant_Folio {
 
   public function set_gallery() {
     $gallery = new Avant_Folio_Gallery();
-    $this->loader->add_action( 'add_meta_boxes', $gallery, 'add_metabox');
-    $this->loader->add_action( 'admin_enqueue_scripts', $gallery, 'enqueue_scripts');
+    $this->loader->add_action( 'add_meta_boxes', $gallery, 'add_metabox' );
+    $this->loader->add_action( 'admin_enqueue_scripts', $gallery, 'enqueue_scripts' );
+    // $this->loader->add_action( 'save_post', $gallery, 'save_images' );
   }
 
   public function run() {
