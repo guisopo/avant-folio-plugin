@@ -94,7 +94,7 @@ class mediaUploader   {
           return;
         }
         this.createImage(imageData);
-        this.selectedImages.push(imageData);
+        this.selectedImages.push(imageData.id);
       });
       this.setInputValue();
       this.renderImages();
@@ -127,6 +127,7 @@ class mediaUploader   {
 
   renderImages() {
     this.galleryList.innerHTML = this.imagesListItems;
+    console.log(this.selectedImages);
   }
 
   removeImage(e) {
