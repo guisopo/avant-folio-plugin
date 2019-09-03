@@ -25,20 +25,31 @@ class mediaUploader   {
     e.preventDefault();
 
     let file_frame;
+
     if ( file_frame !== undefined ) {
       file_frame.open();
       return;
     }
 
     file_frame = wp.media.frames.file_frame = wp.media({
-      frame:  'post',
-      state:  'insert',
-      multiple: true
+      frame:  'select',
+      title: 'Select Work Images',
+      multiple: true,
+      library: {
+        order: 'ASC',
+        orderby: 'title',
+        type: 'image',
+        search: null,
+        uploadedTo: null
+      },
+      button: {
+        text: 'Publish Images'
+      }
     });
 
     console.log('Click: Render Media Uploader');
 
-    file_frame.on( 'insert', () => {
+    file_frame.on( 'select', () => {
       const json = file_frame.state().get('selection').toJSON();
 
       json.forEach(imageData => {
@@ -47,6 +58,7 @@ class mediaUploader   {
         }
         this.createImage(imageData);
       });
+
       this.renderImages();
       this.setInputValue();
     });
@@ -57,6 +69,7 @@ class mediaUploader   {
   createImage(imageData) {
     // Create Image
     const image = document.createElement('img');
+
     image.classList.add('work-image');
     image.setAttribute('src', imageData.url);
     image.setAttribute('alt', imageData.caption);
@@ -64,12 +77,14 @@ class mediaUploader   {
     image.setAttribute('data-id', imageData.id);
 
     this.selectedImages.push(image);
+
     // Add Event-Listener to Image
     image.addEventListener('click', this.removeImage);
+
     // Append to Gallery Container
     this.galleryContainer.appendChild(image);
 
-    console.log(`Image ${imageData.id} created`);
+    console.log(`%cImage ${imageData.id} created`, 'color:green');
   }
 
   renderImages() {
@@ -77,6 +92,7 @@ class mediaUploader   {
 
     console.log('Show Images!');
   }
+
 
   createInput() {
     this.galleryHiddenInput = document.createElement('input');
@@ -100,10 +116,10 @@ class mediaUploader   {
   removeImage(e) {
     e.target.classList.add('hidden');
     e.target.remove();
-    
+
     this.selectedImages = this.selectedImages.filter( image => image !== e.target);
 
-    console.log(`Click: Image removed ${e.target.dataset.id}`);
+    console.log(`Click:  %cImage removed ${e.target.dataset.id}`, 'color: red');
 
     this.setInputValue();
   }
