@@ -3,15 +3,14 @@ $post_type = get_post_type( $post );
 $meta_value = get_post_meta( $post->ID, '_avant_folio_work_info_key', true );
 $gallery = $meta_value['gallery'];
 $images = explode(",", $gallery );
-
 ?>
 
 <p>Here you can add the images of the work.</p>
-<table class="table">
+<table id="avant_folio_gallery" class="table">
 	<tr>
 		<td>
 			<!-- Creating a dynamic ID using the metabox ID for JavaScript-->
-			<ul id="avant_folio_gallery_list" class="avant_folio_gallery">
+			<ul id="avant_folio_gallery_list" class="avant_folio_gallery_list">
 				<?php 
 				
 				// If there is any ID, create the image for it
