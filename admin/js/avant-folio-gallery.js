@@ -4,6 +4,7 @@ class mediaUploader   {
 
   constructor() {
 
+    this.plugin = document.getElementById('avant_folio_gallery');
     this.addImagesButton = document.getElementById('avant_folio_gallery_add_images');
     this.galleryList = document.getElementById('avant_folio_gallery_list');
     this.galleryHiddenInput;
@@ -39,7 +40,7 @@ class mediaUploader   {
 
   setInputValue() {
     let inputValue = [];
-    this.selectedImages.forEach(image => inputValue.push(image.id));
+    this.selectedImages.forEach(image => inputValue.push(image));
 
     this.galleryHiddenInput.setAttribute('value', inputValue);
 
@@ -53,7 +54,7 @@ class mediaUploader   {
     this.galleryHiddenInput.setAttribute('id', 'avant_folio_work_gallery');
     this.galleryHiddenInput.setAttribute('name', 'avant_folio_work_info[gallery]');
 
-    this.galleryList.appendChild(this.galleryHiddenInput);
+    this.plugin.appendChild(this.galleryHiddenInput);
 
     console.log('Hidden Meta Box Created');
   }
