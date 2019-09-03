@@ -4,15 +4,10 @@ class mediaUploader   {
 
   constructor() {
 
-    this.file_frame;
-    this.image_data;
-    this.json;
-
     this.addImagesButton = document.getElementById('js-add-images');
     this.galleryContainer = document.getElementById('js-gallery-container');
 
     this.selectedImages = [];
-    this.inputValue = [];
     this.galleryHiddenInput;
 
     console.log('Constructed');
@@ -29,34 +24,34 @@ class mediaUploader   {
   renderMediaUploader(e) {
     e.preventDefault();
 
-    if ( this.file_frame !== undefined ) {
-        this.file_frame.open();
-        return;
+    let file_frame;
+    if ( file_frame !== undefined ) {
+      file_frame.open();
+      return;
     }
-    
-    this.file_frame = wp.media.frames.file_frame = wp.media({
-        frame:  'post',
-        state:  'insert',
-        multiple: true
+
+    file_frame = wp.media.frames.file_frame = wp.media({
+      frame:  'post',
+      state:  'insert',
+      multiple: true
     });
 
     console.log('Click: Render Media Uploader');
 
-    this.file_frame.on( 'insert', () => {
-      this.json = this.file_frame.state().get('selection').toJSON();
+    file_frame.on( 'insert', () => {
+      const json = file_frame.state().get('selection').toJSON();
 
-      this.json.forEach(imageData => {
+      json.forEach(imageData => {
         if ( 0 > imageData.url.trim() ) {
           return;
         }
         this.createImage(imageData);
       });
       this.renderImages();
-      this.createInput();
       this.setInputValue();
     });
 
-    this.file_frame.open();
+    file_frame.open();
   }
 
   createImage(imageData) {
@@ -93,35 +88,24 @@ class mediaUploader   {
     console.log('Hidden Meta Box Created');
   }
 
-  removeInput() {
-    this.galleryHiddenInput.remove();
-
-    console.log(`Remove Input`)
-  }
-
   setInputValue() {
-    this.inputValue = [];
-    this.selectedImages.forEach(image => this.inputValue.push(image.dataset.id));
+    let inputValue = [];
+    this.selectedImages.forEach(image => inputValue.push(image.dataset.id));
 
-    this.galleryHiddenInput.setAttribute('value', this.inputValue);
+    this.galleryHiddenInput.setAttribute('value', inputValue);
 
     console.log(`Set Input Value: ${this.galleryHiddenInput.value || null}`);
   }
 
   removeImage(e) {
-
     e.target.classList.add('hidden');
     e.target.remove();
+    
     this.selectedImages = this.selectedImages.filter( image => image !== e.target);
 
-    console.log('Click: Image removed');
+    console.log(`Click: Image removed ${e.target.dataset.id}`);
 
-    if( this.selectedImages.length > 0 ) {
-      this.setInputValue();
-    } else {
-      this.setInputValue();
-      this.removeInput();
-    }
+    this.setInputValue();
   }
 
   addEvents() {
@@ -135,6 +119,7 @@ class mediaUploader   {
 
     this.bindAll();
     this.addEvents();
+    this.createInput();
   }
 }
 
