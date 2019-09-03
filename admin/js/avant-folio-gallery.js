@@ -4,9 +4,10 @@ class mediaUploader   {
 
   constructor() {
 
-    this.addImagesButton = document.getElementById('js-add-images');
-    this.galleryContainer = document.getElementById('js-gallery-container');
+    this.addImagesButton = document.getElementById('avant_folio_gallery_add_images');
+    this.galleryList = document.getElementById('avant_folio_gallery_list');
 
+    this.imagesListItems= '';
     this.selectedImages = [];
     this.galleryHiddenInput;
 
@@ -57,56 +58,57 @@ class mediaUploader   {
           return;
         }
         this.createImage(imageData);
+        this.selectedImages.push(imageData);
       });
-
-      this.renderImages();
       this.setInputValue();
+      this.renderImages();
     });
 
     file_frame.open();
   }
 
   createImage(imageData) {
-    // Create Image
-    const image = document.createElement('img');
 
-    image.classList.add('work-image');
-    image.setAttribute('src', imageData.url);
-    image.setAttribute('alt', imageData.caption);
-    image.setAttribute('title', imageData.title);
-    image.setAttribute('data-id', imageData.id);
+    let output = `
+      <li tabindex="0" role="checkbox" aria-label="${imageData.title}" aria-checked="true" data-id="${imageData.id}" class="attachment save-ready selected details">
+        <div class="attachment-preview js--select-attachment type-image subtype-jpeg portrait">
+          <div class="thumbnail">
+            <div class="centered">
+              <img src="${imageData.sizes.thumbnail.url}" draggable="false" alt="${imageData.caption}"/>
+            </div>
+          </div>
+        </div>
+      
+      <button type="button" class="button-link check asap-image-remove" tabindex="0">
+        <span class="media-modal-icon"></span>
+        <span class="screen-reader-text">Deselect</span>
+      </button>
+      
+    </li>`;
 
-    this.selectedImages.push(image);
-
-    // Add Event-Listener to Image
-    image.addEventListener('click', this.removeImage);
-
-    // Append to Gallery Container
-    this.galleryContainer.appendChild(image);
-
-    console.log(`%cImage ${imageData.id} created`, 'color:green');
+    this.imagesListItems += output;
   }
 
   renderImages() {
-    this.galleryContainer.classList.remove('hidden');
-
-    console.log('Show Images!');
+    this.galleryList.sortable();
+    this.galleryList.innerHTML = this.imagesListItems;
   }
-
 
   createInput() {
     this.galleryHiddenInput = document.createElement('input');
+
     this.galleryHiddenInput.setAttribute('type', 'hidden');
     this.galleryHiddenInput.setAttribute('id', 'avant_folio_work_gallery');
     this.galleryHiddenInput.setAttribute('name', 'avant_folio_work_info[gallery]');
-    this.galleryContainer.appendChild(this.galleryHiddenInput);
+
+    this.galleryList.appendChild(this.galleryHiddenInput);
 
     console.log('Hidden Meta Box Created');
   }
 
   setInputValue() {
     let inputValue = [];
-    this.selectedImages.forEach(image => inputValue.push(image.dataset.id));
+    this.selectedImages.forEach(image => inputValue.push(image.id));
 
     this.galleryHiddenInput.setAttribute('value', inputValue);
 
