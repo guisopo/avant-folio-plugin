@@ -21,6 +21,7 @@ class avantFolioMediaUploader   {
     console.log('Init');
 
     this.bindAll();
+    this.getInitialImages();
     this.addEvents();
     this.createInput();
     this.makeGallerySortable();
@@ -31,6 +32,13 @@ class avantFolioMediaUploader   {
       .forEach( fn => this[fn] = this[fn].bind(this));
 
     console.log('Bind All');
+  }
+
+  getInitialImages() {
+    const imagesArray = Array.from(this.galleryList.children);
+    imagesArray.forEach( item => {
+      this.selectedImages.push(item.dataset.id);
+    });
   }
 
   addEvents() {
@@ -137,8 +145,6 @@ class avantFolioMediaUploader   {
     const imageToDelete = e.target.parentNode.parentNode;
     imageToDelete.classList.add('hidden');
     imageToDelete.remove();
-
-    console.log(e.target, imageToDelete);
 
     this.selectedImages = this.selectedImages.filter( image => image !== imageToDelete.dataset.id);
 
