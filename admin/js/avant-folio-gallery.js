@@ -1,12 +1,13 @@
-console.log('Avant-Folio-Gallery');
+(function($) {
 
-class mediaUploader   {
+class avantFolioMediaUploader   {
 
   constructor() {
 
     this.plugin = document.getElementById('avant_folio_gallery');
-    this.addImagesButton = document.getElementById('avant_folio_gallery_add_images');
     this.galleryList = document.getElementById('avant_folio_gallery_list');
+    this.addImagesButton = document.getElementById('avant_folio_gallery_add_images');
+    this.removeImageButton = document.querySelectorAll('.js-avant-folio-gallery-remove-image');
     this.galleryHiddenInput;
 
     this.imagesListItems= '';
@@ -22,10 +23,11 @@ class mediaUploader   {
     this.bindAll();
     this.addEvents();
     this.createInput();
+    this.makeGallerySortable();
   }
 
   bindAll() {
-    ['renderMediaUploader', 'removeImage']
+    ['renderMediaUploader', 'deleteImage']
       .forEach( fn => this[fn] = this[fn].bind(this));
 
     console.log('Bind All');
@@ -33,7 +35,7 @@ class mediaUploader   {
 
   addEvents() {
     this.addImagesButton.addEventListener('click', this.renderMediaUploader);
-    
+    this.removeImageButton.forEach( button => button.addEventListener('click', this.deleteImage));
     console.log('Add events');
   }
 
@@ -94,7 +96,7 @@ class mediaUploader   {
         if ( 0 > imageData.url.trim() ) {
           return;
         }
-        this.createImage(imageData);
+        this.createImagesList(imageData);
         this.selectedImages.push(imageData.id);
       });
       this.setInputValue();
@@ -104,7 +106,7 @@ class mediaUploader   {
     file_frame.open();
   }
 
-  createImage(imageData) {
+  createImagesList(imageData) {
 
     let output = `
       <li tabindex="0" role="checkbox" aria-label="${imageData.title}" aria-checked="true" data-id="${imageData.id}" class="attachment save-ready selected details">
@@ -131,16 +133,28 @@ class mediaUploader   {
     console.log(this.selectedImages);
   }
 
-  removeImage(e) {
-    e.target.classList.add('hidden');
-    e.target.remove();
+  deleteImage(e) {
+    const imageToDelete = e.target.parentNode.parentNode;
+    imageToDelete.classList.add('hidden');
+    imageToDelete.remove();
 
-    this.selectedImages = this.selectedImages.filter( image => image !== e.target);
+    console.log(e.target, imageToDelete);
+
+    this.selectedImages = this.selectedImages.filter( image => image !== imageToDelete.dataset.id);
 
     console.log(`Click:  %cImage removed ${e.target.dataset.id}`, 'color: red');
 
     this.setInputValue();
   }
+
+  makeGallerySortable() {
+    $('#avant_folio_gallery_list').sortable();
+    $('#avant_folio_gallery_list').on( "sortupdate", (events, ui) => {
+      console.log('hola');
+    });
+  }
 }
 
-const gallery = new mediaUploader();
+const gallery = new avantFolioMediaUploader();
+
+})(jQuery);
