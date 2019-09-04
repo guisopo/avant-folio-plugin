@@ -21,9 +21,10 @@ class avantFolioMediaUploader   {
     console.log('Init');
 
     this.bindAll();
-    this.getInitialImages();
-    this.addEvents();
     this.createInput();
+    this.getImages();
+    this.setInputValue()
+    this.addEvents();
     this.makeGallerySortable();
   }
 
@@ -34,11 +35,12 @@ class avantFolioMediaUploader   {
     console.log('Bind All');
   }
 
-  getInitialImages() {
+  getImages() {
     const imagesArray = Array.from(this.galleryList.children);
     imagesArray.forEach( item => {
       this.selectedImages.push(item.dataset.id);
     });
+    console.log('Initial images saved')
   }
 
   addEvents() {
@@ -46,7 +48,6 @@ class avantFolioMediaUploader   {
     this.removeImageButton.forEach( button => button.addEventListener('click', this.deleteImage));
     console.log('Add events');
   }
-
 
   setInputValue() {
     let inputValue = [];
@@ -85,7 +86,7 @@ class avantFolioMediaUploader   {
       multiple: true,
       library: {
         order: 'ASC',
-        orderby: 'title',
+        orderby: 'date',
         type: 'image',
         search: null,
         uploadedTo: null
@@ -104,8 +105,8 @@ class avantFolioMediaUploader   {
         if ( 0 > imageData.url.trim() ) {
           return;
         }
-        this.createImagesList(imageData);
         this.selectedImages.push(imageData.id);
+        this.createImagesList(imageData);
       });
       this.setInputValue();
       this.renderImages();
@@ -113,6 +114,10 @@ class avantFolioMediaUploader   {
 
     file_frame.open();
   }
+
+  // filterImageList() {
+  //   this.selectedImages.filter( image => image !== imageToDelete.dataset.id);
+  // }
 
   createImagesList(imageData) {
 
@@ -126,7 +131,7 @@ class avantFolioMediaUploader   {
           </div>
         </div>
       
-      <button type="button" class="button-link check asap-image-remove" tabindex="0">
+      <button type="button" class="button-link check asap-image-remove js-avant-folio-gallery-remove-image" tabindex="0">
         <span class="media-modal-icon"></span>
         <span class="screen-reader-text">Deselect</span>
       </button>
@@ -137,19 +142,22 @@ class avantFolioMediaUploader   {
   }
 
   renderImages() {
-    this.galleryList.innerHTML = this.imagesListItems;
+    this.galleryList.insertAdjacentHTML( 'beforeend', this.imagesListItems);
     console.log(this.selectedImages);
+
+    this.removeImageButton = document.querySelectorAll('.js-avant-folio-gallery-remove-image');
+    this.addEvents();
   }
 
   deleteImage(e) {
     const imageToDelete = e.target.parentNode.parentNode;
+    const imageToDeleteID = parseFloat(imageToDelete.dataset.id);
     imageToDelete.classList.add('hidden');
     imageToDelete.remove();
 
-    this.selectedImages = this.selectedImages.filter( image => image !== imageToDelete.dataset.id);
+    this.selectedImages = this.selectedImages.filter( imageID => imageID !== imageToDeleteID);
 
-    console.log(`Click:  %cImage removed ${e.target.dataset.id}`, 'color: red');
-
+    console.log(`Click:  %cImage removed ${imageToDeleteID}`, 'color: red');
     this.setInputValue();
   }
 
