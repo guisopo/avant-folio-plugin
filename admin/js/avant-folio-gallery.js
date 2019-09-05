@@ -18,7 +18,6 @@ class avantFolioMediaUploader   {
   init() {
     this.bindAll();
     this.createInput();
-    this.addEvents();
     this.makeGallerySortable();
     this.setInitialState();
   }
@@ -30,6 +29,9 @@ class avantFolioMediaUploader   {
 
   addEvents() {
     this.addImagesButton.addEventListener('click', this.renderMediaUploader);
+
+    const removeImageButtons = document.querySelectorAll('.js-avant-folio-gallery-remove-image');
+    removeImageButtons.forEach( button => button.addEventListener('click', this.deleteImage));
   }
 
   setInitialState() {
@@ -38,7 +40,7 @@ class avantFolioMediaUploader   {
     initialImages.forEach( image => this.selectedImages.push(parseInt(image.dataset.id)));
 
     this.setInputValue();
-    this.addRemoveListener();
+    this.addEvents();
   }
 
   setInputValue() {
@@ -100,7 +102,7 @@ class avantFolioMediaUploader   {
         const image = this.createImageListItem(imageData);
         this.renderImage(image);
       });
-      this.addRemoveListener();
+      this.addEvents();
       this.setInputValue();
     });
 
@@ -131,12 +133,6 @@ class avantFolioMediaUploader   {
   renderImage(image) {
     this.galleryList.insertAdjacentHTML( 'beforeend', image);
     console.log(this.selectedImages);
-  }
-
-  addRemoveListener() {
-    const removeImageButtons = document.querySelectorAll('.js-avant-folio-gallery-remove-image');
-
-    removeImageButtons.forEach( button => button.addEventListener('click', this.deleteImage));
   }
 
   deleteImage(e) {
