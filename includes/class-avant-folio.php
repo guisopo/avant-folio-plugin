@@ -74,7 +74,7 @@ class Avant_Folio {
       'id'            => 'work_type',
       'plural_name'   => 'Types of Work',
       'singular_name' => 'Type of Work',
-      'terms'         => [ 'painting', 'drawing', 'sculpture', 'photography', 'video', 'performance', 'installation']
+      'terms'         => [ 'painting', 'drawing', 'sculpture', 'ceramic', 'photography', 'video', 'performance', 'installation']
     );
 
     $work_type_taxonomy = new Avant_Folio_Taxonomies( $work_type_tax_args );

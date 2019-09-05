@@ -22,19 +22,19 @@ class Avant_Folio_Taxonomies {
     $this->labels = array(
       'name'          => $plural_name,
       'singular_name' => $singular_name ,
-      'search_items'  => 'Search ' . $plural_name . '',
+      'search_items'  => 'Search '  . $plural_name . '',
       'popular_items' => 'Popular ' . $plural_name . '',
-      'all_items'     => 'All ' . $plural_name . '',
-      'edit_item'     => 'Edit ' . $singular_name . '',
-      'view_item'     => 'View ' . $singular_name . '',
-      'update_item'   => 'Update ' . $singular_name . '',
+      'all_items'     => 'All '     . $plural_name . '',
+      'edit_item'     => 'Edit '    . $singular_name . '',
+      'view_item'     => 'View '    . $singular_name . '',
+      'update_item'   => 'Update '  . $singular_name . '',
       'add_new_item'  => 'Add New ' . $singular_name . '',
-      'new_item_name' => 'New ' . $singular_name . ' Name',
-      'not_found'     => 'No ' . $singular_name . ' found',
-      'no_terms'      => 'No ' . $plural_name . '',
-      'add_or_remove_items'        => 'Add or remove ' . $plural_name . '',
+      'new_item_name' => 'New '     . $singular_name . ' Name',
+      'not_found'     => 'No '      . $singular_name . ' found',
+      'no_terms'      => 'No '      . $plural_name . '',
+      'add_or_remove_items'        => 'Add or remove '             . $plural_name . '',
       'choose_from_most_used'      => 'Choose from the most used ' . $plural_name . '',
-      'separate_items_with_commas' => 'Separate ' . $plural_name . ' with commas'
+      'separate_items_with_commas' => 'Separate '                  . $plural_name . ' with commas'
     );
   }
 
