@@ -18,8 +18,8 @@ class avantFolioMediaUploader   {
   init() {
     this.bindAll();
     this.createInput();
-    this.makeGallerySortable();
     this.setInitialState();
+    this.makeGallerySortable();
   }
 
   bindAll() {
@@ -28,8 +28,9 @@ class avantFolioMediaUploader   {
   }
 
   addEvents() {
+    // Media Button
     this.addImagesButton.addEventListener('click', this.renderMediaUploader);
-
+    // Delete Button
     const removeImageButtons = document.querySelectorAll('.js-avant-folio-gallery-remove-image');
     removeImageButtons.forEach( button => button.addEventListener('click', this.deleteImage));
   }
@@ -45,8 +46,20 @@ class avantFolioMediaUploader   {
 
   setInputValue() {
     this.galleryHiddenInput.value = this.selectedImages;
+  }
+  
+  deleteImage(e) {
+    const imageToDelete = e.target.parentNode.parentNode;
 
-    console.log(`Set Input Value: ${this.galleryHiddenInput.value || null}`);
+    if(!imageToDelete.classList.contains('avant-folio-list-item')) {
+      return;
+    }
+
+    imageToDelete.classList.add('hidden');
+    imageToDelete.remove();
+
+    this.selectedImages = this.selectedImages.filter( image => image !== parseInt(imageToDelete.dataset.id));
+    this.setInputValue();
   }
 
   createInput() {
@@ -102,6 +115,7 @@ class avantFolioMediaUploader   {
         const image = this.createImageListItem(imageData);
         this.renderImage(image);
       });
+
       this.addEvents();
       this.setInputValue();
     });
@@ -132,33 +146,20 @@ class avantFolioMediaUploader   {
 
   renderImage(image) {
     this.galleryList.insertAdjacentHTML( 'beforeend', image);
-    console.log(this.selectedImages);
-  }
-
-  deleteImage(e) {
-    const imageToDelete = e.target.parentNode.parentNode;
-    console.log('imagetodelete:', imageToDelete);
-    if(!imageToDelete.classList.contains('avant-folio-list-item')) {
-      return;
-    }
-
-    imageToDelete.classList.add('hidden');
-    imageToDelete.remove();
-
-    this.selectedImages = this.selectedImages.filter( image => image !== parseInt(imageToDelete.dataset.id));
-    this.setInputValue();
   }
 
   makeGallerySortable() {
     $('#avant_folio_gallery_list').sortable();
+    
     $('#avant_folio_gallery_list').on( "sortupdate", (event, ui) => {
       this.selectedImages = [];
       const images = Array.from(this.galleryList.children);
+
       images.forEach(image => {
         this.selectedImages.push(parseInt(image.dataset.id));
       });
+
       this.setInputValue();
-      console.log(this.selectedImages);
     });
   }
 }
