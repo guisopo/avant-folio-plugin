@@ -10,17 +10,14 @@ class avantFolioMediaUploader   {
     
     this.galleryHiddenInput;
 
-    this.imagesListItems= '';
     this.selectedImages = [];
 
     this.init();
   }
 
   init() {
-
     this.bindAll();
     this.createInput();
-    this.setInputValue();
     this.addEvents();
     this.makeGallerySortable();
     this.setInitialState();
@@ -37,8 +34,9 @@ class avantFolioMediaUploader   {
 
   setInitialState() {
     const initialImages = Array.from(this.galleryList.children);
-    initialImages.forEach( image => this.selectedImages.push(image.dataset.id*1));
-    console.log(this.selectedImages);
+
+    initialImages.forEach( image => this.selectedImages.push(parseInt(image.dataset.id)));
+
     this.setInputValue();
     this.addRemoveListener();
   }
@@ -151,7 +149,7 @@ class avantFolioMediaUploader   {
     imageToDelete.classList.add('hidden');
     imageToDelete.remove();
 
-    this.selectedImages = this.selectedImages.filter( image => image !== imageToDelete.dataset.id*1);
+    this.selectedImages = this.selectedImages.filter( image => image !== parseInt(imageToDelete.dataset.id));
     this.setInputValue();
   }
 
@@ -161,7 +159,7 @@ class avantFolioMediaUploader   {
       this.selectedImages = [];
       const images = Array.from(this.galleryList.children);
       images.forEach(image => {
-        this.selectedImages.push(image.dataset.id*1);
+        this.selectedImages.push(parseInt(image.dataset.id));
       });
       this.setInputValue();
       console.log(this.selectedImages);
