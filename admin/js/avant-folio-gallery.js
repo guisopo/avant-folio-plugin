@@ -9,7 +9,6 @@ class avantFolioMediaUploader   {
     this.addImagesButton = document.getElementById('avant_folio_gallery_add_images');
     
     this.galleryHiddenInput;
-
     this.selectedImages = [];
 
     this.init();
@@ -70,7 +69,6 @@ class avantFolioMediaUploader   {
     this.galleryHiddenInput.setAttribute('name', 'avant_folio_work_info[gallery]');
 
     this.plugin.appendChild(this.galleryHiddenInput);
-
   }
 
   renderMediaUploader(e) {
@@ -112,6 +110,7 @@ class avantFolioMediaUploader   {
         }
 
         this.selectedImages.push(imageData.id);
+
         const image = this.createImageListItem(imageData);
         this.renderImage(image);
       });
