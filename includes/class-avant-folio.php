@@ -58,6 +58,7 @@ class Avant_Folio {
     );
 
     $works_cpt = new Avant_Folio_CPT( $works_cpt_args );
+
     $this->loader->add_action( 'init', $works_cpt, 'register_cpt' );
     $this->loader->add_filter( 'enter_title_here', $works_cpt, 'set_custom_enter_title' );
 
@@ -78,6 +79,7 @@ class Avant_Folio {
     );
 
     $work_type_taxonomy = new Avant_Folio_Taxonomies( $work_type_tax_args );
+
     $this->loader->add_action( 'init', $work_type_taxonomy, 'register_taxonomy' );
 
     // Date Completed Taxonomy
@@ -89,6 +91,7 @@ class Avant_Folio {
     );
 
     $date_completed_taxonomy = new Avant_Folio_Taxonomies( $date_completed_tax_args );
+
     $this->loader->add_action( 'init', $date_completed_taxonomy, 'register_taxonomy' );
   }
 
@@ -113,6 +116,7 @@ class Avant_Folio {
     );
 
     $class_cpt_custom_columns = new Avant_Folio_Custom_Columns( $cpt_name, $works_cpt_columns, $works_cpt_custom_columnst );
+
     $this->loader->add_filter( 'manage_' . $cpt_name . '_posts_columns', $class_cpt_custom_columns, 'add_custom_columns' );
     $this->loader->add_action( 'manage_' . $cpt_name . '_posts_custom_column', $class_cpt_custom_columns, 'manage_custom_columns', 10, 2 );
     $this->loader->add_filter( 'manage_edit-' . $cpt_name . '_sortable_columns', $class_cpt_custom_columns, 'set_sortable_columns');
@@ -136,6 +140,7 @@ class Avant_Folio {
   }
 
   public function define_exhibitions_cpt() {
+
     // Exhibition CPT
     $exhibitions_cpt_args = array(
       'cpt_name'       => 'exhibitions',
@@ -145,12 +150,15 @@ class Avant_Folio {
     );
 
     $exhibitions_cpt = new Avant_Folio_CPT( $exhibitions_cpt_args );
+
     $this->loader->add_action( 'init', $exhibitions_cpt, 'register_cpt' );
     $this->loader->add_filter( 'enter_title_here', $exhibitions_cpt, 'set_custom_enter_title' );
   }
 
   public function set_gallery() {
+    
     $gallery = new Avant_Folio_Gallery();
+
     $this->loader->add_action( 'add_meta_boxes', $gallery, 'add_metabox' );
     $this->loader->add_action( 'admin_enqueue_scripts', $gallery, 'enqueue_scripts' );
     // $this->loader->add_action( 'save_post', $gallery, 'save_images' );
