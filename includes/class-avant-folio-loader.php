@@ -10,10 +10,11 @@ class Avant_Folio_Loader {
   }
 
   public function add_action( $hook, $component, $callback, $priority = null, $arguments = null) {
-    !$priority || !$arguments ?
-      $this->actions = $this->add( $this->actions, $hook, $component, $callback)
-    :
+    if( !$priority || !$arguments ) {
+      $this->actions = $this->add( $this->actions, $hook, $component, $callback);
+    } else {
       $this->actions = $this->add( $this->actions, $hook, $component, $callback, $priority, $arguments);
+    }
   }
 
   public function add_filter( $filter, $component, $callback ) {
