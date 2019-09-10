@@ -53,7 +53,7 @@ class Avant_Folio {
     // Works CPT
     $works_cpt_args = array(
       'cpt_name'     => 'works',
-      'cpt_supports' => array( 'title', 'thumbnail', 'revisions' ),
+      'cpt_supports' => array( 'title', 'thumbnail', 'revisions', 'post-formats' ),
       'cpt_icon'     => 'dashicons-visibility'
     );
 

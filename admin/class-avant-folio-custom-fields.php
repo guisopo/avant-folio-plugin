@@ -31,6 +31,17 @@ class Avant_Folio_Custom_Fields {
     require_once plugin_dir_path( dirname( __FILE__ ) )  . 'partials/avant-folio-cf-' . $this->metabox['id'] . '.php';
   }
 
+  public function setPostFormat( $work_type, $gallery ) {
+    $gallery_work_type = [ 'Painting', 'Ceramic', 'Drawing', 'Photography' ];
+    if ( in_array( $work_type, $gallery_work_type ) && !$gallery ) {
+      set_post_format($post_id, 'image');
+    } else if ( in_array( $work_type, $gallery_work_type ) && $gallery ) {
+      set_post_format($post_id, 'gallery');
+    } else {
+      set_post_format($post_id, 'standard');
+    }
+  }
+
   public function save_post_work_meta( $post_id, $post ) {
 
     // Checks save status
@@ -71,6 +82,8 @@ class Avant_Folio_Custom_Fields {
       update_post_meta( $post_id, $date_completed_meta_key, $date_completed );
 
       update_post_meta( $post_id, $meta_key, $new_meta_value );
+
+      $this->setPostFormat( $new_meta_value['work_type'], $new_meta_value['gallery'] );
     }
   
     /* If there is no new meta value but an old value exists, delete it. */
