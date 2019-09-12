@@ -37,7 +37,9 @@ class Avant_Folio_Custom_Fields {
       set_post_format($post_id, 'image');
     } else if ( in_array( $work_type, $gallery_work_type ) && $gallery ) {
       set_post_format($post_id, 'gallery');
-    } else {
+    } else if ( $work_type == 'Video' ) {
+      set_post_format($post_id, 'video');
+    }  else {
       set_post_format($post_id, 'standard');
     }
   }
