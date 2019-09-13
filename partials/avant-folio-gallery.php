@@ -37,12 +37,8 @@ $images = explode(",", $gallery );
 				?>
 			</ul>
 			<!-- Button used to open the WordPress Media Library Modal -->
-			<button id="avant_folio_gallery_add_images" type="button" class="button button-primary" data-gallery="#<?php echo $this->id; ?>_sortable_wordpress_gallery"><?php _e( 'Add Images', 'your_text_domain' ); ?></button>
-			<div id="publishing-action">
-				<span class="spinner"></span>
-				<input name="original_publish" type="hidden" id="original_publish" value="Update">
-				<input name="save" type="submit" class="button button-primary button-large" id="publish" value="Update">
-			</div>
+			<button id="avant_folio_gallery_add_images" type="button" class="button button-primary" data-gallery="#<?php echo $this->id; ?>_sortable_wordpress_gallery"><?php _e( 'Add Images', 'your_text_domain' ); ?></button>	
+			<?php submit_button(); ?>
 		</td>
 	</tr>
 </table>
