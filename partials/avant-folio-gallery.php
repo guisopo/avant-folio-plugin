@@ -38,6 +38,7 @@ $images = explode(",", $gallery );
 			</ul>
 			<!-- Button used to open the WordPress Media Library Modal -->
 			<button id="avant_folio_gallery_add_images" type="button" class="button button-primary" data-gallery="#<?php echo $this->id; ?>_sortable_wordpress_gallery"><?php _e( 'Add Images', 'your_text_domain' ); ?></button>	
+			<!-- Button used to update Selection -->
 			<?php submit_button(); ?>
 		</td>
 	</tr>
