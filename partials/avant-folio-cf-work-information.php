@@ -100,32 +100,32 @@
     <label class="post-attributes-label" for="avant_folio_work_info_duration">Duration:</label>
     <input
       type="text"
-      name="avant_folio_work_info[duration]"
+      name="avant_folio_work_info[duration_hours]"
       placeholder="00"
       maxlength="2"
       pattern="[0-9]{2,2}"
       size="2"
-      value="<?php echo esc_attr( $work_duration ); ?>"
+      value="<?php echo esc_attr( $work_duration_hours ); ?>"
     >
     <span>:</span>
     <input
       type="text"
-      name="avant_folio_work_info[duration]"
+      name="avant_folio_work_info[duration_minutes]"
       placeholder="00"
       maxlength="2"
       pattern="[0-60]{2,2}"
       size="2"
-      value="<?php echo esc_attr( $work_duration ); ?>"
+      value="<?php echo esc_attr( $work_duration_minutes ); ?>"
     >
     <span>:</span>
     <input
       type="text"
-      name="avant_folio_work_info[duration]"
+      name="avant_folio_work_info[duration_seconds]"
       placeholder="00"
       maxlength="2"
       pattern="[0-9]{2,2}"
       size="2"
-      value="<?php echo esc_attr( $work_duration ); ?>"
+      value="<?php echo esc_attr( $work_duration_seconds ); ?>"
     >
   </p>
   <!-- Work Description -->
