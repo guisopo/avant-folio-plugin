@@ -44,7 +44,7 @@
       value="<?php echo esc_attr( $work_material ); ?>"
     >
   </p>
-  <!-- Work Material -->
+  <!-- Work Technique -->
   <p>
     <label class="post-attributes-label" for="avant_folio_work_info_technique">Technique:</label>
     <input
