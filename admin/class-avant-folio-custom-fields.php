@@ -33,6 +33,7 @@ class Avant_Folio_Custom_Fields {
 
   public function setPostFormat( $work_type, $gallery ) {
     $gallery_work_type = [ 'Painting', 'Ceramic', 'Drawing', 'Photography' ];
+    
     if ( in_array( $work_type, $gallery_work_type ) && !$gallery ) {
       set_post_format($post_id, 'image');
     } else if ( in_array( $work_type, $gallery_work_type ) && $gallery ) {
@@ -78,8 +79,10 @@ class Avant_Folio_Custom_Fields {
       
       $work_type      = $new_meta_value['work_type'];
       $date_completed = $new_meta_value['date_completed'];
+      
       wp_set_post_terms( $post_id, $work_type, 'work_type' );
       wp_set_post_terms( $post_id, $date_completed, 'date_completed' );
+
       update_post_meta( $post_id, $work_type_meta_key, $work_type );
       update_post_meta( $post_id, $date_completed_meta_key, $date_completed );
 
