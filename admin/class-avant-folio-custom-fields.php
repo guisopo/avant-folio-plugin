@@ -57,10 +57,11 @@ class Avant_Folio_Custom_Fields {
     if ( $is_autosave || $is_revision || !$is_valid_nonce || !$user_can_edit ) {
       return;
     }
-  
+    
     /* Get the posted data and sanitize it */
-    // $new_meta_value = isset( $_POST[ $this->metabox['meta-key'] ] ) ? array_map( 'sanitize_fields', $_POST[ $this->metabox['meta-key'] ] ) : '';
-    $new_meta_value = isset( $_POST[ $this->metabox['meta-key'] ] ) ?  $_POST[ $this->metabox['meta-key'] ] : '';
+    // $new_meta_value = isset( $_POST[ $this->metabox['meta-key'] ] ) ?  $_POST[ $this->metabox['meta-key'] ] : '';
+    // $new_meta_value = isset( $_POST[ $this->metabox['meta-key'] ] ) ?  $this->sanitize_fields($_POST[ $this->metabox['meta-key'] ]) : '';
+    $new_meta_value = $this->sanitize_fields( $_POST[ $this->metabox['meta-key'] ] );
     
     $new_meta_value['title'] = sanitize_text_field( $_POST[ 'post_title' ] );
     $new_meta_value = array_filter($new_meta_value);
@@ -97,11 +98,29 @@ class Avant_Folio_Custom_Fields {
   }
   
   public function sanitize_fields( $input ) {
-    
-    if ( $input === $_POST['avant_folio_work_info']['description'] || $input === $_POST['avant_folio_work_info']['credits'] ) {
-      return sanitize_textarea_field( $input );
-    } else {
-      return sanitize_text_field( $input );
+
+    foreach ($input as $key => $value) {
+
+      if ( $key == 'credits' ) {
+        $input[$key] = sanitize_textarea_field( $value );
+      } 
+      // else if( $key == 'duration_hours' ) {
+      //   $input[$key] = array( $this, $this->sanitize_duration( $value ) );
+      // } 
+      else {
+        $input[$key] = sanitize_text_field( $value );
+      }
     }
+
+    return $input;
+  }
+
+  public function sanitize_duration( $value ) {
+
+    if( strlen( $value ) < 2 ) {
+      $value = '0' . $value;
+    }
+
+    return $value;
   }
 }
