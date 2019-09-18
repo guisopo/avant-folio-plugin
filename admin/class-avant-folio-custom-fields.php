@@ -59,10 +59,8 @@ class Avant_Folio_Custom_Fields {
     }
     
     /* Get the posted data and sanitize it */
-    // $new_meta_value = isset( $_POST[ $this->metabox['meta-key'] ] ) ?  $_POST[ $this->metabox['meta-key'] ] : '';
-    // $new_meta_value = isset( $_POST[ $this->metabox['meta-key'] ] ) ?  $this->sanitize_fields($_POST[ $this->metabox['meta-key'] ]) : '';
-    $new_meta_value = $this->sanitize_fields( $_POST[ $this->metabox['meta-key'] ] );
-    
+    $new_meta_value = isset( $_POST[ $this->metabox['meta-key'] ] ) ?  $this->sanitize_fields( $_POST[ $this->metabox['meta-key'] ] ) : '';
+        
     $new_meta_value['title'] = sanitize_text_field( $_POST[ 'post_title' ] );
     $new_meta_value = array_filter($new_meta_value);
   
@@ -103,10 +101,8 @@ class Avant_Folio_Custom_Fields {
 
       if ( $key == 'credits' ) {
         $input[$key] = sanitize_textarea_field( $value );
-      } 
-      // else if( $key == 'duration_hours' ) {
-      //   $input[$key] = array( $this, $this->sanitize_duration( $value ) );
-      // } 
+      }
+
       else {
         $input[$key] = sanitize_text_field( $value );
       }
@@ -115,12 +111,4 @@ class Avant_Folio_Custom_Fields {
     return $input;
   }
 
-  public function sanitize_duration( $value ) {
-
-    if( strlen( $value ) < 2 ) {
-      $value = '0' . $value;
-    }
-
-    return $value;
-  }
 }
