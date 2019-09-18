@@ -99,28 +99,32 @@
   <p>
     <label class="post-attributes-label" for="avant_folio_work_info_duration">Duration:</label>
     <input
-      type="number"
+      type="text"
       name="avant_folio_work_info[duration_hours]"
       placeholder="00"
-      min="0"
+      minlength="2"
+      maxlength="2"
+      size="2"
       value="<?php echo esc_attr( $work_duration_hours ); ?>"
     >
     <span>:</span>
     <input
-      type="number"
+      type="text"
       name="avant_folio_work_info[duration_minutes]"
       placeholder="00"
-      min="0"
-      max="59"
+      minlength="2"
+      maxlength="2"
+      size="2"
       value="<?php echo esc_attr( $work_duration_minutes ); ?>"
     >
     <span>:</span>
     <input
-      type="number"
+      type="text"
       name="avant_folio_work_info[duration_seconds]"
       placeholder="00"
-      min="0"
-      max="59"
+      minlength="2"
+      maxlength="2"
+      size="2"
       value="<?php echo esc_attr( $work_duration_seconds ); ?>"
     >
   </p>
