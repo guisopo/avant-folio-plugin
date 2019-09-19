@@ -120,7 +120,7 @@
           size="2"
           value="<?php echo esc_attr( $work_duration_hours ); ?>"
         >
-        <span>:</span>
+        <span>&nbsp : &nbsp</span>
         <input
           class="cf-box__input"
           type="text"
@@ -131,7 +131,7 @@
           size="2"
           value="<?php echo esc_attr( $work_duration_minutes ); ?>"
         >
-        <span>:</span>
+        <span>&nbsp : &nbsp</span>
         <input
           class="cf-box__input"
           type="text"
