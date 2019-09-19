@@ -140,3 +140,30 @@
 .wp-core-ui .attachment.details:hover > .js-avant-folio-gallery-set-featured-image {
 	opacity: 1;
 }
+
+.avant-folio-list-item .thumbnail {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.avant_folio_gallery_add_image {
+	display: flex;
+	align-items: center;
+	height: 30px;
+	padding: 6px;
+	padding-right: 10px;
+	color: #555;
+	border-color: #ccc;
+	background: #f7f7f7;
+	box-shadow: inset 0 -1px 0 #ccc;
+	border-radius: 3px;
+	border-width: 1px;
+	border-style: solid;
+}
+
+.avant_folio_gallery_add_image svg {
+	margin-right: 4px;
+	fill: currentColor;
+}
