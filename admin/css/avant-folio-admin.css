@@ -1,3 +1,84 @@
+/* CPT Details */
+
+.cf-section {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-column-gap: 12px;
+	justify-content: stretch;
+	align-content: stretch;
+}
+
+.cf-column {
+	align-self: stretch;
+	display: grid;
+	grid-row-gap: 12px;
+}
+
+.cf-wrapper,
+.cf-box > .inputs-wrapper {
+	display: inline-flex;
+}
+
+.inputs-wrapper {
+	width: 100%;
+}
+
+.cf-box {
+	height: 100%;
+}
+
+.cf-box--flex {
+	display: flex;
+	flex-direction: column;
+}
+
+.cf-box--flex .cf-box__textarea {
+	flex-grow: 1;
+}
+
+.cf-box--xl,
+.cf-box__input--xl {
+	flex-basis: 80%;
+}
+
+.cf-box--s,
+.cf-box__select--s {
+	flex-basis: 20%;
+}
+
+.cf-box--xl > * {
+	width: calc(100% - 10px);
+}
+
+.cf-box__label {
+	margin: 4px 4px;
+}
+
+.cf-box .cf-box__input,
+.cf-box .cf-box__select {
+	height: 2.5em;
+}
+
+.cf-box .cf-box__textarea {
+	resize: none;
+	margin: 0;
+}
+
+.cf-box__input--xl {
+	margin-right: 10px;
+}
+
+.cf-box > * {
+	display: block;
+}
+
+.cf-box > input,
+.cf-box > textarea {
+	width: 100%;
+}
+
+/* CPT Gallery */
+
 .work-image {
   width:  25%;
   height: auto;
