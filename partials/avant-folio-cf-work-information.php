@@ -7,136 +7,170 @@
 
   $work_types_taxonomies = get_terms( 'work_type', array( 'get' => 'all' ) );
 ?>
-  <p>Here you can fill the details of this work. Remember to click the <b>Publish</b> button on the right to save the data.</p>
-  <!-- Work Type -->
-  <p>
-    <label class="post-attributes-label" for="avant_folio_work_info_work_type">Category:</label>
-    <select id="work_type" name="avant_folio_work_info[work_type]">
-      <?php 
-        foreach( $work_types_taxonomies as $term ){
-          $selected = selected( $work_work_type, $term->name );
-          echo '<option value="'. $term->name .'" '. $selected .'>'. $term->name .'</option>';
-        }
-      ?>
-    </select>
-  </p>
-  <!-- Work Year -->
-  <p>
-    <label class="post-attributes-label" for="avant_folio_work_info_date_completed">Year:</label>
-    <input
-      type="text"
-      name="avant_folio_work_info[date_completed]"
-      placeholder="<?php echo date('Y') ?>"
-      maxlength="4"
-      pattern="[0-9]{4,4}"
-      size="4"
-      value="<?php echo esc_attr( $work_date_completed ); ?>"
-    >
-  </p>
-  <!-- Work Material -->
-  <p>
-    <label class="post-attributes-label" for="avant_folio_work_info_material">Material:</label>
-    <input
-      type="text"
-      name="avant_folio_work_info[material]"
-      placeholder="Material used"
-      size="20"
-      value="<?php echo esc_attr( $work_material ); ?>"
-    >
-  </p>
-  <!-- Work Technique -->
-  <p>
-    <label class="post-attributes-label" for="avant_folio_work_info_technique">Technique:</label>
-    <input
-      type="text"
-      name="avant_folio_work_info[technique]"
-      placeholder="Technique used"
-      size="20"
-      value="<?php echo esc_attr( $work_technique ); ?>"
-    >
-  </p>
-  <!-- Work Dimensions -->
-  <p>
-    <label class="post-attributes-label" for="avant_folio_work_info_dimensions">Dimensions:</label>
-    <input
-      type="text"
-      name="avant_folio_work_info[dimensions]"
-      placeholder="height x width x depth"
-      size="20"
-      value="<?php echo esc_attr( $work_dimensions ); ?>"
-    >
-    <select id="work_units" name="avant_folio_work_info[units]">
-      <option value="none" <?php selected( $work_units, 'none' ); ?>>none</option>
-      <option value="mm" <?php selected( $work_units, 'mm' ); ?>>mm</option>
-      <option value="cm" <?php selected( $work_units, 'cm' ); ?>>cm</option>
-      <option value="m" <?php selected( $work_units, 'm' ); ?>>m</option>
-    </select>
-  </p>
-  <!-- Work Media -->
-  <p>
-    <label class="post-attributes-label" for="avant_folio_work_info_media">Media description:</label>
-    <input
-      type="text"
-      name="avant_folio_work_info[media]"
-      placeholder="Video (Digital Betacam and DVD)"
-      size="20"
-      value="<?php echo esc_attr( $work_media ); ?>"
-    >
-  </p>
-  <!-- Work Credits -->
-  <p>
-    <label class="post-attributes-label" for="avant_folio_work_info_credits">Credits:</label>
-    <textarea
-      name="avant_folio_work_info[credits]"
-      rows="1"
-      cols="20"
-      placeholder="Director, camera, editing, performance..."
-    ><?php 
-      echo esc_attr( $work_credits ); 
-    ?></textarea>
-  </p>
-  <!-- Work Duration -->
-  <p>
-    <label class="post-attributes-label" for="avant_folio_work_info_duration">Duration:</label>
-    <input
-      type="text"
-      name="avant_folio_work_info[duration_hours]"
-      placeholder="00"
-      minlength="2"
-      maxlength="2"
-      size="2"
-      value="<?php echo esc_attr( $work_duration_hours ); ?>"
-    >
-    <span>:</span>
-    <input
-      type="text"
-      name="avant_folio_work_info[duration_minutes]"
-      placeholder="00"
-      minlength="2"
-      maxlength="2"
-      size="2"
-      value="<?php echo esc_attr( $work_duration_minutes ); ?>"
-    >
-    <span>:</span>
-    <input
-      type="text"
-      name="avant_folio_work_info[duration_seconds]"
-      placeholder="00"
-      minlength="2"
-      maxlength="2"
-      size="2"
-      value="<?php echo esc_attr( $work_duration_seconds ); ?>"
-    >
-  </p>
-  <!-- Work Description -->
-  <p>
-    <label class="post-attributes-label" for="avant_folio_work_info_description">Description:</label>
-    <textarea
-      name="avant_folio_work_info[description]"
-      rows="1"
-      cols="50"
-      placeholder="Description of the work"
-    ><?php 
-      echo esc_attr( $work_description ); 
-    ?></textarea>
-  </p>
+
+<div class="cf-section">
+    
+  <div class="cf-column">
+
+    <div class="cf-wrapper">
+
+      <!-- Work Type -->
+      <div class="cf-box cf-box--xl">
+        <label class="post-attributes-label cf-box__label" for="avant_folio_work_info_work_type">Category:</label>
+        <select id="work_type" class="cf-box__select" name="avant_folio_work_info[work_type]">
+          <?php 
+            foreach( $work_types_taxonomies as $term ){
+              $selected = selected( $work_work_type, $term->name );
+              echo '<option value="'. $term->name .'" '. $selected .'>'. $term->name .'</option>';
+            }
+          ?>
+        </select>
+      </div>
+      
+      <!-- Work Year -->
+      <div class="cf-box cf-box--s">
+        <label class="post-attributes-label cf-box__label" for="avant_folio_work_info_date_completed">Year:</label>
+        <input
+          class="cf-box__input"
+          type="text"
+          name="avant_folio_work_info[date_completed]"
+          placeholder="<?php echo date('Y') ?>"
+          maxlength="4"
+          pattern="[0-9]{4,4}"
+          size="4"
+          value="<?php echo esc_attr( $work_date_completed ); ?>"
+        >
+      </div>
+      
+    </div>
+
+    <!-- Work Material -->
+    <div class="cf-box">
+      <label class="post-attributes-label cf-box__label" for="avant_folio_work_info_material">Material:</label>
+      <input
+        class="cf-box__input"
+        type="text"
+        name="avant_folio_work_info[material]"
+        placeholder="Material used"
+        size="20"
+        value="<?php echo esc_attr( $work_material ); ?>"
+      >
+    </div>
+
+    <!-- Work Technique -->
+    <div class="cf-box">
+      <label class="post-attributes-label cf-box__label" for="avant_folio_work_info_technique">Technique:</label>
+      <input
+        class="cf-box__input"
+        type="text"
+        name="avant_folio_work_info[technique]"
+        placeholder="Technique used"
+        size="20"
+        value="<?php echo esc_attr( $work_technique ); ?>"
+      >
+    </div>
+
+    <!-- Work Dimensions -->
+    <div class="cf-box">
+      <label class="post-attributes-label cf-box__label" for="avant_folio_work_info_dimensions">Dimensions:</label>
+      <div class="inputs-wrapper">
+        <input
+          class="cf-box__input cf-box__input--xl"
+          type="text"
+          name="avant_folio_work_info[dimensions]"
+          placeholder="height x width x depth"
+          size="20"
+          value="<?php echo esc_attr( $work_dimensions ); ?>"
+        >
+        <select id="work_units" class="cf-box__select cf-box__select--s" name="avant_folio_work_info[units]">
+          <option value="none" <?php selected( $work_units, 'none' ); ?>>none</option>
+          <option value="mm" <?php selected( $work_units, 'mm' ); ?>>mm</option>
+          <option value="cm" <?php selected( $work_units, 'cm' ); ?>>cm</option>
+          <option value="m" <?php selected( $work_units, 'm' ); ?>>m</option>
+        </select>
+      </div>
+    </div>
+    <!-- Work Media -->
+
+    <div class="cf-box">
+      <label class="post-attributes-label cf-box__label" for="avant_folio_work_info_media">Media description:</label>
+      <input
+        class="cf-box__input"
+        type="text"
+        name="avant_folio_work_info[media]"
+        placeholder="Video (Digital Betacam and DVD)"
+        size="20"
+        value="<?php echo esc_attr( $work_media ); ?>"
+      >
+    </div>
+
+    <!-- Work Duration -->
+    <div class="cf-box">
+      <label class="post-attributes-label cf-box__label" for="avant_folio_work_info_duration">Duration:</label>
+      <div class="inputs-wrapper">
+        <input
+          class="cf-box__input"
+          type="text"
+          name="avant_folio_work_info[duration_hours]"
+          placeholder="00"
+          minlength="2"
+          maxlength="2"
+          size="2"
+          value="<?php echo esc_attr( $work_duration_hours ); ?>"
+        >
+        <span>:</span>
+        <input
+          class="cf-box__input"
+          type="text"
+          name="avant_folio_work_info[duration_minutes]"
+          placeholder="00"
+          minlength="2"
+          maxlength="2"
+          size="2"
+          value="<?php echo esc_attr( $work_duration_minutes ); ?>"
+        >
+        <span>:</span>
+        <input
+          class="cf-box__input"
+          type="text"
+          name="avant_folio_work_info[duration_seconds]"
+          placeholder="00"
+          minlength="2"
+          maxlength="2"
+          size="2"
+          value="<?php echo esc_attr( $work_duration_seconds ); ?>"
+        >
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cf-column">
+
+    <!-- Work Description -->
+    <div class="cf-box cf-box--flex">
+      <label class="post-attributes-label cf-box__label" for="avant_folio_work_info_description">Description:</label>
+      <textarea
+        class="cf-box__textarea"
+        name="avant_folio_work_info[description]"
+        placeholder="Description of the work"
+      ><?php 
+        echo esc_attr( $work_description ); 
+      ?></textarea>
+    </div>
+
+    <!-- Work Credits -->
+    <div class="cf-box cf-box--flex">
+      <label class="post-attributes-label cf-box__label" for="avant_folio_work_info_credits">Credits:</label>
+      <textarea
+        class="cf-box__textarea"
+        name="avant_folio_work_info[credits]"
+        placeholder="Director, camera, editing, performance..."
+      ><?php 
+        echo esc_attr( $work_credits ); 
+      ?></textarea>
+    </div>
+
+  </div>
+
+</div>
