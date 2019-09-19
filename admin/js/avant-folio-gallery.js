@@ -53,17 +53,24 @@ class avantFolioMediaUploader   {
 
   setFeaturedImage(id) {
     this.featuredImageHiddenInput.value = id;
-    console.log(this.featuredImageHiddenInput.value);
   }
 
   setFeatureImage(e) {
 
     const featuredImage = e.target.parentNode.parentNode;
-
+    
     if(!featuredImage.classList.contains('avant-folio-list-item')) {
       return;
     }
 
+    const previousSelected = document.querySelector('.featured-image');
+
+    if(previousSelected) { 
+      previousSelected.classList.remove('featured-image'); 
+    }
+
+    featuredImage.classList.add('featured-image');
+    
     const id = featuredImage.dataset.id;
     this.setFeaturedImage(id);
   }

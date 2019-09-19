@@ -126,6 +126,10 @@
 	opacity: 0;
 }
 
+.featured-image .js-avant-folio-gallery-set-featured-image {
+	opacity: 1;
+}
+
 .wp-core-ui .attachment.details:hover > .js-avant-folio-gallery-remove-image {
 	opacity: 1;
 }
