@@ -18,6 +18,7 @@
       <div class="cf-box cf-box--xl">
         <label class="post-attributes-label cf-box__label" for="avant_folio_work_info_work_type">Category:</label>
         <select id="work_type" class="cf-box__select" name="avant_folio_work_info[work_type]">
+          <option value="" disabled selected>Select work type</option>
           <?php 
             foreach( $work_types_taxonomies as $term ){
               $selected = selected( $work_work_type, $term->name );
@@ -83,10 +84,11 @@
           value="<?php echo esc_attr( $work_dimensions ); ?>"
         >
         <select id="work_units" class="cf-box__select cf-box__select--s" name="avant_folio_work_info[units]">
-          <option value="none" <?php selected( $work_units, 'none' ); ?>>none</option>
+          <option value="" disabled selected>Units</option>
           <option value="mm" <?php selected( $work_units, 'mm' ); ?>>mm</option>
           <option value="cm" <?php selected( $work_units, 'cm' ); ?>>cm</option>
           <option value="m" <?php selected( $work_units, 'm' ); ?>>m</option>
+          <option value="none" <?php selected( $work_units, 'none' ); ?>>none</option>
         </select>
       </div>
     </div>
