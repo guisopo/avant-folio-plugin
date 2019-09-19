@@ -60,7 +60,9 @@ $images = explode(",", $gallery );
 				</li>
 			</ul>
 			<!-- Button used to update Selection -->
-			<?php submit_button(); ?>
 		</td>
 	</tr>
 </table>
+<div class="avant-folio-gallery-save-button">
+	<?php submit_button(); ?>
+</div>

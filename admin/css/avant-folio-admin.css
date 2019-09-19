@@ -167,3 +167,7 @@
 	margin-right: 4px;
 	fill: currentColor;
 }
+
+.avant-folio-gallery-save-button .submit {
+	float: none !important;
+}
