@@ -30,6 +30,8 @@ $images = explode(",", $gallery );
 							$output .= '</div>';
 							// Add the button to remove this image if wanted (we set the data-gallery to target the correct gallery if there are more than one)
 							$output .= '<button type="button" data-gallery="#' . $this->id . '_avant_folio_gallery" class="button-link check js-avant-folio-gallery-remove-image" tabindex="0"><span class="media-modal-icon"></span><span class="screen-reader-text">Deselect</span></button>';
+							// Add the button to remove this image if wanted (we set the data-gallery to target the correct gallery if there are more than one)
+							$output .= '<button type="button" data-gallery="#' . $this->id . '_avant_folio_gallery" class="button-link check js-avant-folio-gallery-set-featured-image" tabindex="0"><span class="dashicons dashicons-star-filled"></span><span class="screen-reader-text">Select Featured</span></button>';
 						$output .= '</li>';
 						echo $output;
 					}         

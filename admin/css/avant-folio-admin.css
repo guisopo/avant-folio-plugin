@@ -107,9 +107,32 @@
 }
 
 .js-avant-folio-gallery-remove-image {
+	top: 35px !important;
+}
+
+.js-avant-folio-gallery-set-featured-image {
+	color: transparent !important;
+}
+
+.dashicons-star-filled {
+	color: #fff;
+	display: block;
+	height: 85%;
+	width: 100%;
+	text-decoration: none;
+}
+
+.js-avant-folio-gallery-remove-image {
 	opacity: 0;
 }
 
 .wp-core-ui .attachment.details:hover > .js-avant-folio-gallery-remove-image {
+	opacity: 1;
+}
+.js-avant-folio-gallery-set-featured-image {
+	opacity: 0;
+}
+
+.wp-core-ui .attachment.details:hover > .js-avant-folio-gallery-set-featured-image {
 	opacity: 1;
 }
