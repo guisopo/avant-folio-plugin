@@ -9,6 +9,7 @@ class avantFolioMediaUploader   {
     this.addImagesButton = document.getElementById('avant_folio_gallery_add_images');
     
     this.galleryHiddenInput;
+    this.featuredImageHiddenInput;
     this.selectedImages = [];
 
     this.init();
@@ -22,7 +23,7 @@ class avantFolioMediaUploader   {
   }
 
   bindAll() {
-    ['renderMediaUploader', 'deleteImage']
+    ['renderMediaUploader', 'deleteImage', 'setFeatureImage']
       .forEach( fn => this[fn] = this[fn].bind(this));
   }
 
@@ -32,6 +33,9 @@ class avantFolioMediaUploader   {
     // Delete Button
     const removeImageButtons = document.querySelectorAll('.js-avant-folio-gallery-remove-image');
     removeImageButtons.forEach( button => button.addEventListener('click', this.deleteImage));
+    // Set Featured Image Button
+    const setFeaturedImageButtons = document.querySelectorAll('.js-avant-folio-gallery-set-featured-image');
+    setFeaturedImageButtons.forEach( button => button.addEventListener('click', this.setFeatureImage));
   }
 
   setInitialState() {
@@ -45,6 +49,23 @@ class avantFolioMediaUploader   {
 
   setInputValue() {
     this.galleryHiddenInput.value = this.selectedImages;
+  }
+
+  setFeaturedImage(id) {
+    this.featuredImageHiddenInput.value = id;
+    console.log(this.featuredImageHiddenInput.value);
+  }
+
+  setFeatureImage(e) {
+
+    const featuredImage = e.target.parentNode.parentNode;
+
+    if(!featuredImage.classList.contains('avant-folio-list-item')) {
+      return;
+    }
+
+    const id = featuredImage.dataset.id;
+    this.setFeaturedImage(id);
   }
   
   deleteImage(e) {
@@ -69,6 +90,14 @@ class avantFolioMediaUploader   {
     this.galleryHiddenInput.setAttribute('name', 'avant_folio_work_info[gallery]');
 
     this.plugin.appendChild(this.galleryHiddenInput);
+
+    this.featuredImageHiddenInput = document.createElement('input');
+
+    this.featuredImageHiddenInput.setAttribute('type', 'hidden');
+    this.featuredImageHiddenInput.setAttribute('id', 'avant_folio_featured_image');
+    this.featuredImageHiddenInput.setAttribute('name', 'avant_folio_work_info[featured_image]');
+
+    this.plugin.appendChild(this.featuredImageHiddenInput);
   }
 
   renderMediaUploader(e) {

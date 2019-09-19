@@ -1,11 +1,11 @@
 <?php
 $post_type = get_post_type( $post );
 $meta_value = get_post_meta( $post->ID, '_avant_folio_work_info_key', true );
+
 $gallery = $meta_value['gallery'];
 $images = explode(",", $gallery );
 ?>
 
-<p>Here you can add the images of the work. Remember to click the <b>Publish</b> button on the right to save the data.</p>
 <table id="avant_folio_gallery" class="table">
 	<tr>
 		<td>
@@ -31,7 +31,7 @@ $images = explode(",", $gallery );
 							// Add the button to remove this image if wanted (we set the data-gallery to target the correct gallery if there are more than one)
 							$output .= '<button type="button" data-gallery="#' . $this->id . '_avant_folio_gallery" class="button-link check js-avant-folio-gallery-remove-image" tabindex="0"><span class="media-modal-icon"></span><span class="screen-reader-text">Deselect</span></button>';
 							// Add the button to remove this image if wanted (we set the data-gallery to target the correct gallery if there are more than one)
-							$output .= '<button type="button" data-gallery="#' . $this->id . '_avant_folio_gallery" class="button-link check js-avant-folio-gallery-set-featured-image" tabindex="0"><span class="dashicons dashicons-star-filled"></span><span class="screen-reader-text">Select Featured</span></button>';
+							$output .= '<button type="button" class="button-link check js-avant-folio-gallery-set-featured-image" tabindex="0"><span class="dashicons dashicons-star-filled"></span><span class="screen-reader-text">Select Featured</span></button>';
 						$output .= '</li>';
 						echo $output;
 					}         

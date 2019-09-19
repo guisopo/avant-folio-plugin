@@ -60,10 +60,9 @@ class Avant_Folio_Custom_Fields {
     
     /* Get the posted data and sanitize it */
     $new_meta_value = isset( $_POST[ $this->metabox['meta-key'] ] ) ?  $this->sanitize_fields( $_POST[ $this->metabox['meta-key'] ] ) : '';
-        
     $new_meta_value['title'] = sanitize_text_field( $_POST[ 'post_title' ] );
     $new_meta_value = array_filter($new_meta_value);
-  
+
     /* Get the meta key. */
     $meta_key =  '_' . $this->metabox['meta-key'] . '_key';
 
@@ -88,6 +87,9 @@ class Avant_Folio_Custom_Fields {
       update_post_meta( $post_id, $meta_key, $new_meta_value );
 
       $this->setPostFormat( $new_meta_value['work_type'], $new_meta_value['gallery'] );
+      
+      
+      set_post_thumbnail( $post_id, $new_meta_value['featured_image']);
     }
   
     /* If there is no new meta value but an old value exists, delete it. */
