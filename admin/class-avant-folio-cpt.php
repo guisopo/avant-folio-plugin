@@ -58,9 +58,14 @@ class Avant_Folio_CPT {
   }
 
   public function set_custom_enter_title( $input ) {
+    $screen = get_current_screen();
 
-    $cpt_singular = rtrim($this->cpt,'s');
-    return 'Add title of the new ' . $cpt_singular . '';
+    if ( !$this->cpt_name == $screen->post_type ) {
+      return false;
+    }
+    
+    $title = rtrim($screen->post_type,'s');
+    return 'Add title of the new ' . $title . '';
   }
 }
 
