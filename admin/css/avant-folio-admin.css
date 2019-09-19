@@ -3,9 +3,7 @@
 .cf-section {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	grid-column-gap: 12px;
-	justify-content: stretch;
-	align-content: stretch;
+	grid-column-gap: 16px;
 }
 
 .cf-column {
@@ -21,6 +19,10 @@
 
 .inputs-wrapper {
 	width: 100%;
+}
+
+.inputs-wrapper span{
+	margin: auto 0;
 }
 
 .cf-box {
