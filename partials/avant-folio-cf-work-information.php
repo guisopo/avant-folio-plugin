@@ -105,44 +105,61 @@
         value="<?php echo esc_attr( $work_media ); ?>"
       >
     </div>
+    
+    <div class="cf-wrapper">
 
-    <!-- Work Duration -->
-    <div class="cf-box">
-      <label class="post-attributes-label cf-box__label" for="avant_folio_work_info_duration">Duration:</label>
-      <div class="inputs-wrapper">
+      <!-- Work Video URL -->
+      <div class="cf-box cf-box--xl">
+        <label class="post-attributes-label cf-box__label" for="avant_folio_work_info_material">Video url:</label>
         <input
-          class="cf-box__input"
+          class="cf-box__input cf-box__input--xl"
           type="text"
-          name="avant_folio_work_info[duration_hours]"
-          placeholder="00"
-          minlength="2"
-          maxlength="2"
-          size="2"
-          value="<?php echo esc_attr( $work_duration_hours ); ?>"
-        >
-        <span>&nbsp : &nbsp</span>
-        <input
-          class="cf-box__input"
-          type="text"
-          name="avant_folio_work_info[duration_minutes]"
-          placeholder="00"
-          minlength="2"
-          maxlength="2"
-          size="2"
-          value="<?php echo esc_attr( $work_duration_minutes ); ?>"
-        >
-        <span>&nbsp : &nbsp</span>
-        <input
-          class="cf-box__input"
-          type="text"
-          name="avant_folio_work_info[duration_seconds]"
-          placeholder="00"
-          minlength="2"
-          maxlength="2"
-          size="2"
-          value="<?php echo esc_attr( $work_duration_seconds ); ?>"
+          name="avant_folio_work_info[material]"
+          placeholder="https://www.vimeo.com/video"
+          size="20"
+          value="<?php echo esc_attr( $work_material ); ?>"
         >
       </div>
+      
+      <!-- Work Duration -->
+      <div class="cf-box cf-box--s">
+        <label class="post-attributes-label cf-box__label" for="avant_folio_work_info_duration">Duration:</label>
+        <div class="inputs-wrapper">
+          <input
+            class="cf-box__input"
+            type="text"
+            name="avant_folio_work_info[duration_hours]"
+            placeholder="00"
+            minlength="2"
+            maxlength="2"
+            size="1"
+            value="<?php echo esc_attr( $work_duration_hours ); ?>"
+          >
+          <span><b>:</b></span>
+          <input
+            class="cf-box__input"
+            type="text"
+            name="avant_folio_work_info[duration_minutes]"
+            placeholder="00"
+            minlength="2"
+            maxlength="2"
+            size="1"
+            value="<?php echo esc_attr( $work_duration_minutes ); ?>"
+          >
+          <span><b>:</b></span>
+          <input
+            class="cf-box__input"
+            type="text"
+            name="avant_folio_work_info[duration_seconds]"
+            placeholder="00"
+            minlength="2"
+            maxlength="2"
+            size="1"
+            value="<?php echo esc_attr( $work_duration_seconds ); ?>"
+          >
+        </div>
+      </div>
+
     </div>
 
   </div>
