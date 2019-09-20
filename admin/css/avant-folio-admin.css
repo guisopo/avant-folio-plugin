@@ -49,7 +49,7 @@
 }
 
 .cf-box--xl > * {
-	width: calc(100% - 10px);
+	width: calc(100% - 10px) !important;
 }
 
 .cf-box__label {
@@ -77,6 +77,10 @@
 .cf-box > input,
 .cf-box > textarea {
 	width: 100%;
+}
+
+.inputs-wrapper span {
+	line-height: 0;
 }
 
 /* CPT Gallery */
