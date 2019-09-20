@@ -49,6 +49,7 @@ class avantFolioMediaUploader   {
 
   setInputValue() {
     this.galleryHiddenInput.value = this.selectedImages;
+    console.log(this.galleryHiddenInput.value, this.selectedImages);
   }
 
   setFeaturedImage(id) {

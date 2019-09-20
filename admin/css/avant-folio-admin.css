@@ -81,22 +81,14 @@
 
 /* CPT Gallery */
 
-.work-image {
-  width:  25%;
-  height: auto;
+.avant_folio-gallery {
+	display: flex;
 }
 
-.avant_folio_gallery_list li.attachment {
-	width:  141px;
-	height: 141px;
-}
-.avant_folio_gallery {
-	display: block;
-}
-.avant_folio_gallery_list:after {
-	display: table;
-	content: '';
-	clear: both;
+.avant_folio-gallery__list li.attachment,
+.avant_folio-gallery__button {
+	width:  141px !important;
+	height: 141px !important;
 }
 
 .wp-core-ui .attachment.details {
@@ -141,14 +133,18 @@
 	opacity: 1;
 }
 
-.avant-folio-list-item .thumbnail {
+.avant_folio-gallery__button {
+	margin: 13px 0 !important;
+}
+
+.avant_folio-gallery__button .thumbnail {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: space-evenly;
+	justify-content: center;
 }
 
-.avant_folio_gallery_add_image {
+.avant_folio-button--add {
 	display: flex;
 	align-items: center;
 	height: 30px;
@@ -163,7 +159,7 @@
 	border-style: solid;
 }
 
-.avant_folio_gallery_add_image svg {
+.avant_folio-button--add svg {
 	margin-right: 4px;
 	fill: currentColor;
 }
