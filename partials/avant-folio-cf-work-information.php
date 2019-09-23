@@ -110,14 +110,14 @@
 
       <!-- Work Video URL -->
       <div class="cf-box cf-box--xl">
-        <label class="post-attributes-label cf-box__label" for="avant_folio_work_info_material">Video url:</label>
+        <label class="post-attributes-label cf-box__label" for="avant_folio_work_info_url">Video url:</label>
         <input
           class="cf-box__input cf-box__input--xl"
           type="text"
-          name="avant_folio_work_info[material]"
+          name="avant_folio_work_info[url]"
           placeholder="https://www.vimeo.com/video"
           size="20"
-          value="<?php echo esc_attr( $work_material ); ?>"
+          value="<?php echo esc_attr( $work_url ); ?>"
         >
       </div>
       
