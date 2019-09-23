@@ -170,9 +170,9 @@ class avantFolioMediaUploader   {
           </div>
         </div>
       
-      <button type="button" data-gallery="#${imageData.id}_avant_folio_gallery" class="button-link check js-avant-folio-gallery-remove-image" tabindex="0">
-        <span class="media-modal-icon"></span>
-        <span class="screen-reader-text">Deselect</span>
+      <button type="button" class="button-link check js-avant-folio-gallery-set-featured-image" tabindex="0">
+        <span class="dashicons dashicons-star-filled"></span>
+        <span class="screen-reader-text">Select Featured</span>
       </button>
       <button type="button" class="button-link check asap-image-remove js-avant-folio-gallery-remove-image" tabindex="0">
         <span class="media-modal-icon"></span>
