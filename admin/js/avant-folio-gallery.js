@@ -41,7 +41,11 @@ class avantFolioMediaUploader   {
   setInitialState() {
     const initialImages = Array.from(this.galleryList.children);
 
-    initialImages.forEach( image => this.selectedImages.push(parseInt(image.dataset.id)));
+    initialImages.forEach( image => {
+      if( image.dataset.id !== undefined ) {
+        this.selectedImages.push(parseInt(image.dataset.id))
+      }
+    });
 
     this.setInputValue();
     this.addEvents();
@@ -196,7 +200,9 @@ class avantFolioMediaUploader   {
       const images = Array.from(this.galleryList.children);
 
       images.forEach(image => {
-        this.selectedImages.push(parseInt(image.dataset.id));
+        if(image.dataset.id !== undefined) {
+          this.selectedImages.push(parseInt(image.dataset.id));
+        }
       });
 
       this.setInputValue();
