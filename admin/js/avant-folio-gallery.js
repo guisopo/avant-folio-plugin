@@ -61,7 +61,6 @@ class avantFolioMediaUploader   {
   }
 
   setFeatureImage(e) {
-
     const featuredImage = e.target.parentNode.parentNode;
     
     if(!featuredImage.classList.contains('avant-folio-list-item')) {
@@ -189,7 +188,7 @@ class avantFolioMediaUploader   {
   }
 
   renderImage(image) {
-    this.galleryList.insertAdjacentHTML( 'afterbegin', image );
+    this.galleryList.lastElementChild.insertAdjacentHTML( 'beforebegin', image );
   }
 
   makeGallerySortable() {
