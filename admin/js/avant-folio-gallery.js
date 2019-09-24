@@ -192,8 +192,29 @@ class avantFolioMediaUploader   {
   }
 
   makeGallerySortable() {
+
     $('#avant_folio_gallery_list').sortable({
-      cancel: '.unsortable'
+      cancel: '.unsortable',
+      items: 'li',
+      start: function () {
+          $('.unsortable', this).each(function () {
+              const $this = $(this);
+              $this.data('pos', $this.index());
+          });
+      },
+      change: function () {
+          const $sortable = $(this);
+          const $statics = $('.unsortable', this).detach();
+          const tagName = $statics.prop('tagName');
+          const $helper = $('<' + tagName + '/>').prependTo(this);
+          $statics.each(function () {
+              const $this = $(this);
+              const target = $this.data('pos');
+              console.log(target);
+              $this.insertAfter($('li', $sortable).eq(target));
+            });
+          $helper.remove();
+      }
     });
     
     $('#avant_folio_gallery_list').on( "sortupdate", (event, ui) => {
