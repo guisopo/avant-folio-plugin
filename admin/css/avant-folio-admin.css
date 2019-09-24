@@ -87,6 +87,7 @@
 
 .avant_folio-gallery {
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .avant_folio-gallery__list li.attachment,
