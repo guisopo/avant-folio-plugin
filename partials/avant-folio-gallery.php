@@ -35,31 +35,32 @@ $images = explode(",", $gallery );
 				}         
 			}               
 		?>
+		<li class="avant_folio-gallery__button attachment selected">
+
+			<div id="avant_folio_gallery_add_images" class="attachment-preview js--select-attachment type-image subtype-jpeg portrait">
+				<div class="thumbnail">
+				
+					<div class="avant_folio-gallery__button-icon">
+						<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" focusable="false">
+							<path fill="none" d="M0 0h24v24H0V0z"></path><g><path d="M20 4v12H8V4h12m0-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 9.67l1.69 2.26 2.48-3.1L19 15H9zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"></path></g>
+						</svg>
+					</div>
+
+					<button type="button" class="avant_folio-button--add">
+						<svg aria-hidden="true" role="img" focusable="false" class="dashicon dashicons-upload" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+							<path d="M8 14V8H5l5-6 5 6h-3v6H8zm-2 2v-6H4v8h12.01v-8H14v6H6z"></path>
+						</svg>
+						Upload
+					</button>
+					
+				</div>
+			</div>
+
+		</li>
 	</ul>
 
 	<!-- Button used to open the WordPress Media Library Modal -->
-	<div class="avant_folio-gallery__button attachment selected">
-
-		<div id="avant_folio_gallery_add_images" class="attachment-preview js--select-attachment type-image subtype-jpeg portrait">
-			<div class="thumbnail">
-			
-				<div class="avant_folio-gallery__button-icon">
-					<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" focusable="false">
-						<path fill="none" d="M0 0h24v24H0V0z"></path><g><path d="M20 4v12H8V4h12m0-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 9.67l1.69 2.26 2.48-3.1L19 15H9zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"></path></g>
-					</svg>
-				</div>
-
-				<button type="button" class="avant_folio-button--add">
-					<svg aria-hidden="true" role="img" focusable="false" class="dashicon dashicons-upload" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-						<path d="M8 14V8H5l5-6 5 6h-3v6H8zm-2 2v-6H4v8h12.01v-8H14v6H6z"></path>
-					</svg>
-					Upload
-				</button>
-				
-			</div>
-		</div>
-
-	</div>
+	
 
 </div>
 
