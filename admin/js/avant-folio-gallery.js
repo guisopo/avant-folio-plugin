@@ -185,7 +185,7 @@ class avantFolioMediaUploader   {
   }
 
   renderImage(image) {
-    this.galleryList.insertAdjacentHTML( 'beforeend', image);
+    this.galleryList.insertAdjacentHTML( 'afterbegin', image );
   }
 
   makeGallerySortable() {
