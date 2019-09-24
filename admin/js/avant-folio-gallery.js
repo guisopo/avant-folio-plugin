@@ -192,7 +192,9 @@ class avantFolioMediaUploader   {
   }
 
   makeGallerySortable() {
-    $('#avant_folio_gallery_list').sortable();
+    $('#avant_folio_gallery_list').sortable({
+      cancel: '.unsortable'
+    });
     
     $('#avant_folio_gallery_list').on( "sortupdate", (event, ui) => {
       this.selectedImages = [];

@@ -39,7 +39,7 @@ $images = explode(",", $gallery );
 		?>
 
 		<!-- Button used to open the WordPress Media Library Modal -->
-		<li class="avant_folio-gallery__button attachment selected">
+		<li class="avant_folio-gallery__button attachment selected unsortable">
 
 			<div id="avant_folio_gallery_add_images" class="attachment-preview js--select-attachment type-image subtype-jpeg portrait">
 				<div class="thumbnail">
