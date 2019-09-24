@@ -138,10 +138,6 @@
 	opacity: 1;
 }
 
-.avant_folio-gallery__button {
-	margin: 13px 0 !important;
-}
-
 .avant_folio-gallery__button .thumbnail {
 	display: flex;
 	flex-direction: column;
