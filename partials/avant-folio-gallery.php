@@ -7,6 +7,7 @@ $images = explode(",", $gallery );
 ?>
 
 <div id="avant_folio_gallery" class="avant_folio-gallery">
+	
 	<!-- Creating a dynamic ID using the metabox ID for JavaScript-->
 	<ul id="avant_folio_gallery_list" class="avant_folio-gallery__list">
 		<?php 
@@ -33,8 +34,11 @@ $images = explode(",", $gallery );
 					$output .= '</li>';
 					echo $output;
 				}         
-			}               
+			}   
+
 		?>
+
+		<!-- Button used to open the WordPress Media Library Modal -->
 		<li class="avant_folio-gallery__button attachment selected">
 
 			<div id="avant_folio_gallery_add_images" class="attachment-preview js--select-attachment type-image subtype-jpeg portrait">
@@ -59,8 +63,6 @@ $images = explode(",", $gallery );
 		</li>
 	</ul>
 
-	<!-- Button used to open the WordPress Media Library Modal -->
-	
 
 </div>
 
