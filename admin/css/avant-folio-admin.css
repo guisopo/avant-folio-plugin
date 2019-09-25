@@ -163,7 +163,7 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	background-color: rgb(245, 245, 245);
+	background-color: #f1f1f1;;
 }
 
 .af-gallery .af-gallery__item--upload-image {
