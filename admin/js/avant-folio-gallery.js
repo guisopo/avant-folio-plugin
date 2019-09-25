@@ -175,6 +175,10 @@ class avantFolioMediaUploader   {
           <span class="dashicons dashicons-no-alt af-button-icon"></span>
           <span class="screen-reader-text">Deselect</span>
         </button>
+        <button type="button" class="js-af-button-show_image af-gallery__list-button" tabindex="0">
+          <span class="dashicons dashicons-search af-button-icon"></span>
+          <span class="screen-reader-text">Show Image</span>
+        </button>
         <button type="button" class="js-af-button-set_featured_image af-gallery__list-button af-gallery__list-button--featured">
           <span class="dashicons dashicons-star-filled af-button-icon"></span>
           <span class="screen-reader-text">Select Featured</span>
