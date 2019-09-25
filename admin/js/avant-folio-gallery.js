@@ -196,17 +196,17 @@ class avantFolioMediaUploader   {
 
   makeGallerySortable() {
     $(this.plugin).sortable({
-      cancel: '.unsortable',
+      cancel: '.af-unsortable',
       items: 'li',
       start: function () {
-        $('.unsortable', this).each(function () {
+        $('.af-unsortable', this).each(function () {
             const $this = $(this);
             $this.data('pos', $this.index());
         });
       },
       change: function () {
         const $sortable = $(this);
-        const $statics = $('.unsortable', this).detach();
+        const $statics = $('.af-unsortable', this).detach();
         const tagName = $statics.prop('tagName');
         const $helper = $('<' + tagName + '/>').prependTo(this);
         $statics.each(function () {
