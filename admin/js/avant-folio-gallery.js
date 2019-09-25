@@ -4,10 +4,12 @@ class avantFolioMediaUploader   {
 
   constructor() {
 
-    this.plugin = document.getElementById('avant_folio_gallery');
-    this.galleryList = document.getElementById('avant_folio_gallery_list');
-    this.addImagesButton = document.getElementById('avant_folio_gallery_add_images');
-    
+    this.plugin = document.getElementById('af-gallery');
+    this.galleryList = document.getElementById('af-gallery__list');
+    this.addImagesButton = document.getElementById('js-af-button-add_image');
+    this.removeImageButtons;
+    this.setFeaturedImageButtons;
+
     this.galleryHiddenInput;
     this.featuredImageHiddenInput;
     this.selectedImages = [];
@@ -31,11 +33,11 @@ class avantFolioMediaUploader   {
     // Media Button
     this.addImagesButton.addEventListener('click', this.renderMediaUploader);
     // Delete Button
-    const removeImageButtons = document.querySelectorAll('.js-avant-folio-gallery-remove-image');
-    removeImageButtons.forEach( button => button.addEventListener('click', this.deleteImage));
+    this.removeImageButtons = document.querySelectorAll('.js-af-button-remove_image');
+    this.removeImageButtons.forEach( button => button.addEventListener('click', this.deleteImage));
     // Set Featured Image Button
-    const setFeaturedImageButtons = document.querySelectorAll('.js-avant-folio-gallery-set-featured-image');
-    setFeaturedImageButtons.forEach( button => button.addEventListener('click', this.setFeatureImage));
+    this.setFeaturedImageButtons = document.querySelectorAll('.js-af-button-set_featured_image');
+    this.setFeaturedImageButtons.forEach( button => button.addEventListener('click', this.setFeatureImage));
   }
 
   setInitialState() {
@@ -53,7 +55,6 @@ class avantFolioMediaUploader   {
 
   setInputValue() {
     this.galleryHiddenInput.value = this.selectedImages;
-    console.log(this.galleryHiddenInput.value, this.selectedImages);
   }
 
   setFeaturedImage(id) {
@@ -62,8 +63,9 @@ class avantFolioMediaUploader   {
 
   setFeatureImage(e) {
     const featuredImage = e.target.parentNode.parentNode;
-    
-    if(!featuredImage.classList.contains('avant-folio-list-item')) {
+
+    // Prevents from selecting ul as a target.
+    if(featuredImage.parentNode !== this.galleryList) {
       return;
     }
 
@@ -82,7 +84,8 @@ class avantFolioMediaUploader   {
   deleteImage(e) {
     const imageToDelete = e.target.parentNode.parentNode;
 
-    if(!imageToDelete.classList.contains('avant-folio-list-item')) {
+    // Prevents from selecting ul as a target and deleting it.
+    if(imageToDelete.parentNode !== this.galleryList) {
       return;
     }
 
@@ -164,7 +167,7 @@ class avantFolioMediaUploader   {
 
   createImageListItem(imageData) {
     let output = `
-      <li tabindex="0" role="checkbox" aria-label="${imageData.title}" aria-checked="true" data-id="${imageData.id}" class="avant-folio-list-item attachment save-ready selected details">
+      <li tabindex="0" role="checkbox" aria-label="${imageData.title}" aria-checked="true" data-id="${imageData.id}" class="af-gallery__item attachment save-ready selected details">
         <div class="attachment-preview js--select-attachment type-image subtype-jpeg portrait">
           <div class="thumbnail">
             <div class="centered">
@@ -173,11 +176,11 @@ class avantFolioMediaUploader   {
           </div>
         </div>
       
-      <button type="button" class="button-link check js-avant-folio-gallery-set-featured-image" tabindex="0">
+      <button type="button" class="button-link check js-af-button-set_featured_image" tabindex="0">
         <span class="dashicons dashicons-star-filled"></span>
         <span class="screen-reader-text">Select Featured</span>
       </button>
-      <button type="button" class="button-link check asap-image-remove js-avant-folio-gallery-remove-image" tabindex="0">
+      <button type="button" class="button-link check asap-image-remove js-af-button-remove_image" tabindex="0">
         <span class="media-modal-icon"></span>
         <span class="screen-reader-text">Deselect</span>
       </button>
@@ -192,7 +195,7 @@ class avantFolioMediaUploader   {
   }
 
   makeGallerySortable() {
-    $('#avant_folio_gallery_list').sortable({
+    $(this.plugin).sortable({
       cancel: '.unsortable',
       items: 'li',
       start: function () {
@@ -209,14 +212,14 @@ class avantFolioMediaUploader   {
         $statics.each(function () {
           const $this = $(this);
           const target = $this.data('pos');
-          console.log(target);
+
           $this.insertAfter($('li', $sortable).eq(target));
         });
         $helper.remove();
       }
     });
     
-    $('#avant_folio_gallery_list').on( "sortupdate", (event, ui) => {
+    $(this.plugin).on( "sortupdate", (event, ui) => {
       this.selectedImages = [];
       const images = Array.from(this.galleryList.children);
 
