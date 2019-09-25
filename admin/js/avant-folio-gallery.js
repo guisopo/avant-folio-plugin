@@ -167,25 +167,19 @@ class avantFolioMediaUploader   {
 
   createImageListItem(imageData) {
     let output = `
-      <li tabindex="0" role="checkbox" aria-label="${imageData.title}" aria-checked="true" data-id="${imageData.id}" class="af-gallery__item attachment save-ready selected details">
-        <div class="attachment-preview js--select-attachment type-image subtype-jpeg portrait">
-          <div class="thumbnail">
-            <div class="centered">
-              <img src="${imageData.sizes.thumbnail.url}" draggable="false" alt="${imageData.caption}"/>
-            </div>
-          </div>
+      <li aria-label="${imageData.title}" data-id="${imageData.id}" class="af-gallery__item">
+        <div class="af-gallery__image-container">
+          <img class="af-gallery__image" src="${imageData.sizes.thumbnail.url}" draggable="false" alt="${imageData.caption}">
         </div>
-      
-      <button type="button" class="button-link check js-af-button-set_featured_image" tabindex="0">
-        <span class="dashicons dashicons-star-filled"></span>
-        <span class="screen-reader-text">Select Featured</span>
-      </button>
-      <button type="button" class="button-link check asap-image-remove js-af-button-remove_image" tabindex="0">
-        <span class="media-modal-icon"></span>
-        <span class="screen-reader-text">Deselect</span>
-      </button>
-      
-    </li>`;
+        <button type="button" class="js-af-button-remove_image af-gallery__list-button af-gallery__list-button--remove">
+          <span class="dashicons dashicons-no-alt af-button-icon"></span>
+          <span class="screen-reader-text">Deselect</span>
+        </button>
+        <button type="button" class="js-af-button-set_featured_image af-gallery__list-button af-gallery__list-button--featured">
+          <span class="dashicons dashicons-star-filled af-button-icon"></span>
+          <span class="screen-reader-text">Select Featured</span>
+        </button>
+      </li>`;
 
     return output;
   }
