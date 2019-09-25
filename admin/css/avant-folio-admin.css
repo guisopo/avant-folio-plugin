@@ -85,10 +85,41 @@
 
 /* CPT Gallery */
 
+.af-gallery {
+	display: flex;
+	/* flex-wrap: wrap; */
+	justify-content: space-around;
+}
+
+.af-gallery__featured {
+	margin: 22px 0;
+	padding: 0 40px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	background-color: #f7f7f7;
+}
+
+.af-gallery .af-gallery__featured .af-featured__title {
+	vertical-align: baseline;
+	font-weight: 600;
+	align-self: flex-start;
+	padding: 0!important;
+}
+
+.af-gallery .af-gallery__featured .af-featured__description {
+	width: 300px;
+	font-style: italic;
+	color: #666;
+}
+
 .af-gallery__list {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: flex-start;
+	justify-content: space;
+	margin: 12px 10px;
+	max-width: 680px;
 }
 
 .af-gallery__list .af-gallery__item {
@@ -166,6 +197,7 @@
 
 .af-gallery .af-gallery__item--upload-image {
 	cursor: default;
+	flex-grow: 1;
 }
 
 .af-gallery .af-gallery__item--upload-image .add-image__button {
@@ -190,6 +222,6 @@
 	fill: currentColor;
 }
 
-.af-gallery .af-gallery__save-button p {
+.af-gallery__save-button p {
 	float: unset!important;
 }
