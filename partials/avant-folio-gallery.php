@@ -20,16 +20,21 @@ $images = explode(",", $gallery );
 					$output = '<li aria-label="' . get_the_title( $attachment_id ) . '" data-id="' . $attachment_id . '" class="af-gallery__item">';
 						// Create a container for the image. (Copied from the WP Media Library Modal to use the same styling)
 						$output .= '<div class="af-gallery__image-container">';
-									// Get the URL to that image thumbnail
-									$output .= '<img class="af-gallery__image" src="'  . wp_get_attachment_thumb_url( $attachment_id ) . '" draggable="false" alt="">';
-							$output .= '</div>';
-						// Add the button to remove this image if wanted (we set the data-gallery to target the correct gallery if there are more than one)
-						$output .= '<button type="button" data-gallery="#' . $this->id . '_avant_folio_gallery" class="js-af-button-remove_image af-gallery__list-button af-gallery__list-button--remove" tabindex="0"><span class="dashicons dashicons-no-alt af-button-icon"></span><span class="screen-reader-text">Deselect</span></button>';
-						// Add the button to remove this image if wanted (we set the data-gallery to target the correct gallery if there are more than one)
-						$output .= '<button type="button" class="js-af-button-set_featured_image af-gallery__list-button af-gallery__list-button--featured" tabindex="0"><span class="dashicons dashicons-star-filled af-button-icon"></span><span class="screen-reader-text">Select Featured</span></button>';
+							// Get the URL to that image thumbnail
+							$output .= '<img class="af-gallery__image" src="'  . wp_get_attachment_thumb_url( $attachment_id ) . '" draggable="false" alt="">';
+						$output .= '</div>';
+						
+						$output .= '<div class="af-gallery__buttons-container">';
+							// Set Featured Image Button
+							$output .= '<button type="button" class="js-af-button-set_featured_image af-gallery__list-button af-gallery__list-button--featured" tabindex="0"><span class="dashicons dashicons-star-filled af-button-icon"></span><span class="screen-reader-text">Select Featured</span></button>';
+							// Show Image Button
+							$output .= '<button type="button" class="js-af-button-show_image af-gallery__list-button" tabindex="0"><span class="dashicons dashicons-search af-button-icon"></span><span class="screen-reader-text">Show Image</span></button>';
+							// Add the button to remove this image if wanted (we set the data-gallery to target the correct gallery if there are more than one)
+							$output .= '<button type="button" data-gallery="#' . $this->id . '_avant_folio_gallery" class="js-af-button-remove_image af-gallery__list-button af-gallery__list-button--remove" tabindex="0"><span class="dashicons dashicons-no af-button-icon"></span><span class="screen-reader-text">Remove from Gallery</span></button>';
+						$output .= '</div>';
 					$output .= '</li>';
 					echo $output;
-				}         
+				}
 			}   
 
 		?>
