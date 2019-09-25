@@ -64,7 +64,7 @@ class avantFolioMediaUploader   {
   setFeatureImage(e) {
     const featuredImage = e.target.parentNode.parentNode.parentNode;
 
-    // Prevents from selecting ul as a target.
+    // Prevents from selecting accidentally the UL as a target.
     if(featuredImage.parentNode !== this.galleryList) {
       return;
     }
@@ -84,7 +84,7 @@ class avantFolioMediaUploader   {
   deleteImage(e) {
     const imageToDelete = e.target.parentNode.parentNode.parentNode;
 
-    // Prevents from selecting ul as a target and deleting it.
+    // Prevents from selecting accidentally the UL as a target and deleting it.
     if(imageToDelete.parentNode !== this.galleryList) {
       return;
     }
@@ -168,9 +168,11 @@ class avantFolioMediaUploader   {
   createImageListItem(imageData) {
     let output = `
       <li aria-label="${imageData.title}" data-id="${imageData.id}" class="af-gallery__item">
+
         <div class="af-gallery__image-container">
           <img class="af-gallery__image" src="${imageData.sizes.thumbnail.url}" draggable="false" alt="${imageData.caption}">
         </div>
+
         <div class="af-gallery__buttons-container">
           <button type="button" class="js-af-button-set_featured_image af-gallery__list-button af-gallery__list-button--featured">
             <span class="dashicons dashicons-star-filled af-button-icon"></span>
@@ -185,6 +187,7 @@ class avantFolioMediaUploader   {
             <span class="screen-reader-text">Deselect</span>
           </button>
         </div>
+        
       </li>`;
 
     return output;

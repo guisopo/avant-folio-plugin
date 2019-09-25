@@ -23,7 +23,7 @@ $images = explode(",", $gallery );
 	<div class="af-gallery__list-container">
 		<!-- Creating a dynamic ID using the metabox ID for JavaScript-->
 		<ul id="af-gallery__list" class="af-gallery__list">
-			<?php 
+			<?php
 			
 				// If there is any ID, create the image for it
 				if( count( $images ) > 0 && $images[0] != '' ) {
@@ -34,7 +34,7 @@ $images = explode(",", $gallery );
 							// Create a container for the image. (Copied from the WP Media Library Modal to use the same styling)
 							$output .= '<div class="af-gallery__image-container">';
 								// Get the URL to that image thumbnail
-								$output .= '<img class="af-gallery__image" src="'  . wp_get_attachment_thumb_url( $attachment_id ) . '" draggable="false" alt="">';
+								$output .= '<img class="af-gallery__image" src="' . wp_get_attachment_thumb_url( $attachment_id ) . '" draggable="false" alt="">';
 							$output .= '</div>';
 							
 							$output .= '<div class="af-gallery__buttons-container">';

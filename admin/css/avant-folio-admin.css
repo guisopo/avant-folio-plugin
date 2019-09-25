@@ -114,12 +114,17 @@
 	color: #666;
 }
 
+.af-gallery__list-container {
+	width: 70%;
+	margin: auto;
+}
+
 .af-gallery__list {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space;
-	margin: 12px 10px;
-	max-width: 680px;
+	justify-content: space-between;
+	margin: 12px 5%;
+	max-width: 100%;
 }
 
 .af-gallery__list .af-gallery__item {
