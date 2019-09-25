@@ -171,18 +171,20 @@ class avantFolioMediaUploader   {
         <div class="af-gallery__image-container">
           <img class="af-gallery__image" src="${imageData.sizes.thumbnail.url}" draggable="false" alt="${imageData.caption}">
         </div>
-        <button type="button" class="js-af-button-remove_image af-gallery__list-button af-gallery__list-button--remove">
-          <span class="dashicons dashicons-no-alt af-button-icon"></span>
-          <span class="screen-reader-text">Deselect</span>
-        </button>
-        <button type="button" class="js-af-button-show_image af-gallery__list-button" tabindex="0">
+        <div class="af-gallery__buttons-container">
+          <button type="button" class="js-af-button-set_featured_image af-gallery__list-button af-gallery__list-button--featured">
+            <span class="dashicons dashicons-star-filled af-button-icon"></span>
+            <span class="screen-reader-text">Select Featured</span>
+          </button>
+          <button type="button" class="js-af-button-show_image af-gallery__list-button" tabindex="0">
           <span class="dashicons dashicons-search af-button-icon"></span>
           <span class="screen-reader-text">Show Image</span>
-        </button>
-        <button type="button" class="js-af-button-set_featured_image af-gallery__list-button af-gallery__list-button--featured">
-          <span class="dashicons dashicons-star-filled af-button-icon"></span>
-          <span class="screen-reader-text">Select Featured</span>
-        </button>
+          </button>
+          <button type="button" class="js-af-button-remove_image af-gallery__list-button af-gallery__list-button--remove">
+            <span class="dashicons dashicons-no-alt af-button-icon"></span>
+            <span class="screen-reader-text">Deselect</span>
+          </button>
+        </div>
       </li>`;
 
     return output;
