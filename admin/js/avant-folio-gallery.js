@@ -62,7 +62,7 @@ class avantFolioMediaUploader   {
   }
 
   setFeatureImage(e) {
-    const featuredImage = e.target.parentNode.parentNode;
+    const featuredImage = e.target.parentNode.parentNode.parentNode;
 
     // Prevents from selecting ul as a target.
     if(featuredImage.parentNode !== this.galleryList) {
