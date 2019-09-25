@@ -82,7 +82,7 @@ class avantFolioMediaUploader   {
   }
   
   deleteImage(e) {
-    const imageToDelete = e.target.parentNode.parentNode;
+    const imageToDelete = e.target.parentNode.parentNode.parentNode;
 
     // Prevents from selecting ul as a target and deleting it.
     if(imageToDelete.parentNode !== this.galleryList) {
