@@ -11,11 +11,9 @@ $images = explode(",", $gallery );
 	<div class="af-gallery__featured">
 		<h2 class="af-featured__title">Featured Image:</h2>
 		<div class="af-featured__image">
-			<a href="http://localhost:9999/wp-admin/media-upload.php?post_id=<?php $post->ID ?>&type=image&TB_iframe=1">
 
-				<?php the_post_thumbnail( 'medium' ); ?>
+			<?php the_post_thumbnail( 'medium' ); ?>
 
-			</a>
 		</div>
 		<p class="af-featured__description">Drag an image here to update the featured image of the work.</p>
 	</div>
