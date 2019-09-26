@@ -9,16 +9,19 @@ $images = explode(",", $gallery );
 <div id="af-gallery" class="af-gallery">
 	
 	<div class="af-gallery__featured">
+	
 		<h2 class="af-featured__title">Featured Image:</h2>
+
 		<div class="af-featured__image">
-
 			<?php the_post_thumbnail( 'medium' ); ?>
-
 		</div>
+
 		<p class="af-featured__description">Drag an image here to update the featured image of the work.</p>
-	</div>
+		
+	</div> <!-- af-gallery__featured -->
 
 	<div class="af-gallery__list-container">
+
 		<!-- Creating a dynamic ID using the metabox ID for JavaScript-->
 		<ul id="af-gallery__list" class="af-gallery__list">
 			<?php
@@ -72,12 +75,12 @@ $images = explode(",", $gallery );
 
 			</li>
 		</ul>
-	</div>
+	</div> <!-- af-gallery__list-container -->
 
-</div>
+</div> <!-- af-gallery -->
 
+<!-- Button used to update Selection -->
 <div class="af-gallery__save-button">
 	<?php submit_button(); ?>
 </div>
 
-<!-- Button used to update Selection -->
