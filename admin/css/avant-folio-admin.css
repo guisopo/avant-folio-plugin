@@ -121,21 +121,27 @@
 
 .af-gallery__list-container {
 	width: 70%;
-	margin: auto;
+	margin: 22px 0;
 }
 
 .af-gallery__list {
 	display: grid;
 	justify-content: center;
-	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-	grid-gap: 10px;
+	grid-template-columns: repeat(auto-fit, 150px);
+	grid-template-rows: repeat(auto-fit, 150px);
+	grid-gap: 10px 10px;
+	justify-items: center;
+	align-items: center;
+	justify-content: end;
+	align-content: start;
+	margin: 0;
 }
 
 .af-gallery__list .af-gallery__item {
 	position: relative;
 	width:  150px;
 	height: 150px;
-	margin: 10px;
+	margin: 0;
 	cursor: pointer;
 }
 
@@ -195,8 +201,9 @@
 }
 
 .af-gallery__button-container {
-	width: calc(100% - 8px);
-	height: calc(100% - 8px);
+	width: inherit;
+	height: inherit;
+	padding: 0;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -206,7 +213,6 @@
 
 .af-gallery .af-gallery__item--upload-image {
 	cursor: default;
-	width: 150px;
 }
 
 .af-gallery .af-gallery__item--upload-image .add-image__button {
