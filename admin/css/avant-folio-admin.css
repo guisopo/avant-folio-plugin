@@ -1,4 +1,6 @@
-/* CPT Details */
+/* ==============
+		CPT Details
+	==============*/
 
 .cf-section {
 	display: grid;
@@ -83,7 +85,9 @@
 	line-height: 0;
 }
 
-/* CPT Gallery */
+/* ==============
+		CPT Gallery 
+  ==============*/
 
 .af-gallery {
 	display: grid;
