@@ -41,6 +41,7 @@ class Avant_Folio {
     $admin = new Avant_Folio_Admin($this->version);
     $this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_styles' );
     $this->loader->add_action( 'admin_menu', $admin, 'add_menu_pages' );
+    $this->loader->add_action( 'admin_menu', $admin, 'remove_menu_pages' );
 
     $settings = new Avant_Folio_Admin_Settings();
     $this->loader->add_action( 'admin_init', $settings, 'register_settings' );

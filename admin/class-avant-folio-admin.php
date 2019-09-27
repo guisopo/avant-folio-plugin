@@ -78,6 +78,12 @@ class Avant_Folio_Admin {
     }
   }
 
+  public function remove_menu_pages() {
+    remove_menu_page( 'index.php' );
+    remove_menu_page( 'edit.php' );
+    remove_menu_page( 'edit-comments.php' );
+  }
+
   public function render_user_profile_page() {
     require_once plugin_dir_path( dirname( __FILE__ ) )  . 'partials/avant-folio-user-profile.php';
   }
