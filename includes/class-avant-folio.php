@@ -14,6 +14,8 @@ class Avant_Folio {
     $this->load_dependencies();
     $this->define_admin_hooks();
     $this->define_works_cpt();
+    $this->define_sketches_cpt();
+    $this->define_texts_cpt();
     $this->define_exhibitions_cpt();
     $this->set_gallery();
   }
@@ -153,6 +155,38 @@ class Avant_Folio {
 
     $this->loader->add_action( 'init', $exhibitions_cpt, 'register_cpt' );
     $this->loader->add_filter( 'enter_title_here', $exhibitions_cpt, 'set_custom_enter_title' );
+  }
+
+  public function define_texts_cpt() {
+
+    // Text CPT
+    $texts_cpt_args = array(
+      'cpt_name'       => 'texts',
+      'cpt_supports'   => array( 'title', 'editor', 'excerpts', 'thumbnail', 'revisions' ),
+      'cpt_icon'       => 'dashicons-edit',
+      'cpt_taxonomies' => array()
+    );
+
+    $texts_cpt = new Avant_Folio_CPT( $texts_cpt_args );
+
+    $this->loader->add_action( 'init', $texts_cpt, 'register_cpt' );
+    $this->loader->add_filter( 'enter_title_here', $texts_cpt, 'set_custom_enter_title' );
+  }
+
+  public function define_sketches_cpt() {
+
+    // Sketches CPT
+    $sketches_cpt_args = array(
+      'cpt_name'       => 'sketches',
+      'cpt_supports'   => array( 'title', 'thumbnail', 'revisions', 'post-formats' ),
+      'cpt_icon'       => 'dashicons-art',
+      'cpt_taxonomies' => array()
+    );
+
+    $sketches_cpt = new Avant_Folio_CPT( $sketches_cpt_args );
+
+    $this->loader->add_action( 'init', $sketches_cpt, 'register_cpt' );
+    $this->loader->add_filter( 'enter_title_here', $sketches_cpt, 'set_custom_enter_title' );
   }
 
   public function set_gallery() {
