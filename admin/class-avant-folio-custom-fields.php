@@ -19,8 +19,8 @@ class Avant_Folio_Custom_Fields {
       $this->metabox['title'],
       array( $this, $this->metabox['callback'] ),
       $this->metabox['screen'],  
-      $this->metabox['context'] ?: 'normal', 
-      $this->metabox['priority'] ?: 'core'   
+      isset( $this->metabox['context'] ) ?: 'normal', 
+      isset( $this->metabox['priority'] ) ?: 'core'   
     );
   }
 
@@ -59,7 +59,13 @@ class Avant_Folio_Custom_Fields {
     }
     
     /* Get the posted data and sanitize it */
-    $new_meta_value = isset( $_POST[ $this->metabox['meta-key'] ] ) ?  $this->sanitize_fields( $_POST[ $this->metabox['meta-key'] ] ) : '';
+    if ( isset( $_POST[ $this->metabox['meta-key'] ] ) ) {
+      $new_meta_value = $this->sanitize_fields( $_POST[ $this->metabox['meta-key'] ] );
+    } else {
+      return;
+    }
+
+    // $new_meta_value = isset( $_POST[ $this->metabox['meta-key'] ] ) ?  $this->sanitize_fields( $_POST[ $this->metabox['meta-key'] ] ) : '';
     $new_meta_value['title'] = sanitize_text_field( $_POST[ 'post_title' ] );
     $new_meta_value = array_filter($new_meta_value);
 
