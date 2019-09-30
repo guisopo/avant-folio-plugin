@@ -1,9 +1,7 @@
 <?php
-$post_type = get_post_type( $post );
-$meta_value = get_post_meta( $post->ID, '_avant_folio_work_info_key', true );
+$meta_value = ( get_post_meta( $post->ID, '_avant_folio_work_info_key', true ) ) ?: array();
 
-$gallery = $meta_value['gallery'];
-$images = explode(",", $gallery );
+$images = isset( $meta_value['gallery'] ) ? explode(",", $meta_value['gallery'] ) : array();
 ?>
 
 <div id="af-gallery" class="af-gallery">
