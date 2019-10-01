@@ -137,7 +137,8 @@
 	margin: 0;
 }
 
-.af-gallery__list .af-gallery__item {
+.af-gallery__list .af-gallery__item,
+.sortable-placeholder {
 	position: relative;
 	width:  150px;
 	height: 150px;
@@ -145,6 +146,11 @@
 	cursor: pointer;
 }
 
+.sortable-placeholder {
+	border-color: #ccc;
+	background: #f7f7f7;
+	box-shadow: inset 0 0 0 4px #fff;
+}
 .af-gallery__list .af-gallery__item .af-gallery__image-container,
 .af-gallery__button-container {
 	padding: 4px;
