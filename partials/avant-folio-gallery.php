@@ -14,7 +14,7 @@ $images = isset( $meta_value['gallery'] ) ? explode(",", $meta_value['gallery'] 
 			<?php the_post_thumbnail( 'medium' ); ?>
 		</div>
 
-		<p class="af-featured__description">Drag an image here to update the featured image of the work.</p>
+		<p class="af-featured__description">Select an image from the gallery.</p>
 		
 	</div> <!-- af-gallery__featured -->
 
