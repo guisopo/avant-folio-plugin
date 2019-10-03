@@ -34,9 +34,9 @@ class Avant_Folio_Custom_Fields {
   public function setPostFormat( $work_type, $gallery ) {
     // $gallery_work_type = [ 'Painting', 'Installation', 'Ceramic', 'Drawing', 'Photography' ];
     
-    if ( $work_type !== 'video' && !$gallery ) {
+    if ( $work_type !== 'Video' && !$gallery ) {
       set_post_format($post_id, 'image');
-    } else if ( $work_type !== 'video' && $gallery ) {
+    } else if ( $work_type !== 'Video' && $gallery ) {
       set_post_format($post_id, 'gallery');
     } else if ( $work_type == 'Video' ) {
       set_post_format($post_id, 'video');
