@@ -152,15 +152,15 @@
 
 .af-gallery__list {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, 150px);
-	grid-template-rows: repeat(auto-fit, 150px);
-	grid-gap: 10px 10px;
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	grid-gap: 1em;
 	align-content: start;
 	margin: 0;
 }
 
 .af-gallery__list .af-gallery__item,
 .sortable-placeholder {
+	justify-self: center;
 	position: relative;
 	width:  150px;
 	height: 150px;
