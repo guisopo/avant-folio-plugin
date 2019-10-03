@@ -39,6 +39,8 @@ $images = isset( $meta_value['gallery'] ) ? explode(",", $meta_value['gallery'] 
 							$output .= '<div class="af-gallery__buttons-container">';
 								// Set Featured Image Button
 								$output .= '<button type="button" class="js-af-button-set_featured_image af-gallery__list-button af-gallery__list-button--featured" tabindex="0"><span class="dashicons dashicons-star-filled af-button-icon"></span><span class="screen-reader-text">Select Featured</span></button>';
+								// Show Image Button
+								$output .= '<button type="button" class="js-af-button-show_image af-gallery__list-button" tabindex="0"><span class="dashicons dashicons-search af-button-icon"></span><span class="screen-reader-text">Show Image</span></button>';
 								// Add the button to remove this image if wanted (we set the data-gallery to target the correct gallery if there are more than one)
 								$output .= '<button type="button" data-gallery="#' . $this->id . '_avant_folio_gallery" class="js-af-button-remove_image af-gallery__list-button af-gallery__list-button--remove" tabindex="0"><span class="dashicons dashicons-no af-button-icon"></span><span class="screen-reader-text">Remove from Gallery</span></button>';
 							$output .= '</div>';
