@@ -1,7 +1,9 @@
 <?php
-$meta_value = ( get_post_meta( $post->ID, '_avant_folio_work_info_key', true ) ) ?: array();
+$post_type = get_post_type( $post );
+$meta_value = get_post_meta( $post->ID, '_avant_folio_work_info_key', true );
 
-$images = isset( $meta_value['gallery'] ) ? explode(",", $meta_value['gallery'] ) : array();
+$gallery = $meta_value['gallery'];
+$images = explode(",", $gallery );
 ?>
 
 <div id="af-gallery" class="af-gallery">
@@ -14,7 +16,7 @@ $images = isset( $meta_value['gallery'] ) ? explode(",", $meta_value['gallery'] 
 			<?php the_post_thumbnail( 'medium' ); ?>
 		</div>
 
-		<p class="af-featured__description">Select an image from the gallery.</p>
+		<p class="af-featured__description">Drag an image here to update the featured image of the work.</p>
 		
 	</div> <!-- af-gallery__featured -->
 

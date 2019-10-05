@@ -199,12 +199,6 @@ class avantFolioMediaUploader   {
 
   makeGallerySortable() {
     $(this.plugin).sortable({
-      revert: true,
-      tolerance: "pointer",
-      cursor: "move",
-      placeholder: "sortable-placeholder",
-      forcePlaceholderSize: true,
-      opacity: 0.8,
       cancel: '.af-unsortable',
       items: 'li',
       start: function () {

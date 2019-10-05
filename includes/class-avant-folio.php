@@ -101,7 +101,7 @@ class Avant_Folio {
   public function define_works_cpt_columns($cpt_name) {
 
     $works_cpt_columns = array(
-      'cb'              =>  '',
+      'cb'              =>  $columns['cb'],
       'image'           =>  __('Image'),
       'title'           =>  __('Title'),
       'work_type'       =>  __('Work Type'),

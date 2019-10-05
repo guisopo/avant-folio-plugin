@@ -32,15 +32,19 @@ class Avant_Folio_Custom_Fields {
   }
 
   public function setPostFormat( $work_type, $gallery ) {
-    // $gallery_work_type = [ 'Painting', 'Installation', 'Ceramic', 'Drawing', 'Photography' ];
     
-    if ( $work_type !== 'Video' && !$gallery ) {
+    $images = explode(",", $gallery );
+
+    if ( $work_type != 'Video' && count($images) == 1  ) {
       set_post_format($post_id, 'image');
-    } else if ( $work_type !== 'Video' && $gallery ) {
+    } 
+    else if ( $work_type != 'Video' && count($images) > 1 ) {
       set_post_format($post_id, 'gallery');
-    } else if ( $work_type == 'Video' ) {
+    } 
+    else if ( $work_type == 'Video' ) {
       set_post_format($post_id, 'video');
-    }  else {
+    }  
+    else {
       set_post_format($post_id, 'standard');
     }
   }

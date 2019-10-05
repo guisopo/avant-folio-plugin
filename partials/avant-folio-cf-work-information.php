@@ -1,5 +1,5 @@
 <?php
-  $meta_value = ( get_post_meta( $post->ID, '_avant_folio_work_info_key', true ) ) ?: array();
+  $meta_value = get_post_meta( $post->ID, '_avant_folio_work_info_key', true );
 
   foreach( $meta_value as $key => $value ) {
     ${'work_'.$key} = ( ! empty ( $value ) ) ? $value : '';
@@ -21,7 +21,7 @@
           <option value="" disabled selected>Select work type</option>
           <?php 
             foreach( $work_types_taxonomies as $term ){
-              $selected = isset($work_work_type) ? selected( $work_work_type, $term->name ) : '';;
+              $selected = selected( $work_work_type, $term->name );
               echo '<option value="'. $term->name .'" '. $selected .'>'. $term->name .'</option>';
             }
           ?>
@@ -39,7 +39,7 @@
           maxlength="4"
           pattern="[0-9]{4,4}"
           size="4"
-          value="<?php echo isset($work_date_completed) ? esc_attr( $work_date_completed ): ''; ?>"
+          value="<?php echo esc_attr( $work_date_completed ); ?>"
         >
       </div>
       
@@ -54,7 +54,7 @@
         name="avant_folio_work_info[material]"
         placeholder="Material used"
         size="20"
-        value="<?php  echo isset($work_material) ? esc_attr( $work_material ): ''; ?>"
+        value="<?php echo esc_attr( $work_material ); ?>"
       >
     </div>
 
@@ -67,7 +67,7 @@
         name="avant_folio_work_info[technique]"
         placeholder="Technique used"
         size="20"
-        value="<?php  echo isset($work_technique) ? esc_attr( $work_technique ): ''; ?>"
+        value="<?php echo esc_attr( $work_technique ); ?>"
       >
     </div>
 
@@ -81,14 +81,14 @@
           name="avant_folio_work_info[dimensions]"
           placeholder="height x width x depth"
           size="20"
-          value="<?php echo isset($work_dimensions) ? esc_attr( $work_dimensions ): ''; ?>"
+          value="<?php echo esc_attr( $work_dimensions ); ?>"
         >
         <select id="work_units" class="cf-box__select cf-box__select--s" name="avant_folio_work_info[units]">
           <option value="" disabled selected>Units</option>
-          <option value="mm" <?php isset($work_units) ? selected( $work_units, 'mm') : ''; ?>>mm</option>
-          <option value="cm" <?php isset($work_units) ? selected( $work_units, 'cm') : ''; ?>>cm</option>
-          <option value="m" <?php isset($work_units) ? selected( $work_units, 'm') : ''; ?>>m</option>
-          <option value="none" <?php isset($work_units) ? selected( $work_units, 'none') : ''; ?>>none</option>
+          <option value="mm" <?php selected( $work_units, 'mm' ); ?>>mm</option>
+          <option value="cm" <?php selected( $work_units, 'cm' ); ?>>cm</option>
+          <option value="m" <?php selected( $work_units, 'm' ); ?>>m</option>
+          <option value="none" <?php selected( $work_units, 'none' ); ?>>none</option>
         </select>
       </div>
     </div>
@@ -102,7 +102,7 @@
         name="avant_folio_work_info[media]"
         placeholder="Video (Digital Betacam and DVD)"
         size="20"
-        value="<?php echo isset($work_media) ? esc_attr( $work_media ): ''; ?>"
+        value="<?php echo esc_attr( $work_media ); ?>"
       >
     </div>
     
@@ -117,7 +117,7 @@
           name="avant_folio_work_info[url]"
           placeholder="https://www.vimeo.com/video"
           size="20"
-          value="<?php echo isset($work_url) ? esc_attr( $work_url ): ''; ?>"
+          value="<?php echo esc_attr( $work_url ); ?>"
         >
       </div>
       
@@ -133,7 +133,7 @@
             minlength="2"
             maxlength="2"
             size="1"
-            value="<?php echo isset($work_duration_hours) ? esc_attr( $work_duration_hours ): ''; ?>"
+            value="<?php echo esc_attr( $work_duration_hours ); ?>"
           >
           <span><b>:</b></span>
           <input
@@ -144,7 +144,7 @@
             minlength="2"
             maxlength="2"
             size="1"
-            value="<?php echo isset($work_duration_minutes) ? esc_attr( $work_duration_minutes ): ''; ?>"
+            value="<?php echo esc_attr( $work_duration_minutes ); ?>"
           >
           <span><b>:</b></span>
           <input
@@ -155,7 +155,7 @@
             minlength="2"
             maxlength="2"
             size="1"
-            value="<?php echo isset($work_duration_seconds) ? esc_attr( $work_duration_seconds ): ''; ?>"
+            value="<?php echo esc_attr( $work_duration_seconds ); ?>"
           >
         </div>
       </div>
@@ -174,7 +174,7 @@
         name="avant_folio_work_info[description]"
         placeholder="Description of the work"
       ><?php 
-        echo isset($work_description) ? esc_attr( $work_description ): '';
+        echo esc_attr( $work_description ); 
       ?></textarea>
     </div>
 
@@ -185,8 +185,8 @@
         class="cf-box__textarea"
         name="avant_folio_work_info[credits]"
         placeholder="Director, camera, editing, performance..."
-      ><?php
-        echo isset($work_credits) ? esc_attr( $work_credits ): '';
+      ><?php 
+        echo esc_attr( $work_credits ); 
       ?></textarea>
     </div>
 
