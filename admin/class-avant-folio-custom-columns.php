@@ -35,7 +35,7 @@ class Avant_Folio_Custom_Columns {
     foreach ($this->cpt_custom_columns as $key => $value) {
       if ( $key === $column ) {
 
-        if ( !$meta_value ) {
+        if ( !$meta_value || !isset($meta_value[$key]) ) {
 
           _e( 'n/a' );  
 
