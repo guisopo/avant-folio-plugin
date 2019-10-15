@@ -11,7 +11,7 @@ $images = isset( $meta_value['gallery'] ) ? explode(",", $meta_value['gallery'] 
 		<h2 class="af-featured__title">Featured Image:</h2>
 
 		<div class="af-featured__image">
-			<?php the_post_thumbnail( 'medium' ); ?>
+			<?php the_post_thumbnail( 'medium', [ 'id' => get_post_thumbnail_id() ] ); ?>
 		</div>
 
 		<p class="af-featured__description">Select an image from the gallery.</p>
