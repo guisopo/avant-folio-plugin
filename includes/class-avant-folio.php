@@ -84,21 +84,6 @@ class Avant_Folio {
     $this->define_cpt_taxonomies($works_cpt_taxonomies);
 
     // Works Columns
-    $this->define_works_cpt_columns($works_cpt_args['cpt_name']);
-    // Works Metaboxes
-    $this->define_works_cpt_metaboxes($works_cpt_args['cpt_name']);
-  }
-
-  public function define_cpt_taxonomies($cpt_taxonomies) {
-
-    foreach ( $cpt_taxonomies as $cpt_taxonomy ) {
-      $taxonomy = new Avant_Folio_Taxonomies( $cpt_taxonomy );
-      $this->loader->add_action( 'init', $taxonomy, 'register_taxonomy' );
-    }
-  }
-
-  public function define_works_cpt_columns($cpt_name) {
-
     $works_cpt_columns = array(
       'cb'              =>  '',
       'image'           =>  __('Image'),
@@ -117,7 +102,23 @@ class Avant_Folio {
       )
     );
 
-    $class_cpt_custom_columns = new Avant_Folio_Custom_Columns( $cpt_name, $works_cpt_columns, $works_cpt_custom_columnst );
+    $this->define_cpt_columns($works_cpt_args['cpt_name'], $works_cpt_columns, $works_cpt_custom_columnst);
+
+    // Works Metaboxes
+    $this->define_works_cpt_metaboxes($works_cpt_args['cpt_name']);
+  }
+
+  public function define_cpt_taxonomies($cpt_taxonomies) {
+
+    foreach ( $cpt_taxonomies as $cpt_taxonomy ) {
+      $taxonomy = new Avant_Folio_Taxonomies( $cpt_taxonomy );
+      $this->loader->add_action( 'init', $taxonomy, 'register_taxonomy' );
+    }
+  }
+
+  public function define_cpt_columns($cpt_name, $cpt_columns, $cpt_custom_columnst) {
+
+    $class_cpt_custom_columns = new Avant_Folio_Custom_Columns( $cpt_name, $cpt_columns, $cpt_custom_columnst );
 
     $this->loader->add_filter( 'manage_' . $cpt_name . '_posts_columns', $class_cpt_custom_columns, 'add_custom_columns' );
     $this->loader->add_action( 'manage_' . $cpt_name . '_posts_custom_column', $class_cpt_custom_columns, 'manage_custom_columns', 10, 2 );
