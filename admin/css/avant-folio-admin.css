@@ -60,7 +60,8 @@
 
 .cf-box .cf-box__input,
 .cf-box .cf-box__select {
-	height: 2.5em;
+	height: 2.5em !important;
+	flex-grow: 1;
 }
 
 .cf-box .cf-box__textarea {
@@ -147,7 +148,7 @@
 .af-gallery__list-container {
 	margin: 6px 0;
 	background-color: #f7f7f7;
-	padding: 0 20px 20px 20px;
+	padding: 20px 20px 20px 20px;
 }
 
 .af-gallery__list {
