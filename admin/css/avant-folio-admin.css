@@ -6,6 +6,7 @@
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
 	grid-column-gap: 16px;
+	grid-row-gap: 12px;
 }
 
 .cf-column {
