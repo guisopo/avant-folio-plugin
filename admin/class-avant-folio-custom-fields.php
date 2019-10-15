@@ -31,8 +31,8 @@ class Avant_Folio_Custom_Fields {
     require_once plugin_dir_path( dirname( __FILE__ ) )  . 'partials/avant-folio-cf-' . $this->metabox['id'] . '.php';
   }
 
-  public function setPostFormat( $work_type, $gallery ) {
-    
+  public function setPostFormat( $post_id, $work_type, $gallery ) {
+
     $images = explode(",", $gallery );
 
     if ( $work_type != 'Video' && count($images) == 1  ) {
@@ -76,6 +76,7 @@ class Avant_Folio_Custom_Fields {
     /* Get the meta key. */
     $meta_key =  '_' . $this->metabox['meta-key'] . '_key';
 
+    /* Set keys to work type and date completed. */
     $work_type_meta_key      = '_avant_folio_work_type_key';
     $date_completed_meta_key = '_avant_folio_date_completed_key';
   
@@ -83,10 +84,11 @@ class Avant_Folio_Custom_Fields {
     $meta_value = get_post_meta( $post_id, $meta_key, true );
 
     /* If the new meta value does not match the old value, update it. */
-    if ( $new_meta_value && $new_meta_value != $meta_value ) {
+    if ( $new_meta_value != $meta_value ) {
       
       $work_type      = $new_meta_value['work_type'];
       $date_completed = $new_meta_value['date_completed'];
+      $gallery        = $new_meta_value['gallery'] ?? delete_post_thumbnail($post_id);
       
       wp_set_post_terms( $post_id, $work_type, 'work_type' );
       wp_set_post_terms( $post_id, $date_completed, 'date_completed' );
@@ -95,13 +97,12 @@ class Avant_Folio_Custom_Fields {
       update_post_meta( $post_id, $date_completed_meta_key, $date_completed );
 
       update_post_meta( $post_id, $meta_key, $new_meta_value );
+      
+      $this->setPostFormat( $post_id, $work_type, $gallery );
 
-      $this->setPostFormat( $new_meta_value['work_type'], $new_meta_value['gallery'] );
-      
-      
-      set_post_thumbnail( $post_id, $new_meta_value['featured_image']);
+      $this->set_featured_image( $post_id, $new_meta_value['featured_image'], $gallery);
     }
-  
+    
     /* If there is no new meta value but an old value exists, delete it. */
     elseif ( $new_meta_value === '' && $meta_value )
       delete_post_meta( $post_id, $meta_key, $meta_value );
@@ -111,7 +112,7 @@ class Avant_Folio_Custom_Fields {
 
     foreach ($input as $key => $value) {
 
-      if ( $key == 'credits' ) {
+      if ( $key == 'credits' || $key == 'description' ) {
         $input[$key] = sanitize_textarea_field( $value );
       }
 
@@ -123,4 +124,17 @@ class Avant_Folio_Custom_Fields {
     return $input;
   }
 
+  public function set_featured_image( $post_id, $featured_image, $gallery ) {
+
+    $images = explode(",", $gallery );
+    $images_count = count($images);
+
+
+    if( $featured_image && in_array( $featured_image, $images, true) ) {
+      set_post_thumbnail( $post_id,  $featured_image );
+    }
+    else if( $images ) {
+      set_post_thumbnail( $post_id,  $images[0] );
+    }
+  }
 }

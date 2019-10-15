@@ -70,13 +70,7 @@ class Avant_Folio_Gallery {
   }
 
   public function render( $post ) {
-    
-    // wp_nonce_field( basename( __FILE__ ), $this->metabox_nonce );
 
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'partials/avant-folio-gallery.php';
   }
-
-  public function save_images() {
-
-  } 
 }

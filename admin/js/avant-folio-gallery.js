@@ -42,7 +42,6 @@ class avantFolioMediaUploader   {
 
   setInitialState() {
     const initialImages = Array.from(this.galleryList.children);
-    const initialFeaturedImage = this.plugin.querySelector('.wp-post-image');
 
     initialImages.forEach( image => {
       if( image.dataset.id !== undefined ) {
@@ -50,7 +49,10 @@ class avantFolioMediaUploader   {
       }
     });
     
-    this.featuredImageHiddenInput.setAttribute('value', initialFeaturedImage.id);
+    if (this.plugin.querySelector('.wp-post-image')) {
+      const initialFeaturedImage = this.plugin.querySelector('.wp-post-image');
+      this.featuredImageHiddenInput.setAttribute('value', initialFeaturedImage.id);
+    }
 
     this.setInputValue();
     this.addEvents();
