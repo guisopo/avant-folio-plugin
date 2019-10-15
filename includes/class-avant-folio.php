@@ -134,9 +134,9 @@ class Avant_Folio {
     $this->loader->add_action( 'pre_get_posts', $class_cpt_custom_columns, 'set_posts_orderby' );
   }
 
-  public function define_cpt_metaboxes( $work_info_metabox ) {
+  public function define_cpt_metaboxes( $metaboxes_args ) {
 
-    $cpt_metaboxes = new Avant_Folio_Custom_Fields( $work_info_metabox );
+    $cpt_metaboxes = new Avant_Folio_Custom_Fields( $metaboxes_args );
 
     $this->loader->add_action( 'add_meta_boxes', $cpt_metaboxes, 'create_meta_boxes' );
     $this->loader->add_action( 'save_post', $cpt_metaboxes, 'save_post_work_meta', 10, 2 );
