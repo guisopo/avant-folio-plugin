@@ -11,7 +11,7 @@ class Avant_Folio_CPT {
 
     $this->cpt_name     = $cpt_args['cpt_name'];
     $this->cpt_supports = $cpt_args['cpt_supports'];
-    $this->cpt_icon     = $cpt_args['cpt_icon']; 
+    $this->cpt_icon     = $cpt_args['cpt_icon'];
   }
 
   public function set_labels() {

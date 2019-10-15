@@ -46,7 +46,7 @@ class Avant_Folio_Taxonomies {
       'rewrite'           => true,
       'slug'              => $this->taxonomy['id'],
       'show_ui'           => true,
-      'show_admin_column' => true
+      'show_in_rest'      => true
     );
   }
 

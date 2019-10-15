@@ -52,7 +52,6 @@ class Avant_Folio {
   }
 
   private function define_works_cpt() {
-
     // Works CPT
     $works_cpt_args = array(
       'cpt_name'     => 'works',
@@ -65,37 +64,37 @@ class Avant_Folio {
     $this->loader->add_action( 'init', $works_cpt, 'register_cpt' );
     $this->loader->add_filter( 'enter_title_here', $works_cpt, 'set_custom_enter_title' );
 
-    $this->define_works_cpt_taxonomies($works_cpt_args['cpt_name']);
+    // Works Taxonomies
+    $works_cpt_taxonomies = array(
+      array(
+        'cpt'           => $works_cpt_args['cpt_name'],
+        'id'            => 'work_type',
+        'plural_name'   => 'Types of Work',
+        'singular_name' => 'Type of Work',
+        'terms'         => [ 'painting', 'drawing', 'sculpture', 'ceramic', 'photography', 'video', 'performance', 'installation']
+      ),
+      array(
+        'cpt'           => $works_cpt_args['cpt_name'],
+        'id'            => 'date_completed',
+        'plural_name'   => 'Dates',
+        'singular_name' => 'Date'
+      )
+    );
+    
+    $this->define_cpt_taxonomies($works_cpt_taxonomies);
+
+    // Works Columns
     $this->define_works_cpt_columns($works_cpt_args['cpt_name']);
+    // Works Metaboxes
     $this->define_works_cpt_metaboxes($works_cpt_args['cpt_name']);
   }
 
-  public function define_works_cpt_taxonomies($cpt_name) {
+  public function define_cpt_taxonomies($cpt_taxonomies) {
 
-    // Work Type Taxonomy
-    $work_type_tax_args = array(
-      'cpt'           => $cpt_name,
-      'id'            => 'work_type',
-      'plural_name'   => 'Types of Work',
-      'singular_name' => 'Type of Work',
-      'terms'         => [ 'painting', 'drawing', 'sculpture', 'ceramic', 'photography', 'video', 'performance', 'installation']
-    );
-
-    $work_type_taxonomy = new Avant_Folio_Taxonomies( $work_type_tax_args );
-
-    $this->loader->add_action( 'init', $work_type_taxonomy, 'register_taxonomy' );
-
-    // Date Completed Taxonomy
-    $date_completed_tax_args = array(
-      'cpt'           => $cpt_name,
-      'id'            => 'date_completed',
-      'plural_name'   => 'Dates',
-      'singular_name' => 'Date'
-    );
-
-    $date_completed_taxonomy = new Avant_Folio_Taxonomies( $date_completed_tax_args );
-
-    $this->loader->add_action( 'init', $date_completed_taxonomy, 'register_taxonomy' );
+    foreach ( $cpt_taxonomies as $cpt_taxonomy ) {
+      $taxonomy = new Avant_Folio_Taxonomies( $cpt_taxonomy );
+      $this->loader->add_action( 'init', $taxonomy, 'register_taxonomy' );
+    }
   }
 
   public function define_works_cpt_columns($cpt_name) {
