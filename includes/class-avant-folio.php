@@ -104,8 +104,16 @@ class Avant_Folio {
 
     $this->define_cpt_columns($works_cpt_args['cpt_name'], $works_cpt_columns, $works_cpt_custom_columnst);
 
-    // Works Metaboxes
-    $this->define_works_cpt_metaboxes($works_cpt_args['cpt_name']);
+    // Works Metaboxes (Info)
+    $work_info_metabox = array(
+      'id'       => 'work-information',
+      'title'    => esc_html__( 'Work Details', 'string' ),
+      'callback' => 'render_cf',
+      'screen'   => $works_cpt_args['cpt_name'],
+      'meta-key' => 'avant_folio_work_info',
+    );
+
+    $this->define_cpt_metaboxes( $work_info_metabox);
   }
 
   public function define_cpt_taxonomies($cpt_taxonomies) {
@@ -126,20 +134,12 @@ class Avant_Folio {
     $this->loader->add_action( 'pre_get_posts', $class_cpt_custom_columns, 'set_posts_orderby' );
   }
 
-  public function define_works_cpt_metaboxes( $cpt_name ) {
+  public function define_cpt_metaboxes( $work_info_metabox ) {
 
-    // Work Information
-    $work_info_metabox = array(
-      'id'       => 'work-information',
-      'title'    => esc_html__( 'Work Details', 'string' ),
-      'callback' => 'render_cf',
-      'screen'   => $cpt_name,
-      'meta-key' => 'avant_folio_work_info',
-    );
+    $cpt_metaboxes = new Avant_Folio_Custom_Fields( $work_info_metabox );
 
-    $work_info_CF = new Avant_Folio_Custom_Fields( $work_info_metabox );
-    $this->loader->add_action( 'add_meta_boxes', $work_info_CF, 'create_meta_boxes' );
-    $this->loader->add_action( 'save_post', $work_info_CF, 'save_post_work_meta', 10, 2 );
+    $this->loader->add_action( 'add_meta_boxes', $cpt_metaboxes, 'create_meta_boxes' );
+    $this->loader->add_action( 'save_post', $cpt_metaboxes, 'save_post_work_meta', 10, 2 );
   }
 
   public function define_exhibitions_cpt() {
