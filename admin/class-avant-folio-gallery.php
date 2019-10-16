@@ -73,4 +73,8 @@ class Avant_Folio_Gallery {
 
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'partials/avant-folio-gallery.php';
   }
+
+  // public function save_gallery() {
+    
+  // }
 }
