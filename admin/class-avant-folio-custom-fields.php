@@ -86,8 +86,8 @@ class Avant_Folio_Custom_Fields {
     /* If the new meta value does not match the old value, update it. */
     if ( $new_meta_value != $meta_value ) {
       
-      $work_type      = $new_meta_value['work_type'];
-      $date_completed = $new_meta_value['date_completed'];
+      $work_type      = $new_meta_value['work_type'] ?? '';
+      $date_completed = $new_meta_value['date_completed'] ?? '';
       $gallery        = $new_meta_value['gallery'] ?? delete_post_thumbnail($post_id);
       
       wp_set_post_terms( $post_id, $work_type, 'work_type' );
