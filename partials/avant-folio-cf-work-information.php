@@ -17,7 +17,7 @@
       <!-- Work Type -->
       <div class="cf-box cf-box--xl">
         <label class="post-attributes-label cf-box__label" for="avant_folio_work_info_work_type">Category:</label>
-        <select id="work_type" class="cf-box__select" name="avant_folio_work_info[work_type]">
+        <select id="work_type" class="cf-box__select" name="avant_folio_work_info[work_type]" required>
           <option value="" disabled selected>Select work type</option>
           <?php 
             foreach( $work_types_taxonomies as $term ){
@@ -34,6 +34,7 @@
         <input
           class="cf-box__input"
           type="text"
+          required
           name="avant_folio_work_info[date_completed]"
           placeholder="<?php echo date('Y') ?>"
           maxlength="4"
