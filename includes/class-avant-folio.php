@@ -17,7 +17,6 @@ class Avant_Folio {
     $this->set_sketches_cpt();
     $this->set_texts_cpt();
     $this->set_exhibitions_cpt();
-    $this->set_gallery();
   }
 
   private function load_dependencies() {
@@ -115,6 +114,9 @@ class Avant_Folio {
     );
 
     $this->set_cpt_metaboxes( $work_info_metabox);
+
+    // Works Gallery
+    $this->set_gallery();
   }
 
   public function set_cpt_taxonomies($cpt_taxonomies) {
@@ -189,6 +191,22 @@ class Avant_Folio {
 
     $this->loader->add_action( 'init', $sketches_cpt, 'register_cpt' );
     $this->loader->add_filter( 'enter_title_here', $sketches_cpt, 'set_custom_enter_title' );
+
+    // Sketches Columns
+    $sketches_cpt_columns = array(
+      'cb'              =>  '',
+      'image'           =>  __('Image'),
+      // 'title'           =>  __('Title'),
+      'date'            =>  __('Date Published'),
+    );
+
+    $sketches_cpt_custom_columnst = array(
+      'date_completed' => array(
+        'sort_id' => 'date'
+      )
+    );
+
+    $this->set_cpt_columns($sketches_cpt_args['cpt_name'], $sketches_cpt_columns, $sketches_cpt_custom_columnst);
   }
 
   public function set_gallery() {
