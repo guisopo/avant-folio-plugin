@@ -57,7 +57,7 @@ class Avant_Folio_CPT {
     register_post_type( $this->cpt_name, $this->cpt_arguments );
   }
 
-  public function set_custom_enter_title( $input ) {
+  public function set_custom_enter_title() {
     $screen = get_current_screen();
 
     if ( !$this->cpt_name == $screen->post_type ) {
