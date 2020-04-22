@@ -116,6 +116,7 @@ class Avant_Folio {
     $work_gallery = array(
       'id'  => 'Works Gallery',
       'title' => 'Works Gallery',
+      'cpt' => $works_cpt_args['cpt_name'],
       'context' => 'advanced',
       'priority'  => 'high'
     );
@@ -186,6 +187,16 @@ class Avant_Folio {
 
     $this->loader->add_action( 'init', $texts_cpt, 'register_cpt' );
     $this->loader->add_filter( 'enter_title_here', $texts_cpt, 'set_custom_enter_title' );
+
+     // Works Gallery
+     $work_gallery = array(
+      'id'  => 'Text Gallery',
+      'title' => 'Text Gallery',
+      'cpt' => $texts_cpt_args['cpt_name'],
+      'context' => 'advanced',
+      'priority'  => 'high'
+    );
+    $this->set_gallery($work_gallery);
   }
 
   public function set_sketches_cpt() {

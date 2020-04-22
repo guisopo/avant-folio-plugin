@@ -7,11 +7,11 @@ class Avant_Folio_Gallery {
 
   protected $id;
   protected $title;
+  protected $cpt;
   protected $context;
   protected $priority;
 
   public function __construct( $gallery_args ) {
-    // $id = 'Gallery', $title = '', $context = 'advanced', $priority = 'high'
     $this->id = $gallery_args['id'];
 
     if( $gallery_args['title'] == '' ) {
@@ -19,6 +19,8 @@ class Avant_Folio_Gallery {
     } else {
       $this->title = $gallery_args['title'];
     } 
+
+    $this->cpt = $gallery_args['cpt'];
 
     $available_context = array(
       'advanced',
@@ -49,7 +51,7 @@ class Avant_Folio_Gallery {
       $this->id,
       $this->title,
       array( $this, 'render' ),
-      'works',
+      $this->cpt,
       $this->context,
       $this->priority
     );
