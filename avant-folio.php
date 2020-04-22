@@ -8,11 +8,20 @@ Author URI: http://github.com/guisopo
 License: GPLv2
 */
 
+if( ! defined( 'ABSPATH' )) {
+  die;
+}
+
 // If something else external from the website is accesing those files ABSPATH is not defined
 defined ( 'ABSPATH' ) or die('You cannot acces this file!');
 
 // If this file is called directly, abort
 if ( ! defined( 'WPINC' ) ){
+  die;
+}
+
+if( ! function_exists( 'add_action' )) {
+  echo 'You cannot acces this file!';
   die;
 }
 
