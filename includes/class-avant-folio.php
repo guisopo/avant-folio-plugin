@@ -90,7 +90,7 @@ class Avant_Folio {
       'date'            =>  __('Date Published'),
     );
 
-    $works_cpt_custom_columnst = array(
+    $works_cpt_custom_columns = array(
       'work_type' => array(
         'sort_id' => 'type'
       ),
@@ -99,7 +99,7 @@ class Avant_Folio {
       )
     );
 
-    $this->set_cpt_columns($works_cpt_args['cpt_name'], $works_cpt_columns, $works_cpt_custom_columnst);
+    $this->set_cpt_columns($works_cpt_args['cpt_name'], $works_cpt_columns, $works_cpt_custom_columns);
 
     // Works Metaboxes (Info)
     $work_info_metabox = array(
