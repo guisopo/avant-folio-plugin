@@ -58,10 +58,7 @@ class Avant_Folio {
       'cpt_icon'     => 'dashicons-visibility'
     );
 
-    $works_cpt = new Avant_Folio_CPT( $works_cpt_args );
-
-    $this->loader->add_action( 'init', $works_cpt, 'register_cpt' );
-    $this->loader->add_filter( 'enter_title_here', $works_cpt, 'set_custom_enter_title' );
+    $this->set_cpt($works_cpt_args);
 
     // Works Taxonomies
     $works_cpt_taxonomies = array(
@@ -116,7 +113,21 @@ class Avant_Folio {
     $this->set_cpt_metaboxes( $work_info_metabox);
 
     // Works Gallery
-    $this->set_gallery();
+    $work_gallery = array(
+      'id'  => 'Works Gallery',
+      'title' => 'Works Gallery',
+      'context' => 'advanced',
+      'priority'  => 'high'
+    );
+    $this->set_gallery($work_gallery);
+  }
+
+  public function set_cpt($cpt_args) {
+    $new_cpt = new Avant_Folio_CPT( $cpt_args );
+
+    $this->loader->add_action( 'init', $new_cpt, 'register_cpt' );
+    $this->loader->add_filter( 'enter_title_here', $new_cpt, 'set_custom_enter_title' );
+
   }
 
   public function set_cpt_taxonomies($cpt_taxonomies) {
@@ -209,9 +220,9 @@ class Avant_Folio {
     $this->set_cpt_columns($sketches_cpt_args['cpt_name'], $sketches_cpt_columns, $sketches_cpt_custom_columnst);
   }
 
-  public function set_gallery() {
+  public function set_gallery($gallery_args) {
     
-    $gallery = new Avant_Folio_Gallery();
+    $gallery = new Avant_Folio_Gallery($gallery_args);
 
     $this->loader->add_action( 'add_meta_boxes', $gallery, 'add_metabox' );
     $this->loader->add_action( 'admin_enqueue_scripts', $gallery, 'enqueue_scripts' );
@@ -219,7 +230,6 @@ class Avant_Folio {
   }
 
   public function run() {
-
     $this->loader->run();
   }
 

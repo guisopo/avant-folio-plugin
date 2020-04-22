@@ -10,14 +10,14 @@ class Avant_Folio_Gallery {
   protected $context;
   protected $priority;
 
-  public function __construct( $id = 'Work Gallery', $title = '', $context = 'advanced', $priority = 'high' ) {
-    
-    $this->id = $id;
+  public function __construct( $gallery_args ) {
+    // $id = 'Gallery', $title = '', $context = 'advanced', $priority = 'high'
+    $this->id = $gallery_args['id'];
 
-    if( $title == '' ) {
+    if( $gallery_args['title'] == '' ) {
       $this->title = ucfirst($this->id);
     } else {
-      $this->title = $title;
+      $this->title = $gallery_args['title'];
     } 
 
     $available_context = array(
@@ -26,8 +26,8 @@ class Avant_Folio_Gallery {
       'normal'
     );
 
-    if( in_array( $context, $available_context ) ) {
-      $this->context = $context;
+    if( in_array( $gallery_args['context'], $available_context ) ) {
+      $this->context = $gallery_args['context'];
     }
 
     $available_priority = array(
@@ -36,8 +36,8 @@ class Avant_Folio_Gallery {
       'normal'
     );
 
-    if( in_array( $priority, $available_priority ) ) {
-      $this->priority = $priority;
+    if( in_array( $gallery_args['priority'], $available_priority ) ) {
+      $this->priority = $gallery_args['priority'];
     }
 
     $this->version = '0.1.0';
