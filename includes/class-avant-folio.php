@@ -218,7 +218,6 @@ class Avant_Folio {
     $sketches_cpt_columns = array(
       'cb'              =>  '',
       'image'           =>  __('Image'),
-      // 'title'           =>  __('Title'),
       'date'            =>  __('Date Published'),
     );
 
