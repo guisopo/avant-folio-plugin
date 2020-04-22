@@ -2,6 +2,8 @@
 class Avant_Folio_Admin {
   
   protected $version;
+  private $adminPages;
+  private $subMenuPages;
 
   public function __construct($version) {
 
@@ -64,7 +66,7 @@ class Avant_Folio_Admin {
     $this->addSubMenuPages();
   }
 
-  public function addSubMenuPages() {
+  private function addSubMenuPages() {
 
     foreach ( $this->subMenuPages as $subpage) {
       add_submenu_page(

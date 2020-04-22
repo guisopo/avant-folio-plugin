@@ -37,7 +37,7 @@ class Avant_Folio {
 
   private function set_admin_hooks() {
 
-    $admin = new Avant_Folio_Admin($this->version);
+    $admin = new Avant_Folio_Admin($this->get_version());
     $this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_styles' );
     $this->loader->add_action( 'admin_menu', $admin, 'add_menu_pages' );
     $this->loader->add_action( 'admin_menu', $admin, 'remove_menu_pages' );
@@ -224,7 +224,6 @@ class Avant_Folio {
   }
 
   public function get_version() {
-
     return $this->version;
   }
 }
