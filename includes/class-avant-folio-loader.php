@@ -1,8 +1,13 @@
 <?php
 class Avant_Folio_Loader {
   
-  protected $actions = array();
-  protected $filters = array();
+  protected $actions;
+  protected $filters;
+
+  public function __construct() {
+    $this->actions = array();
+    $this->filter = array();
+  }
 
   public function add_action( $hook, $component, $callback, $priority = null, $arguments = null) {
     if( !$priority || !$arguments ) {
