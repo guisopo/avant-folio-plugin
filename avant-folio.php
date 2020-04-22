@@ -32,12 +32,14 @@ if( ! function_exists( 'add_action' )) {
 require_once( plugin_dir_path( __FILE__ ) . 'includes/class-avant-folio.php' );
 
 /**
- * Begin excution of plugin
+ * Begin execution of plugin
  */
 function run_avant_folio() {
   $plugin = new Avant_Folio();
   $plugin->run();
 }
+
+// Call the above function to begin execution of the plugin.
 run_avant_folio();
 
 /**
