@@ -14,7 +14,7 @@ class Avant_Folio_Taxonomies {
     $this->set_arguments();
   }
 
-  public function set_labels() {
+  protected function set_labels() {
     
     $plural_name   = $this->taxonomy['plural_name'];
     $singular_name = $this->taxonomy['singular_name'];
@@ -38,7 +38,7 @@ class Avant_Folio_Taxonomies {
     );
   }
 
-  public function set_arguments() {
+  protected function set_arguments() {
 
     $this->arguments = array(
       'labels'            => $this->labels,
@@ -62,7 +62,7 @@ class Avant_Folio_Taxonomies {
     $this->populate_taxonomies();
   }
 
-  public function populate_taxonomies() {
+  protected function populate_taxonomies() {
 
     foreach ($this->taxonomy['terms'] as $term) {
       wp_insert_term(

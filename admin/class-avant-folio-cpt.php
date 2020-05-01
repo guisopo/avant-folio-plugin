@@ -14,7 +14,7 @@ class Avant_Folio_CPT {
     $this->cpt_icon     = $cpt_args['cpt_icon'];
   }
 
-  public function set_labels() {
+  protected function set_labels() {
 
     $cpt_name     = ucfirst($this->cpt_name);
     $cpt_singular = rtrim($cpt_name,'s');
@@ -35,7 +35,7 @@ class Avant_Folio_CPT {
     );
   }
 
-  public function set_cpt_arguments() {
+  protected function set_cpt_arguments() {
     
     $this->cpt_arguments = array(
       'public'        => true,

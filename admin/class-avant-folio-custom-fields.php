@@ -31,7 +31,7 @@ class Avant_Folio_Custom_Fields {
     require_once plugin_dir_path( dirname( __FILE__ ) )  . 'partials/avant-folio-cf-' . $this->metabox['id'] . '.php';
   }
 
-  public function setPostFormat( $post_id, $work_type, $gallery ) {
+  protected function setPostFormat( $post_id, $work_type, $gallery ) {
 
     $images = explode(",", $gallery );
 
@@ -108,7 +108,7 @@ class Avant_Folio_Custom_Fields {
       delete_post_meta( $post_id, $meta_key, $meta_value );
   }
   
-  public function sanitize_fields( $input ) {
+  protected function sanitize_fields( $input ) {
 
     foreach ($input as $key => $value) {
 
@@ -124,7 +124,7 @@ class Avant_Folio_Custom_Fields {
     return $input;
   }
 
-  public function set_featured_image( $post_id, $featured_image, $gallery ) {
+  protected function set_featured_image( $post_id, $featured_image, $gallery ) {
 
     $images = explode(",", $gallery );
     $images_count = count($images);

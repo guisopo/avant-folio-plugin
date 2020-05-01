@@ -30,7 +30,7 @@ class Avant_Folio {
     flush_rewrite_rules();
   }
 
-  private function load_dependencies() {
+  protected function load_dependencies() {
 
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-admin.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-admin-settings.php';
@@ -46,7 +46,7 @@ class Avant_Folio {
     $this->loader = new Avant_Folio_Loader();
   }
 
-  private function set_admin_hooks() {
+  protected function set_admin_hooks() {
 
     $admin = new Avant_Folio_Admin($this->get_version());
     $this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_styles' );
@@ -61,7 +61,7 @@ class Avant_Folio {
     $this->loader->add_action( 'after_setup_theme', $theme, 'set_image_sizes');
   }
 
-  private function set_works_cpt() {
+  protected function set_works_cpt() {
     // Works CPT
     $works_cpt_args = array(
       'cpt_name'     => 'works',
@@ -134,7 +134,7 @@ class Avant_Folio {
     $this->set_gallery($work_gallery);
   }
 
-  public function set_cpt(array $cpt_args) {
+  protected function set_cpt(array $cpt_args) {
     $new_cpt = new Avant_Folio_CPT( $cpt_args );
 
     $this->loader->add_action( 'init', $new_cpt, 'register_cpt' );
@@ -142,7 +142,7 @@ class Avant_Folio {
 
   }
 
-  public function set_cpt_taxonomies(array $cpt_taxonomies) {
+  protected function set_cpt_taxonomies(array $cpt_taxonomies) {
 
     foreach ( $cpt_taxonomies as $cpt_taxonomy ) {
       $taxonomy = new Avant_Folio_Taxonomies( $cpt_taxonomy );
@@ -150,7 +150,7 @@ class Avant_Folio {
     }
   }
 
-  public function set_cpt_columns(string $cpt_name, array $cpt_columns, array $cpt_custom_columnst) {
+  protected function set_cpt_columns(string $cpt_name, array $cpt_columns, array $cpt_custom_columnst) {
 
     $class_cpt_custom_columns = new Avant_Folio_Custom_Columns( $cpt_name, $cpt_columns, $cpt_custom_columnst );
 
@@ -160,7 +160,7 @@ class Avant_Folio {
     $this->loader->add_action( 'pre_get_posts', $class_cpt_custom_columns, 'set_posts_orderby' );
   }
 
-  public function set_cpt_metaboxes( array $metaboxes_args ) {
+  protected function set_cpt_metaboxes( array $metaboxes_args ) {
 
     $cpt_metaboxes = new Avant_Folio_Custom_Fields( $metaboxes_args );
 
@@ -168,7 +168,7 @@ class Avant_Folio {
     $this->loader->add_action( 'save_post', $cpt_metaboxes, 'save_post_work_meta', 10, 2 );
   }
 
-  public function set_exhibitions_cpt() {
+  protected function set_exhibitions_cpt() {
 
     // Exhibition CPT
     $exhibitions_cpt_args = array(
@@ -184,7 +184,7 @@ class Avant_Folio {
     $this->loader->add_filter( 'enter_title_here', $exhibitions_cpt, 'set_custom_enter_title' );
   }
 
-  public function set_texts_cpt() {
+  protected function set_texts_cpt() {
 
     // Text CPT
     $texts_cpt_args = array(
@@ -200,7 +200,7 @@ class Avant_Folio {
     $this->loader->add_filter( 'enter_title_here', $texts_cpt, 'set_custom_enter_title' );
   }
 
-  public function set_sketches_cpt() {
+  protected function set_sketches_cpt() {
 
     // Sketches CPT
     $sketches_cpt_args = array(
@@ -231,7 +231,7 @@ class Avant_Folio {
     $this->set_cpt_columns($sketches_cpt_args['cpt_name'], $sketches_cpt_columns, $sketches_cpt_custom_columnst);
   }
 
-  public function set_gallery(array $gallery_args) {
+  protected function set_gallery(array $gallery_args) {
     
     $gallery = new Avant_Folio_Gallery($gallery_args);
 
@@ -244,7 +244,7 @@ class Avant_Folio {
     $this->loader->run();
   }
 
-  public function get_version() {
+  protected function get_version() {
     return $this->version;
   }
 }
