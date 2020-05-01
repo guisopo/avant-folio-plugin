@@ -53,26 +53,7 @@ require_once( plugin_dir_path( __FILE__ ) . 'includes/class-avant-folio.php' );
 $plugin = new Avant_Folio();
 $plugin->run();
 
-// Call the above function to begin execution of the plugin.
-// run_avant_folio();
-
 // Activation
 register_activation_hook( __FILE__, array($plugin, 'activate') );
 // Deactivation
 register_deactivation_hook( __FILE__, array($plugin, 'deactivate') );
-
-
-// class AvantFolio_Plugin
-// {
-//   function activate() {
-
-//   }
-
-//   function deactivate() {
-
-//   }
-
-//   function uninstall() {
-
-//   }
-// }
