@@ -1,0 +1,16 @@
+{
+    "name": "guillermosolerpoquet/avant-folio",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "guisopo",
+            "email": "solerguillermo@hotmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {"Includes\\": "./includes"}
+    }
+}

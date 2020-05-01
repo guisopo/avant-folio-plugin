@@ -3,11 +3,13 @@
 class Avant_Folio {
   
   protected $loader;
+  protected $plugin;
   protected $plugin_slug;
   protected $version;
 
   public function __construct() {
 
+    $this->plugin = plugin_dir_path( dirname( __FILE__ ) );
     $this->plugin_slug = 'avant_folio';
     $this->version     = '0.1.0';
 
@@ -31,18 +33,18 @@ class Avant_Folio {
   }
 
   protected function load_dependencies() {
+    
+    require_once $this->plugin . 'admin/class-avant-folio-admin.php';
+    require_once $this->plugin . 'admin/class-avant-folio-admin-settings.php';
+    require_once $this->plugin . 'admin/class-avant-folio-cpt.php';
+    require_once $this->plugin . 'admin/class-avant-folio-taxonomies.php';
+    require_once $this->plugin . 'admin/class-avant-folio-custom-fields.php';
+    require_once $this->plugin . 'admin/class-avant-folio-custom-columns.php';
+    require_once $this->plugin . 'admin/class-avant-folio-gallery.php';
 
-    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-admin.php';
-    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-admin-settings.php';
-    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-cpt.php';
-    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-taxonomies.php';
-    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-custom-fields.php';
-    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-custom-columns.php';
-    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-avant-folio-gallery.php';
+    require_once $this->plugin . 'theme/class-avant-folio-theme.php';
 
-    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'theme/class-avant-folio-theme.php';
-
-    require_once plugin_dir_path( __FILE__ ) . 'class-avant-folio-loader.php';
+    require_once $this->plugin . 'admin/class-avant-folio-loader.php';
     $this->loader = new Avant_Folio_Loader();
   }
 
