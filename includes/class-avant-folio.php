@@ -123,7 +123,7 @@ class Avant_Folio {
     $this->set_gallery($work_gallery);
   }
 
-  public function set_cpt($cpt_args) {
+  public function set_cpt(array $cpt_args) {
     $new_cpt = new Avant_Folio_CPT( $cpt_args );
 
     $this->loader->add_action( 'init', $new_cpt, 'register_cpt' );
@@ -131,7 +131,7 @@ class Avant_Folio {
 
   }
 
-  public function set_cpt_taxonomies($cpt_taxonomies) {
+  public function set_cpt_taxonomies(array $cpt_taxonomies) {
 
     foreach ( $cpt_taxonomies as $cpt_taxonomy ) {
       $taxonomy = new Avant_Folio_Taxonomies( $cpt_taxonomy );
@@ -139,7 +139,7 @@ class Avant_Folio {
     }
   }
 
-  public function set_cpt_columns($cpt_name, $cpt_columns, $cpt_custom_columnst) {
+  public function set_cpt_columns(string $cpt_name, array $cpt_columns, array $cpt_custom_columnst) {
 
     $class_cpt_custom_columns = new Avant_Folio_Custom_Columns( $cpt_name, $cpt_columns, $cpt_custom_columnst );
 
@@ -149,7 +149,7 @@ class Avant_Folio {
     $this->loader->add_action( 'pre_get_posts', $class_cpt_custom_columns, 'set_posts_orderby' );
   }
 
-  public function set_cpt_metaboxes( $metaboxes_args ) {
+  public function set_cpt_metaboxes( array $metaboxes_args ) {
 
     $cpt_metaboxes = new Avant_Folio_Custom_Fields( $metaboxes_args );
 
@@ -230,7 +230,7 @@ class Avant_Folio {
     $this->set_cpt_columns($sketches_cpt_args['cpt_name'], $sketches_cpt_columns, $sketches_cpt_custom_columnst);
   }
 
-  public function set_gallery($gallery_args) {
+  public function set_gallery(array $gallery_args) {
     
     $gallery = new Avant_Folio_Gallery($gallery_args);
 
