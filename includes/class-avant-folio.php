@@ -13,10 +13,21 @@ class Avant_Folio {
 
     $this->load_dependencies();
     $this->set_admin_hooks();
+    $this->activate();
+  }
+
+  public function activate() {
     $this->set_works_cpt();
     $this->set_sketches_cpt();
     $this->set_texts_cpt();
     $this->set_exhibitions_cpt();
+    // Refresh DB in order to read the new information
+    flush_rewrite_rules();
+  }
+
+  public function deactivate() {
+    // Refresh DB
+    flush_rewrite_rules();
   }
 
   private function load_dependencies() {
@@ -187,16 +198,6 @@ class Avant_Folio {
 
     $this->loader->add_action( 'init', $texts_cpt, 'register_cpt' );
     $this->loader->add_filter( 'enter_title_here', $texts_cpt, 'set_custom_enter_title' );
-
-     // Works Gallery
-     $work_gallery = array(
-      'id'  => 'Text Gallery',
-      'title' => 'Text Gallery',
-      'cpt' => $texts_cpt_args['cpt_name'],
-      'context' => 'advanced',
-      'priority'  => 'high'
-    );
-    $this->set_gallery($work_gallery);
   }
 
   public function set_sketches_cpt() {
