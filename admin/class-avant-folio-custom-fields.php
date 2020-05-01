@@ -28,7 +28,7 @@ class Avant_Folio_Custom_Fields {
 
     wp_nonce_field( basename( __FILE__ ), $this->metabox_nonce );
 
-    require_once plugin_dir_path( dirname( __FILE__ ) )  . 'partials/avant-folio-cf-' . $this->metabox['id'] . '.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) )  . 'templates/avant-folio-cf-' . $this->metabox['id'] . '.php';
   }
 
   protected function setPostFormat( $post_id, $work_type, $gallery ) {

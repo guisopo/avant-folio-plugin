@@ -72,6 +72,6 @@ class Avant_Folio_Gallery {
   }
 
   public function render($post) {
-    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'partials/avant-folio-gallery.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'templates/avant-folio-gallery.php';
   }
 }

@@ -88,10 +88,10 @@ class Avant_Folio_Admin {
   }
 
   public function render_user_profile_page() {
-    require_once plugin_dir_path( dirname( __FILE__ ) )  . 'partials/avant-folio-user-profile.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) )  . 'templates/avant-folio-user-profile.php';
   }
 
   public function render_cv_page() {
-    require_once plugin_dir_path( dirname( __FILE__ ) )  . 'partials/avant-folio-cv.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) )  . 'templates/avant-folio-cv.php';
   }
 }
