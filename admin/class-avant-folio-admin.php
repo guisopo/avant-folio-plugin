@@ -46,7 +46,8 @@ class Avant_Folio_Admin {
     wp_enqueue_style(
       'avant-folio-admin', 
       plugin_dir_url(__FILE__) . 'css/avant-folio-admin.css', 
-      array(), $this->version, 
+      array(), 
+      $this->version, 
       false
     );
   }
