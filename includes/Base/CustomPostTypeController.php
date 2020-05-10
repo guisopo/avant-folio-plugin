@@ -18,14 +18,14 @@ class CustomPostTypeController extends BaseController
 
 		if( ! empty( $this->custom_post_types ) ) {
 			add_action( 'init', array( $this, 'registerCpt' ) );
+			add_filter( 'enter_title_here', array( $this, 'setCustomEnterTitle' ) );
 		}
 	}
+	
+	public function setCptLabels( string $cpt_name ) {
+    $cpt_singular = rtrim( $cpt_name,'s' );
 
-	public function setCptLabels() {
-		$cpt_name     = ucfirst($this->cpt_name);
-    $cpt_singular = rtrim($cpt_name,'s');
-
-    $this->cpt_labels = array(
+    $cpt_labels = array(
       'name'               => $cpt_name,
       'singular_name'      => $cpt_singular,
       'add_new'            => 'Add New ' . $cpt_singular . '',
@@ -38,42 +38,62 @@ class CustomPostTypeController extends BaseController
       'not_found'          => 'No ' . $cpt_name . ' found',
       'not_found_in_trash' => 'No ' . $cpt_name . ' found in trash',
       'archives'           => '' . $cpt_name . ' Archives'
-    );
+		);
+		
+		return $cpt_labels;
+	}
+
+	public function setCptArguments( string $cpt_supports, array $cpt_labels, string $cpt_icon ) {
+		$cpt_arguments = array(
+      'public'        => true,
+      'supports'      => $cpt_supports,
+      'labels'        => $cpt_labels,
+      'hierarchical'  => true,
+      'has_archive'   => true,
+      'menu_position' => 5,
+      'show_in_rest'  => true,
+      'menu_icon'     => $cpt_icon
+		);
+		
+		return $cpt_arguments;
 	}
 	
 	public function storeCpt() 
 	{
 		$this->custom_post_types =array(
 			array(
-				'post_type' => 'prueba',
-				'name'			=> 'Pruebas',
-				'singular_name' => 'Prueba',
-				'public' => true,
-				'has_archive' => true
+				'cpt_name'     => 'works',
+				'cpt_supports' => array( 'title', 'thumbnail', 'revisions', 'post-formats' ),
+				'cpt_icon'     => 'dashicons-visibility'
 			),
 			array(
-					'post_type' => 'prueba2',
-					'name'			=> 'Pruebas2',
-					'singular_name' => 'Prueba2',
-					'public' => true,
-					'has_archive' => true
+				'cpt_name'       => 'exhibitions',
+				'cpt_supports'   => array( 'title', 'thumbnail', 'revisions', 'post-formats' ),
+				'cpt_icon'       => 'dashicons-awards'
 			)
 		);
 	}
 
   public function registerCpt()
 	{
-		foreach ($this->custom_post_types as $custom_post_type) {
-			register_post_type( $custom_post_type['post_type'],
-				array(
-					'labels' => array(
-						'name' => $custom_post_type['name'],
-						'singular_name' => $custom_post_type['singular_name']
-					),
-					'public' => $custom_post_type['public'],
-					'has_archive' => $custom_post_type['has_archive'],
-				)
+		foreach ( $this->custom_post_types as $custom_post_type ) {
+
+			$custom_post_type['cpt_labels']			=	$this->setCptLabels( $custom_post_type['cpt_name'] );
+			$custom_post_type['cpt_arguments']	=	$this->setCptArguments( $custom_post_type['cpt_supports'], $custom_post_type['cpt_labels'], $custom_post_type['cpt_icon'] );
+
+			register_post_type( 
+				$custom_post_type['cpt_name'], 
+				$custom_post_type['cpt_arguments']
 			);
 		}
+	}
+
+	public function setCustomEnterTitle() 
+	{
+		$screen = get_current_screen();
+    
+		$title = rtrim( $screen->post_type,'s' );
+		
+    return 'Add title of the new ' . $title . '';
 	}
 }
