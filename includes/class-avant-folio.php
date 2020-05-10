@@ -1,5 +1,8 @@
 <?php
 
+use Includes\Base\Activate;
+use Includes\Base\Deactivate;
+
 class Avant_Folio {
   
   protected $loader;
@@ -15,21 +18,24 @@ class Avant_Folio {
 
     $this->load_dependencies();
     $this->set_admin_hooks();
-    $this->activate();
+    $this->register_CPTS();
   }
 
-  public function activate() {
+  public function register_CPTS() {
     $this->set_works_cpt();
     $this->set_sketches_cpt();
     $this->set_texts_cpt();
     $this->set_exhibitions_cpt();
-    // Refresh DB in order to read the new information
-    flush_rewrite_rules();
+  }
+
+  public function activate() {
+    // Refresh DB
+    Activate::activate();
   }
 
   public function deactivate() {
     // Refresh DB
-    flush_rewrite_rules();
+    Deactivate::deactivate();
   }
 
   protected function load_dependencies() {

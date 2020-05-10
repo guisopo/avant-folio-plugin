@@ -30,6 +30,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // If something else external from the website is accesing those files ABSPATH is not defined
 defined ( 'ABSPATH' ) or die('You cannot acces this file!');
 
+// Require once the Composer Autoload
+if( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
+  require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+}
+
 // If this file is called directly, abort
 if ( ! defined( 'WPINC' ) ){
   die;
@@ -43,17 +48,30 @@ if( ! function_exists( 'add_action' )) {
 /**
  * Include core class for executing the plugin
  */
-
 require_once( plugin_dir_path( __FILE__ ) . 'includes/class-avant-folio.php' );
 
 /**
- * Begin execution of plugin
+ * Code that runs during plugin activation
  */
+function activate_avant_folio() {
+  Includes\Base\Activate::activate();
+}
+register_activation_hook( __FILE__, 'activate_avant_folio');
 
-$plugin = new Avant_Folio();
-$plugin->run();
+/**
+ * Code that runs during plugin deactivation
+ */
+function deactivate_avant_folio() {
+  Includes\Base\Deactivate::deactivate();
+}
+register_deactivation_hook( __FILE__, 'deactivate_avant_folio');
 
-// Activation
-register_activation_hook( __FILE__, array($plugin, 'activate') );
-// Deactivation
-register_deactivation_hook( __FILE__, array($plugin, 'deactivate') );
+/**
+ * Initialize all the core classes of the plugin
+ */
+if( class_exists( 'Includes\\Init' ) ) {
+  Includes\Init::register_services();
+}
+
+// $plugin = new Avant_Folio();
+// $plugin->run();
