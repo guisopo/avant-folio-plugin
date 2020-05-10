@@ -23,7 +23,30 @@ class CustomPostTypeController extends BaseController
 		}
 	}
 	
-	public function setCptLabels( string $cpt_name ) {
+	public function storeCpt() 
+	{
+		$this->custom_post_types =array(
+			array(
+				'cpt_name'     			=> 'works',
+				'cpt_supports' 			=> array( 'title', 'thumbnail', 'revisions', 'post-formats' ),
+				'cpt_icon'     			=> 'dashicons-visibility',
+				'cpt_custom_fields' => array(
+					'id'       => 'work-information',
+					'title'    => esc_html__( 'Work Details', 'string' ),
+					'screen'   => 'works',
+					'meta-key' => 'avant_folio_work_info',
+				)
+			),
+			array(
+				'cpt_name'       => 'exhibitions',
+				'cpt_supports'   => array( 'title', 'thumbnail', 'revisions', 'post-formats' ),
+				'cpt_icon'       => 'dashicons-awards'
+			)
+		);
+	}
+	
+	public function setCptLabels( string $cpt_name ) 
+	{
     $cpt_singular = rtrim( $cpt_name,'s' );
 
     $cpt_labels = array(
@@ -44,7 +67,8 @@ class CustomPostTypeController extends BaseController
 		return $cpt_labels;
 	}
 
-	public function setCptArguments( array $cpt_supports, array $cpt_labels, string $cpt_icon ) {
+	public function setCptArguments( array $cpt_supports, array $cpt_labels, string $cpt_icon ) 
+	{
 		$cpt_arguments = array(
       'public'        => true,
       'supports'      => $cpt_supports,
@@ -57,28 +81,6 @@ class CustomPostTypeController extends BaseController
 		);
 		
 		return $cpt_arguments;
-	}
-	
-	public function storeCpt() 
-	{
-		$this->custom_post_types =array(
-			array(
-				'cpt_name'     => 'works',
-				'cpt_supports' => array( 'title', 'thumbnail', 'revisions', 'post-formats' ),
-				'cpt_icon'     => 'dashicons-visibility',
-				'cpt_custom_fields' => array(
-					'id'       => 'work-information',
-					'title'    => esc_html__( 'Work Details', 'string' ),
-					'screen'   => 'works',
-					'meta-key' => 'avant_folio_work_info',
-				)
-			),
-			array(
-				'cpt_name'       => 'exhibitions',
-				'cpt_supports'   => array( 'title', 'thumbnail', 'revisions', 'post-formats' ),
-				'cpt_icon'       => 'dashicons-awards'
-			)
-		);
 	}
 
   public function registerCpt()

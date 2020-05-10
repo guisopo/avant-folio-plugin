@@ -19,7 +19,7 @@ class CustomFieldsController extends BaseController
     }
   }
 
-  public function setMetabox($metabox) 
+  public function setMetabox( array $metabox ) 
   {
     $this->metabox       = $metabox;
     $this->metabox_nonce = $this->metabox['meta-key'] . '_nonce';
@@ -38,9 +38,9 @@ class CustomFieldsController extends BaseController
     );
   }
 
-  public function renderCustomField($post) 
+  public function renderCustomField( $post ) 
   {
-    wp_nonce_field( basename( __FILE__ ), $this->metabox_nonce );
+    wp_nonce_field( $this->plugin_path, $this->metabox_nonce );
     require_once( $this->plugin_path . 'templates/' . $this->metabox['id'] . '.php' );
   }
 
