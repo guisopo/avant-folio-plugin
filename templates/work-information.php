@@ -4,7 +4,7 @@
   foreach( $meta_value as $key => $value ) {
     ${'work_'.$key} = ( ! empty ( $value ) ) ? $value : '';
   }
-  
+
   $work_types_taxonomies = get_terms( 'work_type', array( 'get' => 'all' ) );
 ?>
 
@@ -86,10 +86,16 @@
         >
         <select id="work_units" class="cf-box__select cf-box__select--s" name="avant_folio_work_info[units]">
           <option value="" disabled selected>Units</option>
-          <option value="mm" <?php isset($work_units) ? selected( $work_units, 'mm') : ''; ?>>mm</option>
-          <option value="cm" <?php isset($work_units) ? selected( $work_units, 'cm') : ''; ?>>cm</option>
-          <option value="m" <?php isset($work_units) ? selected( $work_units, 'm') : ''; ?>>m</option>
-          <option value="none" <?php isset($work_units) ? selected( $work_units, 'none') : ''; ?>>none</option>
+          <?php
+          $units = array( 'mm', 'cm', 'm', 'none' );
+
+          foreach ( $units as $unit ) {
+            ?>
+              <option value=<?php echo($unit) ?> <?php isset($work_units) ? selected( $work_units, $unit) : ''; ?>><?php echo($unit) ?></option>
+            <?php
+          }
+          ?>
+          
         </select>
       </div>
     </div>
