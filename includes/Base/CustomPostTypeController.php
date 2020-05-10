@@ -5,12 +5,13 @@
 
 namespace Includes\Base;
 
-use Includes\Api\SettingsApi;
+use Includes\Base\CustomFieldsController;
 use Includes\Base\BaseController;
 
 class CustomPostTypeController extends BaseController
 {
 	public $custom_post_types = array();
+	public $custom_fields;
 
   public function register() 
   {
@@ -43,7 +44,7 @@ class CustomPostTypeController extends BaseController
 		return $cpt_labels;
 	}
 
-	public function setCptArguments( string $cpt_supports, array $cpt_labels, string $cpt_icon ) {
+	public function setCptArguments( array $cpt_supports, array $cpt_labels, string $cpt_icon ) {
 		$cpt_arguments = array(
       'public'        => true,
       'supports'      => $cpt_supports,
@@ -64,7 +65,13 @@ class CustomPostTypeController extends BaseController
 			array(
 				'cpt_name'     => 'works',
 				'cpt_supports' => array( 'title', 'thumbnail', 'revisions', 'post-formats' ),
-				'cpt_icon'     => 'dashicons-visibility'
+				'cpt_icon'     => 'dashicons-visibility',
+				'cpt_custom_fields' => array(
+					'id'       => 'work-information',
+					'title'    => esc_html__( 'Work Details', 'string' ),
+					'screen'   => 'works',
+					'meta-key' => 'avant_folio_work_info',
+				)
 			),
 			array(
 				'cpt_name'       => 'exhibitions',
@@ -85,13 +92,23 @@ class CustomPostTypeController extends BaseController
 				$custom_post_type['cpt_name'], 
 				$custom_post_type['cpt_arguments']
 			);
+
+			array_key_exists ( 'cpt_custom_fields' , $custom_post_type ) ? $this->createCustomFields($custom_post_type['cpt_custom_fields']) : '';
 		}
+	}
+
+	public function createCustomFields($cpt_custom_fields) 
+	{
+		$custom_fields = new CustomFieldsController();
+
+		$custom_fields
+			->setMetabox($cpt_custom_fields)
+			->register();
 	}
 
 	public function setCustomEnterTitle() 
 	{
 		$screen = get_current_screen();
-    
 		$title = rtrim( $screen->post_type,'s' );
 		
     return 'Add title of the new ' . $title . '';
