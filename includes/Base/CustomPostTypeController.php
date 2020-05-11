@@ -99,7 +99,7 @@ class CustomPostTypeController extends BaseController
 		}
 	}
 
-	public function createCustomFields($cpt_custom_fields) 
+	public function createCustomFields( $cpt_custom_fields ) 
 	{
 		$custom_fields = new CustomFieldsController();
 
