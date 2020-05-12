@@ -1,11 +1,13 @@
 <?php
   $meta_value = ( get_post_meta( $post->ID, '_avant_folio_work_info_key', true ) ) ?: array();
-
+  
   foreach( $meta_value as $key => $value ) {
-    ${'work_'.$key} = ( ! empty ( $value ) ) ? $value : '';
+    ${'work_'.$key} = $value ?: '';
   }
 
   $work_types_taxonomies = get_terms( 'work_type', array( 'get' => 'all' ) );
+
+  settings_errors();
 ?>
 
 <div class="cf-section">

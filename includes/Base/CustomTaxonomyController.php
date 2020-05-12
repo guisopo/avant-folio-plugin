@@ -14,8 +14,6 @@ class CustomTaxonomyController extends BaseController
   
   public function register() 
   {
-    $this->taxonomies_options = array();
-
     $this->addTaxonomyOptions();
     $this->addTaxonomies();
 
