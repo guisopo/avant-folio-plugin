@@ -11,7 +11,7 @@ use Includes\Base\BaseController;
 class CustomPostTypeController extends BaseController
 {
 	public $custom_post_types = array();
-	public $custom_fields;
+	public $custom_fields 		= array();
 
   public function register() 
   {
@@ -32,7 +32,7 @@ class CustomPostTypeController extends BaseController
 				'cpt_icon'     			=> 'dashicons-visibility',
 				'cpt_custom_fields' => array(
 					'id'       => 'work-information',
-					'title'    => esc_html__( 'Work Details', 'string' ),
+					'title'    =>	esc_html__( 'Work Details', 'string' ),
 					'screen'   => 'works',
 					'meta-key' => 'avant_folio_work_info',
 				)
@@ -102,7 +102,7 @@ class CustomPostTypeController extends BaseController
 	public function createCustomFields( $cpt_custom_fields ) 
 	{
 		$custom_fields = new CustomFieldsController();
-
+		
 		$custom_fields
 			->setMetabox($cpt_custom_fields)
 			->register();
@@ -110,8 +110,8 @@ class CustomPostTypeController extends BaseController
 
 	public function setCustomEnterTitle() 
 	{
-		$screen = get_current_screen();
-		$title = rtrim( $screen->post_type,'s' );
+		$screen	= get_current_screen();
+		$title	= rtrim( $screen->post_type,'s' );
 		
     return 'Add title of the new ' . $title . '';
 	}

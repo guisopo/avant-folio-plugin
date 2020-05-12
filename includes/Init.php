@@ -17,7 +17,8 @@ final class Init
       Pages\PortfolioPage::class,
       Pages\CVSubpage::class,
       Base\Enqueue::class,
-      Base\CustomPostTypeController::class
+      Base\CustomPostTypeController::class,
+      Base\CustomTaxonomyController::class
     ];
   }
 
