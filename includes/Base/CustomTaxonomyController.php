@@ -14,6 +14,17 @@ class CustomTaxonomyController extends BaseController
   
   public function register() 
   {
+    $this->taxonomies_options = array();
+
+    $this->addTaxonomyOptions();
+    $this->addTaxonomies();
+
+    if( ! empty($this->taxonomies) ) {
+      add_action( 'init', array( $this, 'registerTaxonomies' ));
+    }
+  }
+
+  public function addTaxonomyOptions( array $taxonomy_option ) {
     $this->taxonomies_options = array(
       array(
         'cpt'           => 'works',
@@ -30,15 +41,9 @@ class CustomTaxonomyController extends BaseController
         'show_ui'       => false
       )
     );
-
-    $this->storeTaxonomies();
-
-    if( ! empty($this->taxonomies) ) {
-      add_action( 'init', array( $this, 'registerTaxonomy' ));
-    }
   }
 
-  public function storeTaxonomies() 
+  public function addTaxonomies() 
   {
     foreach ( $this->taxonomies_options as $option ) {
 
@@ -79,23 +84,21 @@ class CustomTaxonomyController extends BaseController
     return $this;
   }
 
-  public function registerTaxonomy() 
+  public function registerTaxonomies() 
   { 
     foreach ( $this->taxonomies as $taxonomy ) {
       register_taxonomy( $taxonomy['id'], $taxonomy['cpt'], $taxonomy['arguments'] );
 
       if ( isset( $taxonomy['terms'] ) ) {
-        $this->populateTaxonomies( $taxonomy );
+        $this->addTaxonomyTerms( $taxonomy );
       }
     }
   }
 
-  public function populateTaxonomies( array $taxonomy ) 
+  public function addTaxonomyTerms( array $taxonomy ) 
   {
     foreach ($taxonomy['terms'] as $term) {
       wp_insert_term( ucfirst($term), $taxonomy['id'], array( 'slug' => $term ) );
     }
   }
-
-
 }
