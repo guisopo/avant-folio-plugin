@@ -24,7 +24,7 @@ class CustomTaxonomyController extends BaseController
     }
   }
 
-  public function addTaxonomyOptions( array $taxonomy_option ) {
+  public function addTaxonomyOptions() {
     $this->taxonomies_options = array(
       array(
         'cpt'           => 'works',
