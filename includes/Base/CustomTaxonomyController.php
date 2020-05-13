@@ -85,7 +85,11 @@ class CustomTaxonomyController extends BaseController
   public function registerTaxonomies() 
   { 
     foreach ( $this->taxonomies as $taxonomy ) {
-      register_taxonomy( $taxonomy['id'], $taxonomy['cpt'], $taxonomy['arguments'] );
+      register_taxonomy( 
+        $taxonomy['id'],
+        $taxonomy['cpt'],
+        $taxonomy['arguments'] 
+      );
 
       if ( isset( $taxonomy['terms'] ) ) {
         $this->addTaxonomyTerms( $taxonomy );
@@ -96,7 +100,11 @@ class CustomTaxonomyController extends BaseController
   public function addTaxonomyTerms( array $taxonomy ) 
   {
     foreach ($taxonomy['terms'] as $term) {
-      wp_insert_term( ucfirst($term), $taxonomy['id'], array( 'slug' => $term ) );
+      wp_insert_term(
+        ucfirst($term),
+        $taxonomy['id'],
+        array( 'slug' => $term ) 
+      );
     }
   }
 }
