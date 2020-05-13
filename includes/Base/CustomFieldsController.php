@@ -123,17 +123,19 @@ class CustomFieldsController extends BaseController
     $date_completed = $new_meta_value['date_completed'] ?? '';
     // $gallery        = $new_meta_value['gallery'] ?? delete_post_thumbnail( $post_id );
     
-    wp_set_post_terms( $post_id, $work_type, 'work_type' );
-    wp_set_post_terms( $post_id, $date_completed, 'date_completed' );
+    if ( $work_type === '' && $work_type ) {
+      delete_post_meta( $post_id, $work_type_meta_key, $work_type );
+    } else {
+      wp_set_post_terms( $post_id, $work_type, 'work_type' );
+      wp_set_post_terms( $post_id, $date_completed, 'date_completed' );
+    }
 
     update_post_meta( $post_id, $work_type_meta_key, $work_type );
     update_post_meta( $post_id, $date_completed_meta_key, $date_completed );
 
     update_post_meta( $post_id, $meta_key, $new_meta_value );
 
-    if ( $work_type === '' ) {
-      delete_post_meta( $post_id, $work_type_meta_key, $work_type );
-    }
+    
     if ( count($new_meta_value) === 0 ) {
       delete_post_meta( $post_id, $meta_key, $new_meta_value );
     }
