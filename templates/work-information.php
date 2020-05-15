@@ -10,6 +10,12 @@
   settings_errors();
 ?>
 
+<input  
+  type="hidden" 
+  name="avant_folio_work_info[title]" 
+  id="workTitle"
+>
+
 <div class="cf-section">
     
   <div class="cf-column">
@@ -19,24 +25,24 @@
       <!-- Work Type -->
       <div class="cf-box cf-box--xl">
         <label class="post-attributes-label cf-box__label" for="avant_folio_work_info_work_type">Category:</label>
-        <select id="work_type" class="cf-box__select" name="avant_folio_work_info[work_type]" required>
+        <select id="work_type" class="cf-box__select" name="avant_folio_work_info[work_type]" >
           <option value="" disabled selected>Select work type</option>
           <?php 
             foreach( $work_types_taxonomies as $term ){
               $selected = isset($work_work_type) ? selected( $work_work_type, $term->name ) : '';;
               echo '<option value="'. $term->name .'" '. $selected .'>'. $term->name .'</option>';
             }
+            echo '<option value="" '. $selected .'></option>';
           ?>
         </select>
       </div>
-      
       <!-- Work Year -->
       <div class="cf-box cf-box--s">
         <label class="post-attributes-label cf-box__label" for="avant_folio_work_info_date_completed">Year:</label>
         <input
           class="cf-box__input"
           type="text"
-          required
+          
           name="avant_folio_work_info[date_completed]"
           placeholder="<?php echo date('Y') ?>"
           maxlength="4"
