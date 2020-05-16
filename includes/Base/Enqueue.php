@@ -16,5 +16,7 @@ class Enqueue extends BaseController
   function enqueue() {
     wp_enqueue_style( 'avant-folio-admin', $this->plugin_url . 'assets/avant-folio-admin.css' );
     wp_enqueue_script( 'avant-folio-script', $this->plugin_url . 'assets/avant-folio-inputs.js' );
+    wp_enqueue_media();
+    wp_enqueue_script( 'avant-folio-gallery', $this->plugin_url . 'assets/avant-folio-gallery.js' );
   }
 }
