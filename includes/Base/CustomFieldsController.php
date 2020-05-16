@@ -73,7 +73,7 @@ class CustomFieldsController extends BaseController
     $this->saveData( $post_id, $meta_key, $meta_value, $new_meta_value );
   }
 
-  public function checkPostStatus( $post_id ) 
+  public function checkPostStatus( string $post_id ) 
   {
     $is_autosave    = wp_is_post_autosave( $post_id );
     $is_revision    = wp_is_post_revision( $post_id );
@@ -129,14 +129,14 @@ class CustomFieldsController extends BaseController
     update_post_meta( $post_id, $meta_key, $new_meta_value );
 
     //  Set the Post Featured Image
-    $this->setFeaturedImage( $post_id, $new_meta_value['featured_image'], $gallery);
+    $this->setFeaturedImage( $post_id, $new_meta_value['featured_image'] ?? '', $gallery);
 
     //  Set the Post Format
-    $this->setPostFormat( $post_id, $work_type, $gallery );
+    $this->setPostFormat( $post_id, $work_type ?? '', $gallery );
 
   }
 
-  protected function setFeaturedImage( $post_id, $featured_image, $gallery ) 
+  protected function setFeaturedImage( string $post_id, string $featured_image, string $gallery ) 
   {
 
     $images = explode(",", $gallery );
@@ -152,7 +152,7 @@ class CustomFieldsController extends BaseController
     }
   }
 
-  protected function setPostFormat( $post_id, $work_type, $gallery ) 
+  protected function setPostFormat( string $post_id, string $work_type, string $gallery ) 
   {
     $images = explode(",", $gallery );
 
