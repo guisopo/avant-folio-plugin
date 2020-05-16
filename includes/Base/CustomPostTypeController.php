@@ -35,6 +35,13 @@ class CustomPostTypeController extends BaseController
 					'title'    =>	esc_html__( 'Work Details', 'string' ),
 					'screen'   => 'works',
 					'meta-key' => 'avant_folio_work_info',
+				),
+				'cpt_gallery'				=> array(
+					'id'       => 'Works Gallery',
+					'title'    =>	esc_html__( 'Works Gallery', 'string' ),
+					'screen'   => 'works',
+					'context'	 => 'advanced',
+					'priority'  => 'high'
 				)
 			),
 			array(
@@ -96,6 +103,7 @@ class CustomPostTypeController extends BaseController
 			);
 
 			array_key_exists ( 'cpt_custom_fields' , $custom_post_type ) ? $this->createCustomFields($custom_post_type['cpt_custom_fields']) : '';
+			array_key_exists ( 'cpt_gallery' , $custom_post_type ) ? $this->createGallery($custom_post_type['cpt_gallery']) : '';
 		}
 	}
 
@@ -105,6 +113,15 @@ class CustomPostTypeController extends BaseController
 		
 		$custom_fields
 			->setMetabox($cpt_custom_fields)
+			->register();
+	}
+
+	public function createGallery( $cpt_gallery ) 
+	{
+		$gallery = new GalleryController();
+		
+		$gallery
+			->setGallery($cpt_gallery)
 			->register();
 	}
 
