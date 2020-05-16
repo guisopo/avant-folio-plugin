@@ -28,10 +28,9 @@ $images = isset( $meta_value['gallery'] ) ? explode(",", $meta_value['gallery'] 
 			<?php
 			
 				// If there is any ID, create the image for it
+				// Create a LI elememnt
 				if( count( $images ) > 0 && $images[0] != '' ) {
 					foreach ( $images as $attachment_id ) {
-							
-						// Create a LI elememnt
 						$output = '<li aria-label="' . get_the_title( $attachment_id ) . '" data-id="' . $attachment_id . '" class="af-gallery__item">';
 							// Create a container for the image. (Copied from the WP Media Library Modal to use the same styling)
 							$output .= '<div class="af-gallery__image-container">';
@@ -45,7 +44,7 @@ $images = isset( $meta_value['gallery'] ) ? explode(",", $meta_value['gallery'] 
 								// Show Image Button
 								$output .= '<button type="button" class="js-af-button-show_image af-gallery__list-button" tabindex="0"><span class="dashicons dashicons-search af-button-icon"></span><span class="screen-reader-text">Show Image</span></button>';
 								// Add the button to remove this image if wanted (we set the data-gallery to target the correct gallery if there are more than one)
-								$output .= '<button type="button" data-gallery="#' . $this->id . '_avant_folio_gallery" class="js-af-button-remove_image af-gallery__list-button af-gallery__list-button--remove" tabindex="0"><span class="dashicons dashicons-no af-button-icon"></span><span class="screen-reader-text">Remove from Gallery</span></button>';
+								$output .= '<button type="button" class="js-af-button-remove_image af-gallery__list-button af-gallery__list-button--remove" tabindex="0"><span class="dashicons dashicons-no af-button-icon"></span><span class="screen-reader-text">Remove from Gallery</span></button>';
 							$output .= '</div>';
 						$output .= '</li>';
 						echo $output;
