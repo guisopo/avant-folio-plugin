@@ -51,7 +51,7 @@ class GalleryController extends BaseController
     return $this;
   }
 
-  public function addGallery( array $gallery ) 
+  public function addGallery( string $gallery ) 
   {
     add_meta_box(
       $this->gallery['id'],
