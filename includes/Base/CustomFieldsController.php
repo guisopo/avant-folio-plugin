@@ -105,7 +105,8 @@ class CustomFieldsController extends BaseController
     return $input;
   }
 
-  public function saveData( string $post_id, string $meta_key, $meta_value, array $new_meta_value ) {
+  public function saveData( string $post_id, string $meta_key, $meta_value, array $new_meta_value ) 
+  {
     //  If 'gallery' key exist save it to variable, if not delete post thumbnail
     $gallery = $new_meta_value['gallery'] ?? delete_post_thumbnail( $post_id );
 
@@ -132,7 +133,7 @@ class CustomFieldsController extends BaseController
     $this->setFeaturedImage( $post_id, $new_meta_value['featured_image'] ?? '', $gallery);
 
     //  Set the Post Format
-    $this->setPostFormat( $post_id, $work_type ?? '', $gallery );
+    $this->setPostFormat( $post_id, $new_meta_value['work_type'] ?? '', $gallery );
 
   }
 
@@ -140,8 +141,6 @@ class CustomFieldsController extends BaseController
   {
 
     $images = explode(",", $gallery );
-    $images_count = count($images);
-
 
     if( $featured_image && in_array( $featured_image, $images, true) ) 
     {
@@ -154,16 +153,16 @@ class CustomFieldsController extends BaseController
 
   protected function setPostFormat( string $post_id, string $work_type, string $gallery ) 
   {
-    $images = explode(",", $gallery );
+    $images_count = $gallery ? count( explode(",", $gallery ) ) : null;
 
-    if ( $work_type != 'Video' && count($images) == 1  ) {
+    if ( $work_type === 'Video' ) {
+      set_post_format($post_id, 'video');
+    }
+    else if ( $work_type != 'Video' && $images_count === 1  ) {
       set_post_format($post_id, 'image');
     } 
-    else if ( $work_type != 'Video' && count($images) > 1 ) {
+    else if ( $work_type != 'Video' && $images_count > 1 ) {
       set_post_format($post_id, 'gallery');
-    } 
-    else if ( $work_type == 'Video' ) {
-      set_post_format($post_id, 'video');
     }  
     else {
       set_post_format($post_id, 'standard');
