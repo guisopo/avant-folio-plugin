@@ -32,7 +32,6 @@
               $selected = isset($work_work_type) ? selected( $work_work_type, $term->name ) : '';;
               echo '<option value="'. $term->name .'" '. $selected .'>'. $term->name .'</option>';
             }
-            echo '<option value="" '. $selected .'></option>';
           ?>
         </select>
       </div>
