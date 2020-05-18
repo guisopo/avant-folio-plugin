@@ -15,7 +15,6 @@ class CustomPostTypeController extends BaseController
 
   public function register() 
   {
-		$this->storeCpt();
 
 		if( ! empty( $this->custom_post_types ) ) {
 			add_action( 'init', array( $this, 'registerCpt' ) );
@@ -23,33 +22,11 @@ class CustomPostTypeController extends BaseController
 		}
 	}
 	
-	public function storeCpt() 
+	public function storeCpt( $cptData ) 
 	{
-		$this->custom_post_types =array(
-			array(
-				'cpt_name'     			=> 'works',
-				'cpt_supports' 			=> array( 'title', 'thumbnail', 'revisions', 'post-formats' ),
-				'cpt_icon'     			=> 'dashicons-visibility',
-				'cpt_custom_fields' => array(
-					'id'       => 'work-information',
-					'title'    =>	esc_html__( 'Work Details', 'string' ),
-					'screen'   => 'works',
-					'meta-key' => 'avant_folio_work_info',
-				),
-				'cpt_gallery'				=> array(
-					'id'       => 'Works Gallery',
-					'title'    =>	esc_html__( 'Works Gallery', 'string' ),
-					'screen'   => 'works',
-					'context'	 => 'advanced',
-					'priority'  => 'high'
-				)
-			),
-			array(
-				'cpt_name'       => 'exhibitions',
-				'cpt_supports'   => array( 'title', 'thumbnail', 'revisions', 'post-formats' ),
-				'cpt_icon'       => 'dashicons-awards'
-			)
-		);
+		$this->custom_post_types = $cptData;
+
+		return $this;
 	}
 	
 	public function setCptLabels( string $cpt_name ) 
