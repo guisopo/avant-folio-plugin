@@ -117,9 +117,7 @@
 	position: relative;
 	line-height: 0;
 	background-color: #f1f1f1;
-	max-width:100%;
-	min-height:225px;
-	min-width: 199px;
+	padding: 4px;
 }
 
 .af-featured__image svg {
@@ -132,7 +130,9 @@
 
 .af-featured__image img {
 	max-width: 100%;
-	height: auto;
+	height: 100%;
+	min-height: inherit;
+	object-fit: cover;
 }
 
 .af-featured__image-placeholder {
