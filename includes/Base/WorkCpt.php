@@ -8,9 +8,9 @@ namespace Includes\Base;
 use Includes\Api\CustomPostType;
 use Includes\Api\CustomField;
 use Includes\Api\ImageGallery;
-use Includes\Api\BaseController;
+use Includes\Api\CustomTaxonomy;
 
-class WorkCpt extends BaseController 
+class WorkCpt 
 {
   public $cpt = array();
   public $cpt_name;
@@ -26,21 +26,22 @@ class WorkCpt extends BaseController
     $this->gallery_title = 'Work Gallery';
 
     $this->store_cpt_data();
-    $this->create_cpt();
-    $this->create_custom_fields();
-    $this->create_image_gallery();
+
+    isset( $this->cpt['arguments'] ) ? $this->create_cpt() : '';
   }
 
   public function store_cpt_data() 
   {
-    $this->add_cpt_arguments()
-         ->add_cpt_custom_fields()
-         ->add_cpt_image_gallery();
+    $this
+      ->add_cpt_arguments()
+      ->add_cpt_custom_fields()
+      ->add_cpt_image_gallery()
+      ->add_cpt_taxonomies();
   }
 
   public function add_cpt_arguments() 
   {
-    $this->cpt['cpt_arguments'] = array(
+    $this->cpt['arguments'] = array(
       'cpt_name'      => $this->cpt_name,
       'cpt_supports'  => array( 'title', 'thumbnail', 'revisions', 'post-formats' ),
       'cpt_icon'      => 'dashicons-visibility',
@@ -49,8 +50,9 @@ class WorkCpt extends BaseController
     return $this;
   }
 
-  public function add_cpt_custom_fields() {
-    $this->cpt['cpt_custom_fields'] = array(
+  public function add_cpt_custom_fields() 
+  {
+    $this->cpt['custom_fields'] = array(
       'id'       => $this->custom_field_id,
       'title'    =>	esc_html__( $this->custom_field_title, 'string' ),
       'screen'   => $this->cpt_name,
@@ -60,8 +62,9 @@ class WorkCpt extends BaseController
     return $this;
   }
 
-  public function add_cpt_image_gallery() {
-    $this->cpt['cpt_image_gallery'] = array(
+  public function add_cpt_image_gallery() 
+  {
+    $this->cpt['image_gallery'] = array(
       'id'       => $this->gallery_title,
       'title'    =>	esc_html__( $this->gallery_title, 'string' ),
       'screen'   => $this->cpt_name,
@@ -72,27 +75,63 @@ class WorkCpt extends BaseController
     return $this;
   }
 
-  public function create_cpt() {
+  public function add_cpt_taxonomies() 
+  {
+    $this->cpt['taxonomies'] = array(
+      array(
+        'cpt'           => strtolower( $this->cpt_name ),
+        'id'            => 'work_type',
+        'plural_name'   => 'Types of Work',
+        'singular_name' => 'Type of Work',
+        'terms'         => [ 'painting', 'drawing', 'sculpture', 'ceramic', 'photography', 'collage', 'video', 'performance', 'installation', '3D Art']
+      ),
+      array(
+        'cpt'           => strtolower( $this->cpt_name ),
+        'id'            => 'date_completed',
+        'plural_name'   => 'Dates',
+        'singular_name' => 'Date',
+        'show_ui'       => false
+      )
+    );
+  }
+
+  public function create_cpt() 
+  {
     $custom_post_type = new CustomPostType();
 
     $custom_post_type
-      ->storeCpt( $this->cpt['cpt_arguments'] )
+      ->store_cpt( $this->cpt['arguments'] )
       ->register();
+
+    isset( $this->cpt['custom_fields'] ) ? $this->create_custom_fields() : '';
+    isset( $this->cpt['image_gallery'] ) ? $this->create_image_gallery() : '';
+    isset( $this->cpt['taxonomies'] ) ? $this->create_taxonomies() : '';
   }
 
-  public function create_custom_fields() {
+  public function create_custom_fields() 
+  {
     $custom_fields = new CustomField();
-    
+
 		$custom_fields
-			->setMetabox( $this->cpt['cpt_custom_fields'] )
+			->set_metabox( $this->cpt['custom_fields'] )
 			->register();
   }
 
-  public function create_image_gallery() {
+  public function create_image_gallery() 
+  {
     $gallery = new ImageGallery();
 		
 		$gallery
-			->setGallery( $this->cpt['cpt_image_gallery'] )
+			->set_gallery( $this->cpt['image_gallery'] )
 			->register();
+  }
+
+  public function create_taxonomies() 
+  {
+    $taxonomies = new CustomTaxonomy();
+    
+    $taxonomies
+      ->add_taxonomies( $this->cpt['taxonomies'] )
+      ->register();
   }
 }

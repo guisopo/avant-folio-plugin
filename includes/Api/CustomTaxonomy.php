@@ -5,45 +5,21 @@
 
 namespace Includes\Api;
 
-use Includes\Api\BaseController;
-
-class CustomTaxonomy extends BaseController
+class CustomTaxonomy
 {
   public $taxonomies = array();
   public $taxonomies_options = array();
   
   public function register() 
   {
-    $this->addTaxonomyOptions();
-    $this->addTaxonomies();
-
     if( ! empty($this->taxonomies) ) {
-      add_action( 'init', array( $this, 'registerTaxonomies' ));
+      add_action( 'init', array( $this, 'register_taxonomies' ));
     }
   }
 
-  public function addTaxonomyOptions() {
-    $this->taxonomies_options = array(
-      array(
-        'cpt'           => 'works',
-        'id'            => 'work_type',
-        'plural_name'   => 'Types of Work',
-        'singular_name' => 'Type of Work',
-        'terms'         => [ 'painting', 'drawing', 'sculpture', 'ceramic', 'photography', 'collage', 'video', 'performance', 'installation', '3D Art']
-      ),
-      array(
-        'cpt'           => 'works',
-        'id'            => 'date_completed',
-        'plural_name'   => 'Dates',
-        'singular_name' => 'Date',
-        'show_ui'       => false
-      )
-    );
-  }
-
-  public function addTaxonomies() 
+  public function add_taxonomies( $taxonomies_options) 
   {
-    foreach ( $this->taxonomies_options as $option ) {
+    foreach ( $taxonomies_options as $option ) {
 
       $labels = array(
         'name'          => $option['plural_name'],
@@ -82,7 +58,7 @@ class CustomTaxonomy extends BaseController
     return $this;
   }
 
-  public function registerTaxonomies() 
+  public function register_taxonomies() 
   { 
     foreach ( $this->taxonomies as $taxonomy ) {
       register_taxonomy( 
@@ -92,12 +68,12 @@ class CustomTaxonomy extends BaseController
       );
 
       if ( isset( $taxonomy['terms'] ) ) {
-        $this->addTaxonomyTerms( $taxonomy );
+        $this->add_taxonomies_terms( $taxonomy );
       }
     }
   }
 
-  public function addTaxonomyTerms( array $taxonomy ) 
+  public function add_taxonomies_terms( array $taxonomy ) 
   {
     foreach ($taxonomy['terms'] as $term) {
       wp_insert_term(

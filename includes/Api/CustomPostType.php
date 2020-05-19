@@ -14,19 +14,19 @@ class CustomPostType extends BaseController
   public function register() 
   {
 		if( ! empty( $this->custom_post_types ) ) {
-			add_action( 'init', array( $this, 'registerCpt' ) );
-			add_filter( 'enter_title_here', array( $this, 'setCustomEnterTitle' ) );
+			add_action( 'init', array( $this, 'register_cpt' ) );
+			add_filter( 'enter_title_here', array( $this, 'set_custom_enter_title' ) );
 		}
 	}
 	
-	public function storeCpt( $cptData ) 
+	public function store_cpt( $cptData ) 
 	{
 		$this->custom_post_types = $cptData;
 
 		return $this;
 	}
 	
-	public function setCptLabels( string $cpt_name ) 
+	public function set_cpt_labels( string $cpt_name ) 
 	{
     $cpt_singular = rtrim( $cpt_name,'s' );
 
@@ -48,7 +48,7 @@ class CustomPostType extends BaseController
 		return $cpt_labels;
 	}
 
-	public function setCptArguments( array $cpt_supports, array $cpt_labels, string $cpt_icon ) 
+	public function set_cpt_arguments( array $cpt_supports, array $cpt_labels, string $cpt_icon ) 
 	{
 		$cpt_arguments = array(
       'public'        => true,
@@ -64,12 +64,12 @@ class CustomPostType extends BaseController
 		return $cpt_arguments;
 	}
 
-  public function registerCpt()
+  public function register_cpt()
 	{
 		foreach ( $this->custom_post_types as $custom_post_type ) {
 
-			$this->custom_post_types['cpt_labels']			=	$this->setCptLabels( $this->custom_post_types['cpt_name'] );
-			$this->custom_post_types['cpt_arguments']	=	$this->setCptArguments( $this->custom_post_types['cpt_supports'], $this->custom_post_types['cpt_labels'], $this->custom_post_types['cpt_icon'] );
+			$this->custom_post_types['cpt_labels']			=	$this->set_cpt_labels( $this->custom_post_types['cpt_name'] );
+			$this->custom_post_types['cpt_arguments']	=	$this->set_cpt_arguments( $this->custom_post_types['cpt_supports'], $this->custom_post_types['cpt_labels'], $this->custom_post_types['cpt_icon'] );
 
 			register_post_type( 
 				$this->custom_post_types['cpt_name'], 
@@ -78,7 +78,7 @@ class CustomPostType extends BaseController
 		}
 	}
 
-	public function setCustomEnterTitle() 
+	public function set_custom_enter_title() 
 	{
 		$screen	= get_current_screen();
 		$title	= rtrim( $screen->post_type,'s' );

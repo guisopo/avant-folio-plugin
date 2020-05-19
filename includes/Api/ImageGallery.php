@@ -18,11 +18,11 @@ class ImageGallery extends BaseController
   public function register() 
   {
     if( ! empty($this->gallery) ) {
-      add_action( 'add_meta_boxes', array( $this, 'addGallery' ) );
+      add_action( 'add_meta_boxes', array( $this, 'add_gallery' ) );
     }
   }
 
-  public function setGallery( array $gallery ) 
+  public function set_gallery( array $gallery ) 
   {
     // if( $gallery['title'] === '' ) {
     //   $this->gallery['title'] = ucfirst($gallery['id']);
@@ -51,19 +51,19 @@ class ImageGallery extends BaseController
     return $this;
   }
 
-  public function addGallery( string $gallery ) 
+  public function add_gallery( string $gallery ) 
   {
     add_meta_box(
       $this->gallery['id'],
       $this->gallery['title'],
-      array( $this, 'renderGallery' ),
+      array( $this, 'render_gallery' ),
       $this->gallery['screen'],
       $this->gallery['context'],
       $this->gallery['priority']
     );
   }
 
-  public function renderGallery( $post ) 
+  public function render_gallery( $post ) 
   {
     require_once( $this->plugin_path . 'templates/avant-folio-gallery.php' );
   }

@@ -17,8 +17,8 @@ final class Init
       Pages\PortfolioPage::class,
       Pages\CVSubpage::class,
       Base\Enqueue::class,
-      Base\CreateCpts::class,
-      Api\CustomTaxonomy::class
+      Base\WorkCpt::class,
+      // Api\CustomTaxonomy::class
     ];
   }
 
