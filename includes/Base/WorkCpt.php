@@ -17,13 +17,16 @@ class WorkCpt
   public $custom_field_id;
   public $custom_field_title;
   public $gallery_title;
+  public $meta_key;
 
   public function register() 
   {
     $this->cpt_name = 'Works';
+    $this->gallery_title = 'Work Gallery';
     $this->custom_field_id = 'work-information';
     $this->custom_field_title = 'Work Details';
-    $this->gallery_title = 'Work Gallery';
+    $this->meta_key = 'avant_folio_work_info';
+    $this->gallery_meta_key = 'avant_folio_gallery';
 
     $this->store_cpt_data();
 
@@ -69,7 +72,7 @@ class WorkCpt
       'id'       => $this->custom_field_id,
       'title'    =>	esc_html__( $this->custom_field_title, 'string' ),
       'screen'   => $this->cpt_name,
-      'meta-key' => 'avant_folio_work_info',
+      'meta-key' => $this->meta_key
     );
 
     return $this;
@@ -92,7 +95,8 @@ class WorkCpt
         'title'    =>	esc_html__( $this->gallery_title, 'string' ),
         'screen'   => $this->cpt_name,
         'context'	 => 'advanced',
-        'priority' => 'high'
+        'priority' => 'high',
+        'meta-key' => $this->gallery_meta_key
       )
     );
 

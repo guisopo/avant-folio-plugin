@@ -1,3 +1,7 @@
+h3 {
+	font-size: 13px;
+}
+
 /* ==============
 		CPT Details
 	==============*/
@@ -117,6 +121,8 @@
 	position: relative;
 	line-height: 0;
 	background-color: #f1f1f1;
+	min-height:225px;
+	min-width: 199px;
 	padding: 4px;
 }
 
@@ -167,7 +173,7 @@
 .af-gallery__list-container {
 	margin: 6px 0;
 	background-color: #f7f7f7;
-	padding: 20px 20px 20px 20px;
+	padding: 0 20px 20px 20px;
 }
 
 .af-gallery__list {

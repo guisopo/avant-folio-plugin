@@ -106,7 +106,7 @@ class avantFolioMediaUploader   {
 
     this.galleryHiddenInput.setAttribute('type', 'hidden');
     this.galleryHiddenInput.setAttribute('id', 'avant_folio_work_gallery');
-    this.galleryHiddenInput.setAttribute('name', 'avant_folio_work_info[gallery]');
+    this.galleryHiddenInput.setAttribute('name', 'avant_folio_gallery[gallery]');
 
     this.plugin.appendChild(this.galleryHiddenInput);
 
@@ -114,7 +114,7 @@ class avantFolioMediaUploader   {
 
     this.featuredImageHiddenInput.setAttribute('type', 'hidden');
     this.featuredImageHiddenInput.setAttribute('id', 'avant_folio_featured_image');
-    this.featuredImageHiddenInput.setAttribute('name', 'avant_folio_work_info[featured_image]');
+    this.featuredImageHiddenInput.setAttribute('name', 'avant_folio_gallery[featured_image]');
 
     this.plugin.appendChild(this.featuredImageHiddenInput);
   }

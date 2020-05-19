@@ -108,7 +108,7 @@ class CustomField extends BaseController
   public function save_data( string $post_id, string $meta_key, $meta_value, array $new_meta_value ) 
   {
     //  If 'gallery' key exist save it to variable, if not delete post thumbnail
-    $gallery = $new_meta_value['gallery'] ?? delete_post_thumbnail( $post_id );
+    // $gallery = $new_meta_value['gallery'] ?? delete_post_thumbnail( $post_id );
 
     if ( count($new_meta_value) === 0 ) {
       delete_post_meta( $post_id, $meta_key, $meta_value );
@@ -130,10 +130,10 @@ class CustomField extends BaseController
     update_post_meta( $post_id, $meta_key, $new_meta_value );
 
     //  Set the Post Featured Image
-    $this->set_featured_image( $post_id, $new_meta_value['featured_image'] ?? '', $gallery);
+    // $this->set_featured_image( $post_id, $new_meta_value['featured_image'] ?? '', $gallery);
 
     //  Set the Post Format
-    $this->set_post_format( $post_id, $new_meta_value['work_type'] ?? '', $gallery );
+    // $this->set_post_format( $post_id, $new_meta_value['work_type'] ?? '', $gallery );
 
   }
 
