@@ -5,7 +5,7 @@
 
 namespace Includes\Base;
 
-use \Includes\Base\BaseController;
+use \Includes\Api\BaseController;
 
 class Enqueue extends BaseController
 {

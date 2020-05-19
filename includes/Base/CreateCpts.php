@@ -5,8 +5,8 @@
 
 namespace Includes\Base;
 
-use Includes\Base\CustomPostTypeController;
-use Includes\Base\BaseController;
+use Includes\Api\CustomPostTypeController;
+use Includes\Api\BaseController;
 
 class CreateCpts extends BaseController {
 

@@ -5,7 +5,7 @@
 
 namespace Includes\Api\Callbacks;
 
-use \Includes\Base\BaseController;
+use \Includes\Api\BaseController;
 
 class SanitizationCallbacks extends BaseController
 {

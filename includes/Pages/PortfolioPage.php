@@ -5,7 +5,7 @@
 
 namespace Includes\Pages;
 
-use \Includes\Base\BaseController;
+use \Includes\Api\BaseController;
 use \Includes\Api\SettingsApi;
 use \Includes\Api\Callbacks\AdminCallbacks;
 use \Includes\Api\Callbacks\SanitizationCallbacks;
