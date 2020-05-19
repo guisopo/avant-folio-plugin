@@ -5,18 +5,14 @@
 
 namespace Includes\Api;
 
-use Includes\Api\CustomField;
-use Includes\Api\ImageGallery;
 use Includes\Api\BaseController;
 
 class CustomPostType extends BaseController
 {
 	public $custom_post_types = array();
-	public $custom_fields 		= array();
 
   public function register() 
   {
-
 		if( ! empty( $this->custom_post_types ) ) {
 			add_action( 'init', array( $this, 'registerCpt' ) );
 			add_filter( 'enter_title_here', array( $this, 'setCustomEnterTitle' ) );
@@ -72,35 +68,14 @@ class CustomPostType extends BaseController
 	{
 		foreach ( $this->custom_post_types as $custom_post_type ) {
 
-			$custom_post_type['cpt_labels']			=	$this->setCptLabels( $custom_post_type['cpt_name'] );
-			$custom_post_type['cpt_arguments']	=	$this->setCptArguments( $custom_post_type['cpt_supports'], $custom_post_type['cpt_labels'], $custom_post_type['cpt_icon'] );
+			$this->custom_post_types['cpt_labels']			=	$this->setCptLabels( $this->custom_post_types['cpt_name'] );
+			$this->custom_post_types['cpt_arguments']	=	$this->setCptArguments( $this->custom_post_types['cpt_supports'], $this->custom_post_types['cpt_labels'], $this->custom_post_types['cpt_icon'] );
 
 			register_post_type( 
-				$custom_post_type['cpt_name'], 
-				$custom_post_type['cpt_arguments']
+				$this->custom_post_types['cpt_name'], 
+				$this->custom_post_types['cpt_arguments']
 			);
-
-			array_key_exists ( 'cpt_custom_fields' , $custom_post_type ) ? $this->createCustomFields($custom_post_type['cpt_custom_fields']) : '';
-			array_key_exists ( 'cpt_gallery' , $custom_post_type ) ? $this->createGallery($custom_post_type['cpt_gallery']) : '';
 		}
-	}
-
-	public function createCustomFields( $cpt_custom_fields ) 
-	{
-		$custom_fields = new CustomField();
-		
-		$custom_fields
-			->setMetabox($cpt_custom_fields)
-			->register();
-	}
-
-	public function createGallery( $cpt_gallery ) 
-	{
-		$gallery = new ImageGallery();
-		
-		$gallery
-			->setGallery($cpt_gallery)
-			->register();
 	}
 
 	public function setCustomEnterTitle() 
