@@ -5,7 +5,7 @@
 
 namespace Includes\Api;
 
-class SettingsApi
+class AdminPages
 {
   public $admin_pages    = array();
   public $admin_subpages = array();

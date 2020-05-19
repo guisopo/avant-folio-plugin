@@ -7,7 +7,7 @@ namespace Includes\Api;
 
 use Includes\Api\BaseController;
 
-class GalleryController extends BaseController
+class ImageGallery extends BaseController
 {
   
   public $name;

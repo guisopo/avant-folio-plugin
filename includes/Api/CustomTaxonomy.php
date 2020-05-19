@@ -7,7 +7,7 @@ namespace Includes\Api;
 
 use Includes\Api\BaseController;
 
-class CustomTaxonomyController extends BaseController
+class CustomTaxonomy extends BaseController
 {
   public $taxonomies = array();
   public $taxonomies_options = array();

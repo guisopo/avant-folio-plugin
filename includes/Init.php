@@ -18,7 +18,7 @@ final class Init
       Pages\CVSubpage::class,
       Base\Enqueue::class,
       Base\CreateCpts::class,
-      Api\CustomTaxonomyController::class
+      Api\CustomTaxonomy::class
     ];
   }
 

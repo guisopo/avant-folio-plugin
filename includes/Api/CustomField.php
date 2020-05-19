@@ -7,7 +7,7 @@ namespace Includes\Api;
 
 use Includes\Api\BaseController;
 
-class CustomFieldsController extends BaseController
+class CustomField extends BaseController
 {
   
   public $metabox = array();

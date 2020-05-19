@@ -5,10 +5,11 @@
 
 namespace Includes\Api;
 
-use Includes\Api\CustomFieldsController;
+use Includes\Api\CustomField;
+use Includes\Api\ImageGallery;
 use Includes\Api\BaseController;
 
-class CustomPostTypeController extends BaseController
+class CustomPostType extends BaseController
 {
 	public $custom_post_types = array();
 	public $custom_fields 		= array();
@@ -86,7 +87,7 @@ class CustomPostTypeController extends BaseController
 
 	public function createCustomFields( $cpt_custom_fields ) 
 	{
-		$custom_fields = new CustomFieldsController();
+		$custom_fields = new CustomField();
 		
 		$custom_fields
 			->setMetabox($cpt_custom_fields)
@@ -95,7 +96,7 @@ class CustomPostTypeController extends BaseController
 
 	public function createGallery( $cpt_gallery ) 
 	{
-		$gallery = new GalleryController();
+		$gallery = new ImageGallery();
 		
 		$gallery
 			->setGallery($cpt_gallery)

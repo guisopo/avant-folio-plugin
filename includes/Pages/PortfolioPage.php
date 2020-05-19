@@ -6,7 +6,7 @@
 namespace Includes\Pages;
 
 use \Includes\Api\BaseController;
-use \Includes\Api\SettingsApi;
+use \Includes\Api\AdminPages;
 use \Includes\Api\Callbacks\AdminCallbacks;
 use \Includes\Api\Callbacks\SanitizationCallbacks;
 
@@ -20,7 +20,7 @@ class PortfolioPage extends BaseController
 
   public function register() 
   {
-    $this->settings = new SettingsApi();
+    $this->settings = new AdminPages();
 
     $this->callbacks = new AdminCallbacks();
     $this->callbacks_sanitization = new SanitizationCallbacks();

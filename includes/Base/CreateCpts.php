@@ -5,7 +5,7 @@
 
 namespace Includes\Base;
 
-use Includes\Api\CustomPostTypeController;
+use Includes\Api\CustomPostType;
 use Includes\Api\BaseController;
 
 class CreateCpts extends BaseController {
@@ -48,7 +48,7 @@ class CreateCpts extends BaseController {
   }
 
   public function createCpt() {
-    $custom_post_type = new CustomPostTypeController();
+    $custom_post_type = new CustomPostType();
 
     $custom_post_type
       ->storeCpt( $this->cptData )
