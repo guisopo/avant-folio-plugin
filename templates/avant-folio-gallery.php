@@ -1,5 +1,5 @@
 <?php
-$meta_value = ( get_post_meta( $post->ID, '_avant_folio_work_info_key', true ) ) ?: array();
+$meta_value = ( get_post_meta( $post->ID, '_avant_folio_gallery_key', true ) ) ?: array();
 
 $images = isset( $meta_value['gallery'] ) ? explode(",", $meta_value['gallery'] ) : array();
 ?>
@@ -8,7 +8,7 @@ $images = isset( $meta_value['gallery'] ) ? explode(",", $meta_value['gallery'] 
 	
 	<div class="af-gallery__featured">
 	
-		<h2 class="af-featured__title">Featured Image:</h2>
+		<h3 class="af-featured__title">Featured Image:</h3>
 		
 		<div class="af-featured__image">
 			<!-- <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" focusable="false">
@@ -22,6 +22,8 @@ $images = isset( $meta_value['gallery'] ) ? explode(",", $meta_value['gallery'] 
 	</div> <!-- af-gallery__featured -->
 
 	<div class="af-gallery__list-container">
+
+		<h3 class="af-gallery__title">Gallery Images:</h3>
 
 		<!-- Creating a dynamic ID using the metabox ID for JavaScript-->
 		<ul id="af-gallery__list" class="af-gallery__list">
