@@ -50,6 +50,19 @@ class WorkCpt
     return $this;
   }
 
+  public function create_cpt() 
+  {
+    $custom_post_type = new CustomPostType();
+
+    $custom_post_type
+      ->store_cpt( $this->cpt['arguments'] )
+      ->register();
+
+    isset( $this->cpt['custom_fields'] ) ? $this->create_custom_fields() : '';
+    isset( $this->cpt['image_gallery'] ) ? $this->create_image_gallery() : '';
+    isset( $this->cpt['taxonomies'] ) ? $this->create_taxonomies() : '';
+  }
+
   public function add_cpt_custom_fields() 
   {
     $this->cpt['custom_fields'] = array(
@@ -62,17 +75,39 @@ class WorkCpt
     return $this;
   }
 
+  public function create_custom_fields() 
+  {
+    $custom_fields = new CustomField();
+
+		$custom_fields
+			->set_metabox( $this->cpt['custom_fields'] )
+			->register();
+  }
+
   public function add_cpt_image_gallery() 
   {
     $this->cpt['image_gallery'] = array(
-      'id'       => $this->gallery_title,
-      'title'    =>	esc_html__( $this->gallery_title, 'string' ),
-      'screen'   => $this->cpt_name,
-      'context'	 => 'advanced',
-      'priority' => 'high'
+      array (
+        'id'       => $this->gallery_title,
+        'title'    =>	esc_html__( $this->gallery_title, 'string' ),
+        'screen'   => $this->cpt_name,
+        'context'	 => 'advanced',
+        'priority' => 'high'
+      )
     );
 
     return $this;
+  }
+
+  public function create_image_gallery() 
+  {
+    foreach ($this->cpt['image_gallery'] as $gallery_arguments) {
+      $gallery = new ImageGallery();
+      
+      $gallery
+        ->set_gallery( $gallery_arguments )
+        ->register();
+    }
   }
 
   public function add_cpt_taxonomies() 
@@ -93,37 +128,6 @@ class WorkCpt
         'show_ui'       => false
       )
     );
-  }
-
-  public function create_cpt() 
-  {
-    $custom_post_type = new CustomPostType();
-
-    $custom_post_type
-      ->store_cpt( $this->cpt['arguments'] )
-      ->register();
-
-    isset( $this->cpt['custom_fields'] ) ? $this->create_custom_fields() : '';
-    isset( $this->cpt['image_gallery'] ) ? $this->create_image_gallery() : '';
-    isset( $this->cpt['taxonomies'] ) ? $this->create_taxonomies() : '';
-  }
-
-  public function create_custom_fields() 
-  {
-    $custom_fields = new CustomField();
-
-		$custom_fields
-			->set_metabox( $this->cpt['custom_fields'] )
-			->register();
-  }
-
-  public function create_image_gallery() 
-  {
-    $gallery = new ImageGallery();
-		
-		$gallery
-			->set_gallery( $this->cpt['image_gallery'] )
-			->register();
   }
 
   public function create_taxonomies() 
