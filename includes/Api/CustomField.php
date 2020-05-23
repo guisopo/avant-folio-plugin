@@ -6,6 +6,7 @@
 namespace Includes\Api;
 
 use Includes\Api\BaseController;
+use Includes\Api\Callbacks\CustomFieldsCallbacks;
 
 class CustomField extends BaseController
 {
@@ -49,7 +50,7 @@ class CustomField extends BaseController
   public function save_metaboxes_data( $post_id ) 
   {
     //  Check Post Status
-    if (  ! $this->check_post_status( $post_id ) ) return; 
+    if (  ! $this->user_can_save( $post_id ) ) return; 
 
     //  Check if Nonce is Set
     if (  ! isset(  $_POST[$this->metabox_nonce] ) ) return;
@@ -73,7 +74,7 @@ class CustomField extends BaseController
     $this->save_data( $post_id, $meta_key, $meta_value, $new_meta_value );
   }
 
-  public function check_post_status( string $post_id ) 
+  public function user_can_save( string $post_id ) 
   {
     $is_autosave    = wp_is_post_autosave( $post_id );
     $is_revision    = wp_is_post_revision( $post_id );
@@ -107,48 +108,28 @@ class CustomField extends BaseController
 
   public function save_data( string $post_id, string $meta_key, $meta_value, array $new_meta_value ) 
   {
-    //  If 'gallery' key exist save it to variable, if not delete post thumbnail
-    // $gallery = $new_meta_value['gallery'] ?? delete_post_thumbnail( $post_id );
-
     if ( count($new_meta_value) === 0 ) {
       delete_post_meta( $post_id, $meta_key, $meta_value );
       return;
     }
     
     //  Set Taxonomies
-    isset( $new_meta_value['work_type'] ) 
-      ? wp_set_post_terms( $post_id, $new_meta_value['work_type'], 'work_type')
-      : '';
+    if ( isset( $new_meta_value['work_type'] ) ) {
+      wp_set_post_terms( $post_id, $new_meta_value['work_type'], 'work_type');
+      update_post_meta( $post_id, '_avant_folio_work_type_key', $new_meta_value['work_type'] );
+
+    }
       // : wp_remove_object_terms( $post_id, $meta_value['work_type'], 'work_type', true);
 
-    isset( $new_meta_value['date_completed'] ) 
-      ? wp_set_post_terms( $post_id, $new_meta_value['date_completed'], 'date_completed' )
-      : '';
+    if ( isset( $new_meta_value['date_completed'] ) ) {
+      wp_set_post_terms( $post_id, $new_meta_value['date_completed'], 'date_completed' );
+      update_post_meta( $post_id, '_avant_folio_date_completed_key', $new_meta_value['date_completed'] );
+
+    }
       // : wp_remove_object_terms( $post_id, $meta_value['date_completed' ?? ''], 'date_completed', true);
 
     //  Save Meta Data
     update_post_meta( $post_id, $meta_key, $new_meta_value );
-
-    //  Set the Post Featured Image
-    // $this->set_featured_image( $post_id, $new_meta_value['featured_image'] ?? '', $gallery);
-
-    //  Set the Post Format
-    // $this->set_post_format( $post_id, $new_meta_value['work_type'] ?? '', $gallery );
-
-  }
-
-  protected function set_featured_image( string $post_id, string $featured_image, string $gallery ) 
-  {
-
-    $images = explode(",", $gallery );
-
-    if( $featured_image && in_array( $featured_image, $images, true) ) 
-    {
-      set_post_thumbnail( $post_id,  $featured_image );
-    }
-    else if( $images ) {
-      set_post_thumbnail( $post_id,  $images[0] );
-    }
   }
 
   protected function set_post_format( string $post_id, string $work_type, string $gallery ) 
