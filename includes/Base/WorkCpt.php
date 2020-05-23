@@ -9,15 +9,21 @@ use Includes\Api\CustomPostType;
 use Includes\Api\CustomField;
 use Includes\Api\ImageGallery;
 use Includes\Api\CustomTaxonomy;
+use Includes\Api\CustomColumns;
 
 class WorkCpt 
 {
   public $cpt = array();
   public $cpt_name;
+
   public $custom_field_id;
   public $custom_field_title;
+
   public $gallery_title;
   public $meta_key;
+
+  public $works_cpt_columns;
+  public $works_cpt_custom_columns;
 
   public function register() 
   {
@@ -39,7 +45,8 @@ class WorkCpt
       ->add_cpt_arguments()
       ->add_cpt_custom_fields()
       ->add_cpt_image_gallery()
-      ->add_cpt_taxonomies();
+      ->add_cpt_taxonomies()
+      ->add_cpt_custom_columns();
   }
 
   public function add_cpt_arguments() 
@@ -64,6 +71,7 @@ class WorkCpt
     isset( $this->cpt['custom_fields'] ) ? $this->create_custom_fields() : '';
     isset( $this->cpt['image_gallery'] ) ? $this->create_image_gallery() : '';
     isset( $this->cpt['taxonomies'] ) ? $this->create_taxonomies() : '';
+    isset( $this->cpt['columns'] ) ? $this->create_columns() : '';
   }
 
   public function add_cpt_custom_fields() 
@@ -132,6 +140,8 @@ class WorkCpt
         'show_ui'       => false
       )
     );
+
+    return $this;
   }
 
   public function create_taxonomies() 
@@ -140,6 +150,55 @@ class WorkCpt
     
     $taxonomies
       ->add_taxonomies( $this->cpt['taxonomies'] )
+      ->register();
+  }
+
+  public function add_cpt_custom_columns()
+  {
+    $this->cpt['columns'] = array(
+      'cb'              =>  '<input type="checkbox" />',
+      'image'           =>  __('Image'),
+      'title'           =>  __('Title'),
+      'work_type'       =>  __('Work Type', 'avant-folio'),
+      'date_completed'  =>  __('Created', 'avant-folio'),
+      'date'            =>  __('Published'),
+    );
+
+    $this->cpt['custom_columns'] = array(
+      'work_type' => array(
+        'sort_id' => 'work_type'
+      ),
+      'date_completed' => array(
+        'sort_id' => 'date_completed'
+      )
+    );
+
+    $this->cpt['custom_columns_filters'] = array(
+      array(
+        'show_option_all'   => 'All Work Type',
+        'orderby'           => 'NAME',
+        'order'             => 'ASC',
+        'name'              => 'avant_folio_work_type_filter',
+        'taxonomy'          => 'work_type'
+      ),
+      array(
+        'show_option_all'   => 'All Years',
+        'orderby'           => 'NAME',
+        'order'             => 'ASC',
+        'name'              => 'avant_folio_date_completed_filter',
+        'taxonomy'          => 'date_completed'
+      )
+    );
+
+    return $this;
+  }
+
+  public function create_columns()
+  {
+    $custom_columns = new CustomColumns();
+
+    $custom_columns
+      ->add_columns( strtolower( $this->cpt_name ), $this->cpt['columns'], $this->cpt['custom_columns'], $this->cpt['custom_columns_filters'] )
       ->register();
   }
 }
