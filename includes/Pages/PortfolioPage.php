@@ -90,9 +90,9 @@ class PortfolioPage extends BaseController
         'page'      =>  'avant-folio_portfolio',
         'section'   =>  'avant-folio_artist-profile',
         'args'      =>  array(
-          'label_for' => 'first_name',
+          'label_for'   => 'first_name',
           'option_name' => 'avant_folio_options_profile',
-          'class'     => 'post-attributes-label',
+          'class'       => 'post-attributes-label',
           'placeholder' => 'Name'
         )
       ),
@@ -103,9 +103,9 @@ class PortfolioPage extends BaseController
         'page'      =>  'avant-folio_portfolio',
         'section'   =>  'avant-folio_artist-profile',
         'args'      =>  array(
-          'label_for' => 'last_name',
+          'label_for'   => 'last_name',
           'option_name' => 'avant_folio_options_profile',
-          'class'     => 'post-attributes-label',
+          'class'       => 'post-attributes-label',
           'placeholder' => 'Last Name'
         )
       ),
@@ -116,9 +116,9 @@ class PortfolioPage extends BaseController
         'page'      =>  'avant-folio_portfolio',
         'section'   =>  'avant-folio_artist-profile',
         'args'      =>  array(
-          'label_for' => 'facebook',
+          'label_for'   => 'facebook',
           'option_name' => 'avant_folio_options_profile',
-          'class'     => 'post-attributes-label',
+          'class'       => 'post-attributes-label',
           'placeholder' => '@facebook_user'
         )
       ),
@@ -129,9 +129,9 @@ class PortfolioPage extends BaseController
         'page'      =>  'avant-folio_portfolio',
         'section'   =>  'avant-folio_artist-profile',
         'args'      =>  array(
-          'label_for' => 'twitter',
+          'label_for'   => 'twitter',
           'option_name' => 'avant_folio_options_profile',
-          'class'     => 'post-attributes-label',
+          'class'       => 'post-attributes-label',
           'placeholder' => '@twitter_user'
         )
       ),
@@ -142,9 +142,9 @@ class PortfolioPage extends BaseController
         'page'      =>  'avant-folio_portfolio',
         'section'   =>  'avant-folio_artist-profile',
         'args'      =>  array(
-          'label_for' => 'instagram',
+          'label_for'   => 'instagram',
           'option_name' => 'avant_folio_options_profile',
-          'class'     => 'post-attributes-label',
+          'class'       => 'post-attributes-label',
           'placeholder' => '@instagram_user'
         )
       )
