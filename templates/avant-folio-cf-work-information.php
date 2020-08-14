@@ -175,7 +175,7 @@
         name="avant_folio_work_info[description]"
         placeholder="Description of the work"
       ><?php 
-        echo isset($work_description) ? esc_attr( $work_description ): '';
+        echo isset($work_description) ? esc_textarea( $work_description ): '';
       ?></textarea>
     </div>
 
@@ -187,7 +187,7 @@
         name="avant_folio_work_info[credits]"
         placeholder="Director, camera, editing, performance..."
       ><?php
-        echo isset($work_credits) ? esc_attr( $work_credits ): '';
+        echo isset($work_credits) ? esc_textarea( $work_credits ): '';
       ?></textarea>
     </div>
 
