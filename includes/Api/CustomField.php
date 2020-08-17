@@ -6,7 +6,6 @@
 namespace Includes\Api;
 
 use Includes\Api\BaseController;
-use Includes\Api\Callbacks\CustomFieldsCallbacks;
 
 class CustomField extends BaseController
 {
@@ -49,16 +48,19 @@ class CustomField extends BaseController
 
   public function save_metaboxes_data( $post_id ) 
   {
-    //  Check Post Status
+    // Skip saving if auto saving
+    if (  defined ('DOING_AUTOSAFE' ) && DOING_AUTOSAFE ) return;
+
+    //  Skip saving if user cannot save
     if (  ! $this->user_can_save( $post_id ) ) return; 
 
-    //  Check if Nonce is Set
+    //  Skip saving if nonce is not set
     if (  ! isset(  $_POST[$this->metabox_nonce] ) ) return;
     
-    //  Validate Nonce
+    //  Skip saving if invalidated nonce
     if (  ! wp_verify_nonce( $_POST[$this->metabox_nonce],  $this->plugin_path ) ) return;
 
-    //  Check if Key is Set
+    //  Skip saving if key is not set
     if (  ! isset( $_POST[$this->metabox['meta-key']] ) ) return;
 
     //  Sanitize Form Values and Save to new Variable
