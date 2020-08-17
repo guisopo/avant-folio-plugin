@@ -31,18 +31,18 @@ class CustomPostType extends BaseController
     $cpt_singular = rtrim( $cpt_name,'s' );
 
     $cpt_labels = array(
-      'name'               => $cpt_name,
-      'singular_name'      => $cpt_singular,
-      'add_new'            => 'Add New ' . $cpt_singular . '',
-      'add_new_item'       => 'Add New ' . $cpt_singular . '',
-      'edit_item'          => 'Edit ' . $cpt_singular . '',
-      'new_item'           => 'New ' . $cpt_singular . '',
-      'view_item'          => 'View ' . $cpt_singular . '',
-      'all_item'           => 'All ' . $cpt_name . '',
-      'search_items'       => 'Search ' . $cpt_name . '',
-      'not_found'          => 'No ' . $cpt_name . ' found',
-      'not_found_in_trash' => 'No ' . $cpt_name . ' found in trash',
-      'archives'           => '' . $cpt_name . ' Archives'
+      'name'               => __( $cpt_name, 'avant-folio-plugin' ),
+      'singular_name'      => __( $cpt_singular, 'avant-folio-plugin' ),
+      'add_new'            => __( 'Add New ' . $cpt_singular . '', 'avant-folio-plugin' ),
+      'add_new_item'       => __( 'Add New ' . $cpt_singular . '', 'avant-folio-plugin' ),
+      'edit_item'          => __( 'Edit ' . $cpt_singular . '', 'avant-folio-plugin' ),
+      'new_item'           => __( 'New ' . $cpt_singular . '', 'avant-folio-plugin' ),
+      'view_item'          => __( 'View ' . $cpt_singular . '', 'avant-folio-plugin' ),
+      'all_item'           => __( 'All ' . $cpt_name . '', 'avant-folio-plugin' ),
+      'search_items'       => __( 'Search ' . $cpt_name . '', 'avant-folio-plugin' ),
+      'not_found'          => __( 'No ' . $cpt_name . ' found', 'avant-folio-plugin' ),
+      'not_found_in_trash' => __( 'No ' . $cpt_name . ' found in trash', 'avant-folio-plugin' ),
+      'archives'           => __( '' . $cpt_name . ' Archives', 'avant-folio-plugin' )
 		);
 		
 		return $cpt_labels;
