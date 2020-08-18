@@ -17,7 +17,8 @@ final class Init
       Pages\PortfolioPage::class,
       Pages\CVSubpage::class,
       Base\Enqueue::class,
-      Base\WorkCpt::class
+      Base\WorkCpt::class,
+      Base\ExhibitionsCpt::class
     ];
   }
 
