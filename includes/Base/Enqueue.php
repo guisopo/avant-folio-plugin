@@ -22,10 +22,11 @@ class Enqueue extends BaseController
 
     if( in_array($hook_suffix, array('post.php', 'post-new.php') ) ){
       $screen = get_current_screen();
+      
       if( is_object( $screen ) && $cpt == $screen->post_type ){
         // Register, enqueue scripts and styles here
         wp_enqueue_script( 'avant-folio-script-inputs', $this->plugin_url . 'assets/avant-folio-inputs.js' );
       }
-  }
+    }
   }
 }
