@@ -48,9 +48,6 @@ class CustomField extends BaseController
 
   public function save_metaboxes_data( $post_id ) 
   {
-    // Skip saving if auto saving
-    if (  defined ('DOING_AUTOSAFE' ) && DOING_AUTOSAFE ) return;
-
     //  Skip saving if user cannot save
     if (  ! $this->user_can_save( $post_id ) ) return; 
 
