@@ -15,16 +15,6 @@
   name="avant_folio_exhibition_info[title]" 
   id="exhibition_title_key"
 >
-<input  
-  type="hidden" 
-  name="avant_folio_exhibition_type" 
-  id="exhibition_type_key"
->
-<input  
-  type="hidden" 
-  name="avant_folio_date_completed" 
-  id="date_completed_key"
->
 
 <div id="af-exhibition-info-form" class="cf-section">
     
@@ -32,20 +22,20 @@
 
     <div class="cf-wrapper">
 
-      <!-- Exhibition Name -->
+      <!-- Exhibition Venue -->
       <div class="cf-box cf-box--xl">
         <label class="post-attributes-label cf-box__label" for="avant_folio_exhibition_info_material">Venue:</label>
         <input
           class="cf-box__input"
           type="text"
-          name="avant_folio_exhibition_info[material]"
+          name="avant_folio_exhibition_info[venue]"
           placeholder="Gallery, offspace, museum..."
           size="20"
-          value="<?php  echo isset($exhibition_material) ? esc_attr( $exhibition_material ): ''; ?>"
+          value="<?php  echo isset($exhibition_venue) ? esc_attr( $exhibition_venue ): ''; ?>"
         >
       </div>
       
-      <!-- exhibition Year -->
+      <!-- Exhibition Year -->
       <div class="cf-box cf-box--s">
         <label class="post-attributes-label cf-box__label" for="avant_folio_exhibition_info_date_completed">Year:</label>
         <input
@@ -64,7 +54,7 @@
       
     </div>    
 
-    <!-- exhibition Video URL -->
+    <!-- Exhibition URL -->
     <div class="cf-box">
       <label class="post-attributes-label cf-box__label" for="avant_folio_exhibition_info_url">Exhibition url:</label>
       <input
