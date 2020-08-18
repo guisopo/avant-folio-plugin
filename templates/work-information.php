@@ -26,7 +26,7 @@
   id="date_completed_key"
 >
 
-<div class="cf-section">
+<div id="af-work-info-form" class="cf-section">
     
   <div class="cf-column">
 
