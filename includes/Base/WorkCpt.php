@@ -98,14 +98,14 @@ class WorkCpt
   public function add_cpt_image_gallery() 
   {
     $this->cpt['image_gallery'] = array(
-      array (
+
         'id'       => $this->gallery_title,
         'title'    =>	esc_html__( $this->gallery_title, 'string' ),
         'screen'   => $this->cpt_name,
         'context'	 => 'advanced',
         'priority' => 'high',
         'meta-key' => $this->gallery_meta_key
-      )
+
     );
 
     return $this;
@@ -113,13 +113,11 @@ class WorkCpt
 
   public function create_image_gallery() 
   {
-    foreach ($this->cpt['image_gallery'] as $gallery_arguments) {
       $gallery = new ImageGallery();
       
       $gallery
-        ->set_gallery( $gallery_arguments )
+        ->set_gallery( $this->cpt['image_gallery'] )
         ->register();
-    }
   }
 
   public function add_cpt_taxonomies() 
@@ -199,6 +197,7 @@ class WorkCpt
 
     $custom_columns
       ->add_columns( strtolower( $this->cpt_name ), $this->cpt['columns'], $this->cpt['custom_columns'], $this->cpt['custom_columns_filters'] )
+      ->add_meta_key( $this->meta_key )
       ->register();
   }
 }
