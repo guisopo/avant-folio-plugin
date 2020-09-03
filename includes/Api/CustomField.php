@@ -42,7 +42,9 @@ class CustomField extends BaseController
 
   public function render_custom_field( $post ) 
   {
+    // Add an nonce field so we can check for it later
     wp_nonce_field( $this->plugin_path, $this->metabox_nonce );
+    // Require template
     require_once( $this->plugin_path . 'templates/' . $this->metabox['id'] . '.php' );
   }
 
@@ -118,14 +120,12 @@ class CustomField extends BaseController
       update_post_meta( $post_id, '_avant_folio_work_type_key', $new_meta_value['work_type'] );
 
     }
-      // : wp_remove_object_terms( $post_id, $meta_value['work_type'], 'work_type', true);
 
     if ( isset( $new_meta_value['date_completed'] ) ) {
       wp_set_post_terms( $post_id, $new_meta_value['date_completed'], 'date_completed' );
       update_post_meta( $post_id, '_avant_folio_date_completed_key', $new_meta_value['date_completed'] );
 
     }
-      // : wp_remove_object_terms( $post_id, $meta_value['date_completed' ?? ''], 'date_completed', true);
 
     //  Save Meta Data
     update_post_meta( $post_id, $meta_key, $new_meta_value );
