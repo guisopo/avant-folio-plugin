@@ -9,7 +9,7 @@ use Includes\Api\BaseController;
 
 class CustomPostType extends BaseController
 {
-	public $custom_post_types = array();
+	public $custom_post_types;
 
   public function register() 
   {
@@ -66,16 +66,13 @@ class CustomPostType extends BaseController
 
   public function register_cpt()
 	{
-		foreach ( $this->custom_post_types as $custom_post_type ) {
-
-			$this->custom_post_types['cpt_labels']			=	$this->set_cpt_labels( $this->custom_post_types['cpt_name'] );
+			$this->custom_post_types['cpt_labels']		=	$this->set_cpt_labels( $this->custom_post_types['cpt_name'] );
 			$this->custom_post_types['cpt_arguments']	=	$this->set_cpt_arguments( $this->custom_post_types['cpt_supports'], $this->custom_post_types['cpt_labels'], $this->custom_post_types['cpt_icon'] );
 
 			register_post_type( 
 				$this->custom_post_types['cpt_name'], 
 				$this->custom_post_types['cpt_arguments']
 			);
-		}
 	}
 
 	public function set_custom_enter_title() 
