@@ -10,16 +10,16 @@ class CustomColumns
   public $cpt_name;
   public $cpt_columns;
   public $cpt_custom_columns;
+  public $meta_key;
   
-  public function register(  ) 
+  public function register() 
   {
     if ( ! empty( $this->cpt_columns ) ) {
       add_filter( 'manage_' . $this->cpt_name . '_posts_columns', array( $this, 'add_custom_columns' ) );
       add_action( 'manage_' . $this->cpt_name . '_posts_custom_column', array( $this, 'manage_custom_columns' ), 10, 2 );
       add_filter( 'manage_edit-' . $this->cpt_name . '_sortable_columns', array( $this, 'set_sortable_columns' ) );
       add_action( 'pre_get_posts', array( $this, 'set_posts_orderby' ) );
-      add_action('restrict_manage_posts',array( $this, 'add_custom_filter' ) );
-
+      add_action( 'restrict_manage_posts',array( $this, 'add_custom_filter' ) );
     }
   }
 
@@ -33,6 +33,13 @@ class CustomColumns
     return $this;
   }
 
+  public function add_meta_key( $meta_key )
+  {
+    $this->meta_key = '_' . $meta_key . '_key';
+
+    return $this;
+  }
+
   public function add_custom_columns( $columns ) 
   {
     $columns = $this->cpt_columns;
@@ -40,12 +47,12 @@ class CustomColumns
     return $columns;
   }
 
-  public function manage_custom_columns( $column, $post_id ) 
+  public function manage_custom_columns( $column_name, $post_id ) 
   {
-    $meta_value = get_post_meta( $post_id, '_avant_folio_work_info_key', true );
+    $meta_value = get_post_meta( $post_id, $this->meta_key, true );
 
     // Image Column
-    if ( 'image' === $column ) {
+    if ( 'image' === $column_name ) {
 
       $thumbnail = get_the_post_thumbnail( $post_id, array(80, 80) );
 
@@ -57,8 +64,7 @@ class CustomColumns
     }
 
     foreach ($this->cpt_custom_columns as $key => $value) {
-      if ( $key === $column ) {
-
+      if ( $key === $column_name ) {
         if ( !$meta_value || !isset($meta_value[$key]) ) {
           _e( 'n/a' );  
         } else {
@@ -86,19 +92,18 @@ class CustomColumns
     if( ! is_admin() || ! $query->is_main_query() ) {
       return;
     }
-
+    
     foreach ( $this->cpt_custom_columns as $key => $value ) {
       if ( $value['sort_id'] === $query->get( 'orderby' ) ) {
+        
         $query->set( 'orderby', 'meta_value' );
         $query->set( 'meta_key', '_avant_folio_' . $key . '_key' );
-        // $query->set( 'meta_type', 'numeric' );
-
       }
     }
 
     global $post_type, $pagenow;
 
-    //if we are currently on the edit screen of the post type listings
+    // if we are currently on the edit screen of the post type listings
     if($pagenow == 'edit.php' && $post_type == $this->cpt_name){
 
       if( isset( $_GET['avant_folio_work_type_filter'] ) || isset( $_GET['avant_folio_date_completed_filter'] ) ){
@@ -155,7 +160,6 @@ class CustomColumns
     if( $post_type == $this->cpt_name ){
 
       foreach ($this->cpt_custom_columns_filters as $filter) {
-
         //if we have a post format already selected, ensure that its value is set to be selected
         if( isset( $_GET[ $filter['name'] ] ) ){
             $filter['selected'] = sanitize_text_field( $_GET[ $filter['name'] ] );

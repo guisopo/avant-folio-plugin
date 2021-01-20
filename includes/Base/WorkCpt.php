@@ -154,7 +154,7 @@ class WorkCpt
   public function add_cpt_custom_columns()
   {
     $this->cpt['columns'] = array(
-      'cb'              =>  '<input type="checkbox" />',
+      'cb'              =>  'cb',
       'image'           =>  __('Image'),
       'title'           =>  __('Title'),
       'work_type'       =>  __('Work Type', 'avant-folio'),

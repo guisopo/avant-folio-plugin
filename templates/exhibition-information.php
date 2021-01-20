@@ -37,18 +37,18 @@
       
       <!-- Exhibition Year -->
       <div class="cf-box cf-box--s">
-        <label class="post-attributes-label cf-box__label" for="avant_folio_exhibition_info_date_completed">Year:</label>
+        <label class="post-attributes-label cf-box__label" for="avant_folio_exhibition_info_year">Year:</label>
         <input
-          id="date_completed"
+          id="exhibition_year"
           class="cf-box__input"
           type="text"
           required
-          name="avant_folio_exhibition_info[date_completed]"
+          name="avant_folio_exhibition_info[year]"
           placeholder="<?php echo date('Y') ?>"
           maxlength="4"
           pattern="[0-9]{4,4}"
           size="4"
-          value="<?php echo isset($exhibition_date_completed) ? esc_attr( $exhibition_date_completed ): ''; ?>"
+          value="<?php echo isset($exhibition_year) ? esc_attr( $exhibition_year ): ''; ?>"
         >
       </div>
       
