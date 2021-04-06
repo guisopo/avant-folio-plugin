@@ -13,7 +13,7 @@ The plugin creates an __Admin page__ and three custom post types:
 
 + __Texts Custom Post Type:__ simple CPT for texts.
 
-In the Works Custom Post Type the user can fill the information of each of their works, organizing them by categories. Also there is an image gallery where he can add multiple pictures and select the featured one.
+In the Works Custom Post Type the user can fill the information of each of their works, organizing them by **categories**. Also there is an **image gallery** where he can add multiple pictures and select the featured one.
 
 ## Copyright and License
 This version is under the [GPLv2 or later](https://www.gnu.org/licenses/)
