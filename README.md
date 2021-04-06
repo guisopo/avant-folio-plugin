@@ -1,5 +1,5 @@
 # Avant Folio Wordpress Plugin 🎨
-Avant Folio is a Wordpress plugin that helps artists manage their portfolio in it's Wordpress site.
+Avant Folio is an __OOP__ Wordpress plugin that helps artists manage their portfolio in it's Wordpress site.
 
 ![alt text](https://raw.githubusercontent.com/guisopo/avant-folio-plugin/master/assets/screenshot.png "Plugin screenshot")
 
