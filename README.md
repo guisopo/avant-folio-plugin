@@ -1,7 +1,7 @@
 # Avant Folio Wordpress Plugin 🎨
 Avant Folio is an Wordpress plugin written in __OOP__ that helps artists manage their portfolio in it's Wordpress site.
 
-![alt text](https://github.com/guisopo/sunset-theme/blob/master/wp-content/themes/sunset%20theme/screenshot.png?raw=true "Plugin screenshot")
+![alt text](https://raw.githubusercontent.com/guisopo/avant-folio-plugin/master/assets/screenshot.png "Plugin screenshot")
 
 ## Plugin Features
 
